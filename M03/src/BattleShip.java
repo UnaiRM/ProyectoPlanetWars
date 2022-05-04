@@ -9,11 +9,11 @@ public class BattleShip extends Ship{
 	
 	// Mirar como sacar el nivel de tecnologia de planeta
 	public BattleShip() {
-		int armor = (Variables.ARMOR_LIGTHHUNTER) + (Planeta.technologyDefense * Variables.PLUS_ARMOR_LIGTHHUNTER_BY_TECHNOLOGY)*1000/100;
+		int armor = (Variables.ARMOR_LIGTHHUNTER) + (Planet.getTechnologyDefense() * Variables.PLUS_ARMOR_LIGTHHUNTER_BY_TECHNOLOGY)*1000/100;
 		super.setArmor(armor);
 		super.setInitialArmor(armor);
 		
-		int baseDamage = (Variables.BASE_DAMAGE_LIGTHHUNTER) + (Planeta.technologyAttack * Variables.PLUS_ATTACK_LIGTHHUNTER_BY_TECHNOLOGY)*1000/100;
+		int baseDamage = (Variables.BASE_DAMAGE_LIGTHHUNTER) + (Planet.getTechnologyAttack() * Variables.PLUS_ATTACK_LIGTHHUNTER_BY_TECHNOLOGY)*1000/100;
 		super.setBaseDamage(baseDamage);
 	}
 	
