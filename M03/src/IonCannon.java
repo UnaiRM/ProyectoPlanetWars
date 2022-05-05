@@ -1,5 +1,5 @@
 
-public class IonCannon extends Ship{
+public class IonCannon extends Ship {
 
 	IonCannon(int armor, int baseDamage){
 		super.setArmor(armor);
@@ -9,42 +9,50 @@ public class IonCannon extends Ship{
 	
 	// Mirar como sacar el nivel de tecnologia de planeta
 	public IonCannon() {
-		int armor = (Variables.ARMOR_LIGTHHUNTER) + (Planet.getTechnologyDefense() * Variables.PLUS_ARMOR_LIGTHHUNTER_BY_TECHNOLOGY)*1000/100;
+		super.setArmor(0);
+		super.setInitialArmor(0);
+		super.setBaseDamage(0);
+	}
+
+	public void setArmorAndDamage(Planet planeta) {
+		int armor = (Variables.ARMOR_IONCANNON) + (planeta.getTechnologyDefense() * Variables.PLUS_ARMOR_IONCANNON_BY_TECHNOLOGY)*1000/100;
+		int baseDamage = (Variables.BASE_DAMAGE_IONCANNON) + (planeta.getTechnologyAttack() * Variables.PLUS_ATTACK_IONCANNON_BY_TECHNOLOGY)*1000/100;
+
 		super.setArmor(armor);
 		super.setInitialArmor(armor);
-		
-		int baseDamage = (Variables.BASE_DAMAGE_LIGTHHUNTER) + (Planet.getTechnologyAttack() * Variables.PLUS_ATTACK_LIGTHHUNTER_BY_TECHNOLOGY)*1000/100;
 		super.setBaseDamage(baseDamage);
 	}
+	
+	// IMPLEMENTAR MILITARYUNIT
+	// MIRAR COMO VAN LAS PELEAS
+	
 	
 	@Override
 	public int attack() {
 		// TODO Auto-generated method stub
-		return 0;
+		return super.getBaseDamage();
 	}
 
 	@Override
 	public void takeDamage(int receivedDamage) {
-		// TODO Auto-generated method stub
-		
+		super.setArmor(super.getArmor() - receivedDamage);
 	}
 
 	@Override
 	public int getActualArmor() {
-		// TODO Auto-generated method stub
-		return 0;
+		return super.getArmor();
 	}
 
 	@Override
 	public int getMetalCost() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Variables.METAL_COST_IONCANNON;
 	}
 
 	@Override
 	public int getDeuteriumCost() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Variables.DEUTERIUM_COST_IONCANNON;
 	}
 
 	@Override
@@ -62,7 +70,7 @@ public class IonCannon extends Ship{
 	@Override
 	public void resetArmor() {
 		// TODO Auto-generated method stub
-		
+		super.setArmor(super.getInitialArmor());
 	}
-
+	
 }

@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class Planet {
 
 	// PREGUNTAR SI PUEDEN SER STATIC YA QUE SE USAN EN OTRAS CLASES SIN RELACION
-	private static int technologyDefense = 0;
-	private static int technologyAttack = 0;
+	private int technologyDefense = 0;
+	private int technologyAttack = 0;
 	
 	
 	private int metal = 0;
@@ -42,7 +42,7 @@ public class Planet {
 
 	// SETTERS Y GETTERS
 	
-	public static int getTechnologyDefense() {
+	public int getTechnologyDefense() {
 		return technologyDefense;
 	}
 
@@ -50,7 +50,7 @@ public class Planet {
 		this.technologyDefense = technologyDefense;
 	}
 
-	public static int getTechnologyAttack() {
+	public int getTechnologyAttack() {
 		return technologyAttack;
 	}
 
@@ -143,10 +143,11 @@ public class Planet {
 			while (this.metal > costeUnidadMetal && this.deuterium > costeUnidadDeuterium) {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
+				LightHunter nave = new LightHunter();
+				nave.setArmorAndDamage(this);
 				this.army[0].add(new LightHunter());
 				cantidad++;
 			}
-			
 			// MIRAR DE INTEGRAR EN INTERFAZ
 			System.out.println("Se han generado "+cantidad+" Light Hunters"); 
 			
@@ -174,10 +175,11 @@ public class Planet {
 			while (this.metal > costeUnidadMetal && this.deuterium > costeUnidadDeuterium) {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
+				HeavyHunter nave = new HeavyHunter();
+				nave.setArmorAndDamage(this);
 				this.army[1].add(new HeavyHunter());
 				cantidad++;
 			}
-			
 			// MIRAR DE INTEGRAR EN INTERFAZ
 			System.out.println("Se han generado "+cantidad+" Heavy Hunters"); 
 			
@@ -205,12 +207,13 @@ public class Planet {
 			while (this.metal > costeUnidadMetal && this.deuterium > costeUnidadDeuterium) {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
+				BattleShip nave = new BattleShip();
+				nave.setArmorAndDamage(this);
 				this.army[2].add(new BattleShip());
 				cantidad++;
 			}
-			
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" Battle Ships"); 
+			System.out.println("Se han generado "+cantidad+" BattleShip"); 
 			
 			throw new ResourceException();
 		} else {
@@ -236,12 +239,13 @@ public class Planet {
 			while (this.metal > costeUnidadMetal && this.deuterium > costeUnidadDeuterium) {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
+				ArmoredShip nave = new ArmoredShip();
+				nave.setArmorAndDamage(this);
 				this.army[3].add(new ArmoredShip());
 				cantidad++;
 			}
-			
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" Armored Ships"); 
+			System.out.println("Se han generado "+cantidad+" ArmoredShip"); 
 			
 			throw new ResourceException();
 		} else {
@@ -267,12 +271,13 @@ public class Planet {
 			while (this.metal > costeUnidadMetal && this.deuterium > costeUnidadDeuterium) {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
+				MissileLauncher nave = new MissileLauncher();
+				nave.setArmorAndDamage(this);
 				this.army[4].add(new MissileLauncher());
 				cantidad++;
 			}
-			
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" Missile Launchers"); 
+			System.out.println("Se han generado "+cantidad+" MissileLauncher"); 
 			
 			throw new ResourceException();
 		} else {
@@ -298,12 +303,13 @@ public class Planet {
 			while (this.metal > costeUnidadMetal && this.deuterium > costeUnidadDeuterium) {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
+				IonCannon nave = new IonCannon();
+				nave.setArmorAndDamage(this);
 				this.army[5].add(new IonCannon());
 				cantidad++;
 			}
-			
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" Ion Cannons"); 
+			System.out.println("Se han generado "+cantidad+" IonCannon"); 
 			
 			throw new ResourceException();
 		} else {
@@ -329,12 +335,13 @@ public class Planet {
 			while (this.metal > costeUnidadMetal && this.deuterium > costeUnidadDeuterium) {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
+				PlasmaCannon nave = new PlasmaCannon();
+				nave.setArmorAndDamage(this);
 				this.army[6].add(new PlasmaCannon());
 				cantidad++;
 			}
-			
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" Plasma Cannons"); 
+			System.out.println("Se han generado "+cantidad+" PlasmaCannon"); 
 			
 			throw new ResourceException();
 		} else {
@@ -351,6 +358,103 @@ public class Planet {
 	
 	public void printStats() {
 		// USAR INTERFAZ PARA MOSTRAR ESTADISTICAS
+		int attackTechnology = technologyAttack;
+		int defenseTechnology = technologyDefense;
+		
+		int metal = this.metal;
+		int deuterium = this.deuterium;
+		
+		int MissileLauncher=0,IonCannon=0,PlasmaCannon=0,LightHunter=0,HeavyHunter=0,BattleShip=0,ArmoredShip=0;
+		int cantidad;
+		
+		for (int i = 0; i < army.length; i++) {
+			ArrayList<MilitaryUnit> flota = army[i];
+			cantidad = flota.size();
+			switch (i) {
+			case 0:
+				LightHunter = cantidad;
+				break;
+			case 1:
+				HeavyHunter = cantidad;
+				break;
+			case 2:
+				BattleShip = cantidad;
+				break;
+			case 3:
+				ArmoredShip = cantidad;
+				break;
+			case 4:
+				MissileLauncher = cantidad;
+				break;
+			case 5:
+				IonCannon = cantidad;
+				break;
+			case 6:
+				PlasmaCannon = cantidad;
+				break;
+			default:
+				break;
+			}
+		}
+		System.out.println("Planet Stats:");
+		System.out.println("\nTECHNOLOGY");
+		System.out.println("\nAttack Technology " +attackTechnology);
+		System.out.println("Defense Technology "+defenseTechnology);
+		System.out.println("\nDEFENSE");
+		System.out.println("\nMissile Launcher "+MissileLauncher);
+		System.out.println("Ion Cannon "+ IonCannon);
+		System.out.println("\nRESOURCES:");
+		System.out.println("\nMetal "+metal);
+		System.out.println("Deuterium "+deuterium);
 	}
 	
+	public static void main(String[] args) {
+		Planet planeta = new Planet();
+		
+		planeta.setMetal(2000000);
+		planeta.setDeuterium(2000000);
+		
+		HeavyHunter naveHH1 = new HeavyHunter();
+		HeavyHunter naveHH2 = new HeavyHunter();
+		
+		 //CREAR UNA FLOTA PARA CADA TIPO DE UNIDAD
+	
+		try {
+			planeta.newLigthHunter(2);
+			planeta.newArmoredShip(1);
+			planeta.newHeavyHunter(2);
+			planeta.newMissileLauncher(3);
+			planeta.newIonCannon(4);
+		} catch (ResourceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	 //AÑADIR INDIVIDUALMENTE LAS NAVES A CADA FLOTA
+		
+		
+//		flotaHH.add(naveHH1);
+//		flotaHH.add(naveHH2);
+		
+		ArrayList<MilitaryUnit>[] army = planeta.getArmy();
+		
+	 //PONER CADA FLOTA EN SU POSICION
+		
+		
+	 //ITERACION EN CADA UNA DE LAS UNIDADES
+		for (ArrayList<MilitaryUnit> flota : army) { // ITERA EN CADA FLOTA
+			for (MilitaryUnit nave : flota) { // ITERA EN CADA UNIDAD DE CADA FLOTA
+				System.out.println(nave.getClass());
+			}
+		}
+		try {
+			planeta.upgradeTechnologyAttack();
+			planeta.upgradeTechnologyDefense();
+		} catch (ResourceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		planeta.printStats();
+	}
 }
