@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="pyoyecto" id="0211FD41-5080-E944-DC25-D147DA7018B1" version="3.5">
-<createdBy>andre</createdBy>
-<createdTime>2022-05-05 06:29:26 UTC</createdTime>
-<ownerDesignName>pyoyecto</ownerDesignName>
-<capitalNames>false</capitalNames>
-<designId>0211FD41-5080-E944-DC25-D147DA7018B1</designId>
-</OSDM_Design>
