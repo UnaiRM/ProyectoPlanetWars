@@ -46,8 +46,8 @@ CREATE TABLE SHIP
 CREATE TABLE PLANET_SHIP
   (ID_planet numeric,
   ID_ship numeric,
-  cuantity numeric,
-  lvl numeric,
+  ship_quantity numeric,
+  ship_level numeric,
    CONSTRAINT Planet_Ship_fk FOREIGN KEY (ID_planet) REFERENCES PLANET (ID_planet),
    CONSTRAINT Ship_Planet_fk FOREIGN KEY (ID_ship) REFERENCES SHIP (ID_ship),
    PRIMARY KEY(ID_planet, ID_ship))';
@@ -69,8 +69,8 @@ CREATE TABLE DEFENSE
 CREATE TABLE PLANET_DEFENSE
   (ID_planet numeric,
   ID_defense numeric,
-  cuantity numeric,
-  lvl numeric,
+  defense_quantity numeric,
+  defense_level numeric,
   CONSTRAINT Planet_Defense_fk FOREIGN KEY (ID_planet) REFERENCES PLANET (ID_planet),
   CONSTRAINT Defense_Planet_fk FOREIGN KEY (ID_defense) REFERENCES DEFENSE (ID_defense),
   PRIMARY KEY(ID_planet, ID_defense))';
