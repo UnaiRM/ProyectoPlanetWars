@@ -1,4 +1,4 @@
-create or replace procedure CREATE_TABLE_02
+create or replace procedure INSERT_DATA_03
 as
      insert1 VARCHAR(100);
      insert2 VARCHAR(100);
