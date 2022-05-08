@@ -400,6 +400,7 @@ public class Planet {
 		System.out.println("\nTECHNOLOGY");
 		System.out.println("\nAttack Technology " +attackTechnology);
 		System.out.println("Defense Technology "+defenseTechnology);
+		// FALTA ATAQUE
 		System.out.println("\nDEFENSE");
 		System.out.println("\nMissile Launcher "+MissileLauncher);
 		System.out.println("Ion Cannon "+ IonCannon);
@@ -411,8 +412,8 @@ public class Planet {
 	public static void main(String[] args) {
 		Planet planeta = new Planet();
 		
-		planeta.setMetal(2000000);
-		planeta.setDeuterium(2000000);
+		planeta.setMetal(2000);
+		planeta.setDeuterium(2000);
 		
 		HeavyHunter naveHH1 = new HeavyHunter();
 		HeavyHunter naveHH2 = new HeavyHunter();

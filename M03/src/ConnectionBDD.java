@@ -13,12 +13,15 @@ public class ConnectionBDD {
 
 	// PREGUNTAR SI PUEDES SER ESTATICA
 	private Connection con;
+	private String ip = "@192.168.40.2";
+	private String usuario = "alumnoAMS8";
+	private String contrasena = "alumnoAMS8";
 	
 	
 	public ConnectionBDD() {
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.40.2:1521:orcl", "alumnoAMS8", "alumnoAMS8");
+			con = DriverManager.getConnection("jdbc:oracle:thin:"+ip+":1521:orcl", usuario, contrasena);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
