@@ -73,16 +73,19 @@ public class MENU extends JFrame {
 		JButton botonbuild = new JButton("");
 		botonbuild.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\BUILD.jpeg"));
 		botonbuild.setBounds(443, 572, 122, 103);
+		botonbuild.setFocusable(false);
 		contentPane.add(botonbuild);
 		
 		JButton botonUpgrade = new JButton("");
 		botonUpgrade.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\ION.png"));
 		botonUpgrade.setBounds(795, 572, 107, 113);
+		botonUpgrade.setFocusable(false);
 		contentPane.add(botonUpgrade);
 		
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\batalla.png"));
 		btnNewButton.setBounds(1172, 582, 107, 96);
+		btnNewButton.setFocusable(false);
 		contentPane.add(btnNewButton);
 	}
 

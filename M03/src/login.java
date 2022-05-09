@@ -68,7 +68,7 @@ public class login extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					new MENU();
+				new MENU().main(null);
 				
 				System.out.println(name.getText()); 
 				System.out.println(passwordField.getText()); 
