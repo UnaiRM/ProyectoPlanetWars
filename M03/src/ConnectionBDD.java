@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 
 public class ConnectionBDD {
 
-	// PREGUNTAR SI PUEDES SER ESTATICA
-	private Connection con;
+	// PREGUNTAR SI PUEDE SER ESTATICA
+	private static Connection con;
 	private String ip = "@192.168.40.2";
 	private String usuario = "alumnoAMS8";
 	private String contrasena = "alumnoAMS8";
@@ -51,6 +51,110 @@ public class ConnectionBDD {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public static int getShipMetalCost(int id) {
+		CallableStatement cst;
+		try {
+			cst = con.prepareCall("{call GET_SHIP_06(?,?,?,?,?,?,?,?,?,?)}");
+			cst.setInt(1, id);
+			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
+			cst.registerOutParameter(3, java.sql.Types.INTEGER);
+			cst.registerOutParameter(4, java.sql.Types.INTEGER);
+			cst.registerOutParameter(5, java.sql.Types.INTEGER);
+			cst.registerOutParameter(6, java.sql.Types.INTEGER);
+			cst.registerOutParameter(7, java.sql.Types.INTEGER);
+			cst.registerOutParameter(8, java.sql.Types.INTEGER);
+			cst.registerOutParameter(9, java.sql.Types.INTEGER);
+			cst.registerOutParameter(10, java.sql.Types.INTEGER);
+			cst.execute();
+			
+			int metalCost = cst.getInt(3);
+			
+			return metalCost;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public static int getShipDeuteriumCost(int id) {
+		CallableStatement cst;
+		try {
+			cst = con.prepareCall("{call GET_SHIP_06(?,?,?,?,?,?,?,?,?,?)}");
+			cst.setInt(1, id);
+			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
+			cst.registerOutParameter(3, java.sql.Types.INTEGER);
+			cst.registerOutParameter(4, java.sql.Types.INTEGER);
+			cst.registerOutParameter(5, java.sql.Types.INTEGER);
+			cst.registerOutParameter(6, java.sql.Types.INTEGER);
+			cst.registerOutParameter(7, java.sql.Types.INTEGER);
+			cst.registerOutParameter(8, java.sql.Types.INTEGER);
+			cst.registerOutParameter(9, java.sql.Types.INTEGER);
+			cst.registerOutParameter(10, java.sql.Types.INTEGER);
+			cst.execute();
+			
+			int deuteriumCost = cst.getInt(5);
+			
+			return deuteriumCost;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public static int getDefenseMetalCost(int id) {
+		CallableStatement cst;
+		try {
+			cst = con.prepareCall("{call GET_DEFENSE_05(?,?,?,?,?,?,?,?,?,?)}");
+			cst.setInt(1, id);
+			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
+			cst.registerOutParameter(3, java.sql.Types.INTEGER);
+			cst.registerOutParameter(4, java.sql.Types.INTEGER);
+			cst.registerOutParameter(5, java.sql.Types.INTEGER);
+			cst.registerOutParameter(6, java.sql.Types.INTEGER);
+			cst.registerOutParameter(7, java.sql.Types.INTEGER);
+			cst.registerOutParameter(8, java.sql.Types.INTEGER);
+			cst.registerOutParameter(9, java.sql.Types.INTEGER);
+			cst.registerOutParameter(10, java.sql.Types.INTEGER);
+			cst.execute();
+			
+			int metalCost = cst.getInt(3);
+			
+			return metalCost;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public static int getDefenseDeuteriumCost(int id) {
+		CallableStatement cst;
+		try {
+			cst = con.prepareCall("{call GET_DEFENSE_05(?,?,?,?,?,?,?,?,?,?)}");
+			cst.setInt(1, id);
+			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
+			cst.registerOutParameter(3, java.sql.Types.INTEGER);
+			cst.registerOutParameter(4, java.sql.Types.INTEGER);
+			cst.registerOutParameter(5, java.sql.Types.INTEGER);
+			cst.registerOutParameter(6, java.sql.Types.INTEGER);
+			cst.registerOutParameter(7, java.sql.Types.INTEGER);
+			cst.registerOutParameter(8, java.sql.Types.INTEGER);
+			cst.registerOutParameter(9, java.sql.Types.INTEGER);
+			cst.registerOutParameter(10, java.sql.Types.INTEGER);
+			cst.execute();
+			
+			int deuteriumCost = cst.getInt(3);
+			
+			return deuteriumCost;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
 		}
 	}
 	

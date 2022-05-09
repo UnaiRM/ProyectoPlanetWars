@@ -26,6 +26,12 @@ public class Battle {
 	int[] actualNumberUnitsEnemy;
 	
 	
+	// REVISAR CONSTRUCOR
+	public Battle(ArrayList<MilitaryUnit>[] planetArmy, ArrayList<MilitaryUnit>[] enemyArmy) {
+		super();
+		this.planetArmy = planetArmy;
+		this.enemyArmy = enemyArmy;
+	}
 	
 	public ArrayList<MilitaryUnit>[] getPlanetArmy() {
 		return planetArmy;
@@ -112,7 +118,7 @@ public class Battle {
 	// METODOS PEDIDOS
 	
 	public String getBattleReport(int battles) {
-		// POR HACER
+		// POR HACER !!!!!
 		return battleDevolpment;
 	}
 	
@@ -120,9 +126,15 @@ public class Battle {
 		return battleDevolpment;
 	}
 	
-	
-	
-	
-	
-	
+	public void initInitialArmies() {
+		
+		for (int i = 0; i < armies.length; i++) {
+			for (ArrayList<MilitaryUnit> flota : armies[i]) {
+				System.out.println("Unidades Flota"+flota.size());
+			
+			System.out.println("Enemy Army ------");
+			}
+		}
+	}
+		
 }

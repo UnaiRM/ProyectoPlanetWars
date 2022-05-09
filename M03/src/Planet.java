@@ -133,8 +133,8 @@ public class Planet {
 	// Generacion de unidades
 	
 	public void newLigthHunter(int n) throws ResourceException {
-		int costeUnidadDeuterium = Variables.DEUTERIUM_COST_LIGTHHUNTER;
-		int costeUnidadMetal = Variables.METAL_COST_LIGTHHUNTER;
+		int costeUnidadDeuterium = ConnectionBDD.getShipDeuteriumCost(1);
+		int costeUnidadMetal = ConnectionBDD.getShipMetalCost(1);
 		
 		// Comprueba que se tengan suficientes recursos para todas las unidades pedidas(n)
 		if (this.metal < costeUnidadMetal * n || this.deuterium < costeUnidadDeuterium * n) {
@@ -165,8 +165,8 @@ public class Planet {
 	}
 	
 	public void newHeavyHunter(int n) throws ResourceException {
-		int costeUnidadDeuterium = Variables.DEUTERIUM_COST_HEAVYHUNTER;
-		int costeUnidadMetal = Variables.METAL_COST_HEAVYHUNTER;
+		int costeUnidadDeuterium = ConnectionBDD.getShipDeuteriumCost(2);
+		int costeUnidadMetal = ConnectionBDD.getShipMetalCost(2);
 		
 		// Comprueba que se tengan suficientes recursos para todas las unidades pedidas(n)
 		if (this.metal < costeUnidadMetal * n || this.deuterium < costeUnidadDeuterium * n) {
@@ -197,8 +197,8 @@ public class Planet {
 	}
 	
 	public void newBattleShip(int n) throws ResourceException {
-		int costeUnidadDeuterium = Variables.DEUTERIUM_COST_BATTLESHIP;
-		int costeUnidadMetal = Variables.METAL_COST_BATTLESHIP;
+		int costeUnidadDeuterium = ConnectionBDD.getShipDeuteriumCost(3);
+		int costeUnidadMetal = ConnectionBDD.getShipMetalCost(3);
 		
 		// Comprueba que se tengan suficientes recursos para todas las unidades pedidas(n)
 		if (this.metal < costeUnidadMetal * n || this.deuterium < costeUnidadDeuterium * n) {
@@ -229,8 +229,8 @@ public class Planet {
 	}
 	
 	public void newArmoredShip(int n) throws ResourceException {
-		int costeUnidadDeuterium = Variables.DEUTERIUM_COST_ARMOREDSHIP;
-		int costeUnidadMetal = Variables.METAL_COST_ARMOREDSHIP;
+		int costeUnidadDeuterium = ConnectionBDD.getShipDeuteriumCost(4);
+		int costeUnidadMetal = ConnectionBDD.getShipMetalCost(4);
 		
 		// Comprueba que se tengan suficientes recursos para todas las unidades pedidas(n)
 		if (this.metal < costeUnidadMetal * n || this.deuterium < costeUnidadDeuterium * n) {
@@ -261,8 +261,8 @@ public class Planet {
 	}
 	
 	public void newMissileLauncher(int n) throws ResourceException {
-		int costeUnidadDeuterium = Variables.DEUTERIUM_COST_MISSILELAUNCHER;
-		int costeUnidadMetal = Variables.METAL_COST_MISSILELAUNCHER;
+		int costeUnidadDeuterium = ConnectionBDD.getDefenseDeuteriumCost(1);
+		int costeUnidadMetal = ConnectionBDD.getDefenseMetalCost(1);
 		
 		// Comprueba que se tengan suficientes recursos para todas las unidades pedidas(n)
 		if (this.metal < costeUnidadMetal * n || this.deuterium < costeUnidadDeuterium * n) {
@@ -293,8 +293,8 @@ public class Planet {
 	}
 	
 	public void newIonCannon(int n) throws ResourceException {
-		int costeUnidadDeuterium = Variables.DEUTERIUM_COST_IONCANNON;
-		int costeUnidadMetal = Variables.METAL_COST_IONCANNON;
+		int costeUnidadDeuterium = ConnectionBDD.getDefenseDeuteriumCost(2);
+		int costeUnidadMetal = ConnectionBDD.getDefenseMetalCost(2);
 		
 		// Comprueba que se tengan suficientes recursos para todas las unidades pedidas(n)
 		if (this.metal < costeUnidadMetal * n || this.deuterium < costeUnidadDeuterium * n) {
@@ -324,9 +324,11 @@ public class Planet {
 		}
 	}
 	
+	// PREGUNTAR SI SE PUEDE DEVOLVER UN INT PARA LA CANTIDAD NUEVA DE NAVES
+	
 	public void newPlasmaCannon(int n) throws ResourceException {
-		int costeUnidadDeuterium = Variables.DEUTERIUM_COST_PLASMACANNON;
-		int costeUnidadMetal = Variables.METAL_COST_PLASMACANNON;
+		int costeUnidadDeuterium = ConnectionBDD.getDefenseDeuteriumCost(3);
+		int costeUnidadMetal = ConnectionBDD.getDefenseMetalCost(3);
 		
 		// Comprueba que se tengan suficientes recursos para todas las unidades pedidas(n)
 		if (this.metal < costeUnidadMetal * n || this.deuterium < costeUnidadDeuterium * n) {
@@ -410,10 +412,11 @@ public class Planet {
 	}
 	
 	public static void main(String[] args) {
+		ConnectionBDD con = new ConnectionBDD();
 		Planet planeta = new Planet();
 		
-		planeta.setMetal(2000);
-		planeta.setDeuterium(2000);
+		planeta.setMetal(200000);
+		planeta.setDeuterium(200000);
 		
 		HeavyHunter naveHH1 = new HeavyHunter();
 		HeavyHunter naveHH2 = new HeavyHunter();
@@ -421,9 +424,9 @@ public class Planet {
 		 //CREAR UNA FLOTA PARA CADA TIPO DE UNIDAD
 	
 		try {
-			planeta.newLigthHunter(2);
-			planeta.newArmoredShip(1);
-			planeta.newHeavyHunter(2);
+//			planeta.newLigthHunter(2);
+//			planeta.newArmoredShip(1);
+//			planeta.newHeavyHunter(2);
 			planeta.newMissileLauncher(3);
 			planeta.newIonCannon(4);
 		} catch (ResourceException e) {
