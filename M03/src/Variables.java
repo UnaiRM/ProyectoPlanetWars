@@ -120,6 +120,7 @@ public interface Variables {
     // LIGTHHUNTER, HEAVYHUNTER, BATTLESHIP, ARMOREDSHIP
     public final int[] CHANCE_ATTACK_ENEMY_UNITS = {10,20,30,40};
     
+    public final int[] CHANCES_ENEMY_ARMY_CREATION = {35,25,20,20};
     // percentage of waste that will be generated with respect to the cost of the units
     public final int PERCENTATGE_WASTE = 70;
     

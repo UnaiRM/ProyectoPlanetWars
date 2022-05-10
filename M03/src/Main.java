@@ -123,7 +123,7 @@ public class Main {
 		int enemyMetalTemp = enemyMetal;
 		int enemyDeuteriumTemp = enemyDeuterium;
 		
-		ArrayList<MilitaryUnit>[] enemyArmyTemp = new ArrayList[7];
+		ArrayList<MilitaryUnit>[] enemyArmyTemp = new ArrayList[4];
 		
 		// Saca todos los precios
 		
@@ -140,7 +140,7 @@ public class Main {
 		int costeDeuteriumArmoredShip = ConnectionBDD.getShipDeuteriumCost(4);
 		
 		// Inicializa el array
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 4; i++) {
 			enemyArmyTemp[i] = new ArrayList<MilitaryUnit>();
 		}
 		
@@ -148,7 +148,7 @@ public class Main {
 		
 		// Generador de tropas por probabilidad
 		while (enemyMetal > costeMetalLightHunter && enemyDeuterium > costeDeuteriumLightHunter) {
-			int numRandom = generador.nextInt(0,101);
+			int numRandom = generador.nextInt(0,100);
 			if (numRandom >= 0 && numRandom < 35) {
 				enemyMetal -= costeMetalLightHunter;
 				enemyDeuterium -= costeDeuteriumLightHunter;
