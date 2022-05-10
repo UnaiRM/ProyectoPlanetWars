@@ -90,6 +90,8 @@ public class MENU extends JFrame {
 		botonUpgrade.setIcon(new ImageIcon("fotos proyecto/ION.png"));
 		botonUpgrade.setBounds(795, 572, 107, 113);
 		botonUpgrade.setFocusable(false);
+		
+		
 		contentPane.add(botonUpgrade);
 		
 		JButton btnNewButton = new JButton("");

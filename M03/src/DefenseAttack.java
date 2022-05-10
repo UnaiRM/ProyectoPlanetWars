@@ -45,6 +45,7 @@ public class DefenseAttack extends JFrame {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(100, 100, (int) dim.getWidth(), (int) dim.getHeight());
 		
+		
 		this.setTitle("ATTACK");
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();

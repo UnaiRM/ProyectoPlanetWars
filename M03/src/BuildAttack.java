@@ -238,6 +238,7 @@ public class BuildAttack extends JFrame {
 		contentPane.add(sumar_1);
 		JLabel contador = new JLabel("0");
 		contador.setBackground(Color.BLACK);
+		
 		contador.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		contador.setForeground(Color.WHITE);
 		contador.setBounds(212, 578, 45, 27);

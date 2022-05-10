@@ -44,6 +44,7 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					Login frame = new Login();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -61,9 +62,11 @@ public class Login extends JFrame {
 		getContentPane().setLayout(null);
 		
 		this.setSize(486,448);
+		
 		JButton login = new JButton("");
 		login.setIcon(new ImageIcon("fotos proyecto/BOTON.jpg"));
 		login.setBounds(175, 356, 109, 35);
+		
 		getContentPane().add(login);
 		login.addActionListener(new ActionListener() {
 			
