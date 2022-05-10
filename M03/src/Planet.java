@@ -2,15 +2,13 @@ import java.util.ArrayList;
 
 public class Planet {
 
-	// PREGUNTAR SI PUEDEN SER STATIC YA QUE SE USAN EN OTRAS CLASES SIN RELACION
 	private int technologyDefense = 0;
 	private int technologyAttack = 0;
 	
+	// MIRAR CON CUANTO SE EMPIEZA
+	private int metal = Variables.METAL_BASE_ENEMY_ARMY;
+	private int deuterium = Variables.DEUTERIUM_BASE_ENEMY_ARMY;
 	
-	private int metal = 0;
-	private int deuterium = 0;
-	
-	// MIRAR SI SE DEBEN USAR LAS CONSTANTES PARA ESTOS VALORES O SI SE PUEDEN INVENTAR (preguntar si contienen cuanto sube o cuanto vale)
 	private int upgradeDefenseTechnologyDeuteriumCost = Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_DEUTERIUM_COST;
 	private int upgradeAttackTechnologyDeuteriumCost = Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_DEUTERIUM_COST;
 	
@@ -18,7 +16,7 @@ public class Planet {
 	private ArrayList<MilitaryUnit>[] army = new ArrayList[7];
 	
 	
-	// REVISAR CONSTRUCTORES (NO SE INDICAN EN EL DOCUMENTO)
+	
 	public Planet() {
 		super();
 		// Genera todas las flotas vacias

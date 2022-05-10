@@ -33,6 +33,7 @@ public class ConnectionBDD {
 		try {
 			cst = con.prepareCall("{call INITALIZE_04(0)}");
 			cst.execute();
+			cst.close();
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -46,6 +47,7 @@ public class ConnectionBDD {
 		try {
 			cst = con.prepareCall("{call INITALIZE_04(1)}");
 			cst.execute();
+			cst.close();
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -71,7 +73,7 @@ public class ConnectionBDD {
 			cst.execute();
 			
 			int metalCost = cst.getInt(3);
-			
+			cst.close();
 			return metalCost;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -97,7 +99,7 @@ public class ConnectionBDD {
 			cst.execute();
 			
 			int deuteriumCost = cst.getInt(5);
-			
+			cst.close();
 			return deuteriumCost;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -123,7 +125,7 @@ public class ConnectionBDD {
 			cst.execute();
 			
 			int metalCost = cst.getInt(3);
-			
+			cst.close();
 			return metalCost;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -149,7 +151,7 @@ public class ConnectionBDD {
 			cst.execute();
 			
 			int deuteriumCost = cst.getInt(3);
-			
+			cst.close();
 			return deuteriumCost;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
