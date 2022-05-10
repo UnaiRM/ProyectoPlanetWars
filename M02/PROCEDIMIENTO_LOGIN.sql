@@ -37,12 +37,3 @@ exception
    dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR');
    
 end;
-/
-set SERVEROUTPUT ON
-declare
-   x int;
-   
-begin
-   login('Andes', '123', x);
-   DBMS_OUTPUT.PUT_LINE(x);
-end;
