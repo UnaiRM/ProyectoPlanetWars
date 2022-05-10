@@ -42,6 +42,8 @@ public class BuildDefense extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	
 	public BuildDefense() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		

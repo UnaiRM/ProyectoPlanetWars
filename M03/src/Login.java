@@ -32,6 +32,7 @@ public class Login extends JFrame {
 	private JPanel panel_6;
 	private JPanel panel_1;
 	private JLabel lblNewLabel_2;
+	
 	private JLabel lblNewLabel_1;
 	private JTextField name;
 	private JPasswordField passwordField;

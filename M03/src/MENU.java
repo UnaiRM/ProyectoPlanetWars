@@ -72,6 +72,7 @@ public class MENU extends JFrame {
 		
 		JButton botonbuild = new JButton("");
 		botonbuild.setIcon(new ImageIcon("fotos proyecto/BUILD.jpeg"));
+		
 		botonbuild.setBounds(443, 572, 122, 103);
 		botonbuild.addActionListener(new ActionListener() {
 			

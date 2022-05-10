@@ -232,6 +232,7 @@ public class BuildAttack extends JFrame {
 				contador_1.setText(numCadena);
 				
 			}
+			
 		});
 
 		contentPane.add(sumar_1);

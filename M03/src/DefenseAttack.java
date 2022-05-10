@@ -38,7 +38,8 @@ public class DefenseAttack extends JFrame {
 	 * Create the frame.
 	 */
 	public DefenseAttack() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\BATALLA ESPACIAL.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -53,7 +54,7 @@ public class DefenseAttack extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel("");
-		ImageIcon imagen= new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\space.png");
+		ImageIcon imagen= new ImageIcon("fotos proyecto/space.png");
 		lblNewLabel.setBounds(75, -16, 1920, 1080);
 		imagen=new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_AREA_AVERAGING));
 		
@@ -104,6 +105,8 @@ public class DefenseAttack extends JFrame {
 				
 			}
 		});
+		
+		
 		contentPane.add(exit);
 		lblNewLabel.setIcon(new ImageIcon("fotos proyecto/space.png"));
 		lblNewLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
