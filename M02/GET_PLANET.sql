@@ -27,21 +27,3 @@ exception
    dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR');
    
 end;
-/
-set SERVEROUTPUT ON
-declare
-   id int := 1;
-   user int;
-   name varchar(50);
-   t_at int;
-   t_de int;
-   u_de int;
-   u_at int;
-   cry int;
-   iron int;
-   deu int;
-   
-begin
-   get_planet(id, user, name, t_at, t_de, u_de, u_at, cry, iron, deu);
-   DBMS_OUTPUT.put_line(name ||' '||id);
-end;

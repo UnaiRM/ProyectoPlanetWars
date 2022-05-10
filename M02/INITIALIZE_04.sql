@@ -1,4 +1,4 @@
-create or replace procedure INITIALIZE_04(boton_reset int)--INSERTAR 1 PARA EL RESET
+create or replace procedure INITIALIZE_04(boton_reset int)
 as   
    existe_b int;
    existe_d int;
@@ -45,8 +45,4 @@ exception
    when others then
    dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
    
-end;
-/
-begin
-   initialize_04(1);
 end;
