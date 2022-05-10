@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.BoxLayout;
 import javax.swing.JPasswordField;
 
-public class login extends JFrame {
+public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel_2;
@@ -32,6 +32,7 @@ public class login extends JFrame {
 	private JPanel panel_6;
 	private JPanel panel_1;
 	private JLabel lblNewLabel_2;
+	
 	private JLabel lblNewLabel_1;
 	private JTextField name;
 	private JPasswordField passwordField;
@@ -43,7 +44,8 @@ public class login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					login frame = new login();
+					
+					Login frame = new Login();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,14 +57,16 @@ public class login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public login() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\BATALLA ESPACIAL.jpg"));
+	public Login() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		getContentPane().setLayout(null);
 		
 		this.setSize(486,448);
+		
 		JButton login = new JButton("");
-		login.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\BOTON.jpg"));
+		login.setIcon(new ImageIcon("fotos proyecto/BOTON.jpg"));
 		login.setBounds(175, 356, 109, 35);
+		
 		getContentPane().add(login);
 		login.addActionListener(new ActionListener() {
 			
@@ -85,7 +89,7 @@ public class login extends JFrame {
 		name.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\login8.jpg"));
+		lblNewLabel_3.setIcon(new ImageIcon("fotos proyecto/login8.jpg"));
 		lblNewLabel_3.setBounds(0, 0, 480, 417);
 		getContentPane().add(lblNewLabel_3);
 		

@@ -39,7 +39,7 @@ public class MENU extends JFrame {
 	 * Create the frame.
 	 */
 	public MENU() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\BATALLA ESPACIAL.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(100, 100, (int) dim.getWidth(), (int) dim.getHeight());
@@ -51,7 +51,7 @@ public class MENU extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		ImageIcon imagen= new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\menu.png");
+		ImageIcon imagen= new ImageIcon("fotos proyecto/menu.png");
 		lblNewLabel.setBounds(47, 10, 1920, 1080);
 		imagen=new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_AREA_AVERAGING));
 		lblNewLabel.setIcon(imagen);
@@ -71,7 +71,8 @@ public class MENU extends JFrame {
 		
 		
 		JButton botonbuild = new JButton("");
-		botonbuild.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\BUILD.jpeg"));
+		botonbuild.setIcon(new ImageIcon("fotos proyecto/BUILD.jpeg"));
+		
 		botonbuild.setBounds(443, 572, 122, 103);
 		botonbuild.addActionListener(new ActionListener() {
 			
@@ -86,13 +87,15 @@ public class MENU extends JFrame {
 		contentPane.add(botonbuild);
 		
 		JButton botonUpgrade = new JButton("");
-		botonUpgrade.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\ION.png"));
+		botonUpgrade.setIcon(new ImageIcon("fotos proyecto/ION.png"));
 		botonUpgrade.setBounds(795, 572, 107, 113);
 		botonUpgrade.setFocusable(false);
+		
+		
 		contentPane.add(botonUpgrade);
 		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\batalla.png"));
+		btnNewButton.setIcon(new ImageIcon("fotos proyecto/batalla.png"));
 		btnNewButton.setBounds(1172, 582, 107, 96);
 		btnNewButton.setFocusable(false);
 		contentPane.add(btnNewButton);
