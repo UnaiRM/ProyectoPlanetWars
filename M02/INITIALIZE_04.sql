@@ -1,4 +1,4 @@
-create or replace procedure INITIALIZE_04(boton_reset int)
+create or replace procedure INITIALIZE_04(boton_reset int)--INSERTAR 1 PARA EL RESET
 as   
    existe_b int;
    existe_d int;
