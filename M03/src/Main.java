@@ -11,30 +11,113 @@ public class Main {
 	private int enemyMetal = Variables.METAL_BASE_ENEMY_ARMY;
 	private int enemyDeuterium = Variables.DEUTERIUM_BASE_ENEMY_ARMY;
 	
-	private static int timeGeneration = 10000;
+	public boolean flagLogin = false;
+	
+	private int timeGeneration = 10000;
 	
 	private ArrayList<MilitaryUnit>[] enemyArmy = new ArrayList[7];
 
 	public static void main(String[] args) {
 		
+		Main main = new Main();
+		
 		ConnectionBDD con = new ConnectionBDD();
+		
+		
+		
+		Login login = new Login();
 		
 		Planet planeta = new Planet();
 		
-		Timer time = new Timer();
-		TimerTask autoIncrease = new TimerTask() {
-			
-			@Override
-			public void run() {
-				autoIncreaseResources(planeta);
-				System.out.println(planeta.getMetal());
-				System.out.println(planeta.getDeuterium());
-			}
-		};
-		time.schedule(autoIncrease,0, timeGeneration);
+		if (main.isFlagLogin()) {
+			Timer time = new Timer();
+			TimerTask autoIncrease = new TimerTask() {
+				
+				@Override
+				public void run() {
+					autoIncreaseResources(planeta);
+					System.out.println(planeta.getMetal());
+					System.out.println(planeta.getDeuterium());
+				}
+			};
+			time.schedule(autoIncrease,0, main.getTimeGeneration());
+		}
 	}
 	
 	
+	
+	
+	public int getEnemyMetal() {
+		return enemyMetal;
+	}
+
+
+
+
+	public void setEnemyMetal(int enemyMetal) {
+		this.enemyMetal = enemyMetal;
+	}
+
+
+
+
+	public int getEnemyDeuterium() {
+		return enemyDeuterium;
+	}
+
+
+
+
+	public void setEnemyDeuterium(int enemyDeuterium) {
+		this.enemyDeuterium = enemyDeuterium;
+	}
+
+
+
+
+	public boolean isFlagLogin() {
+		return flagLogin;
+	}
+
+
+
+
+	public static void setFlagLogin(boolean flagLogin) {
+		flagLogin = flagLogin;
+	}
+
+
+
+
+	public ArrayList<MilitaryUnit>[] getEnemyArmy() {
+		return enemyArmy;
+	}
+
+
+
+
+	public void setEnemyArmy(ArrayList<MilitaryUnit>[] enemyArmy) {
+		this.enemyArmy = enemyArmy;
+	}
+
+
+	
+
+
+	public int getTimeGeneration() {
+		return timeGeneration;
+	}
+
+
+
+
+	public void setTimeGeneration(int timeGeneration) {
+		this.timeGeneration = timeGeneration;
+	}
+
+
+
+
 	public void createEnemyArmy(){
 		
 		int enemyMetalTemp = enemyMetal;

@@ -160,4 +160,27 @@ public class ConnectionBDD {
 		}
 	}
 	
+	public static int loginProcedure(String user, String password) {
+		CallableStatement cst;
+		try {
+			cst = con.prepareCall("{call LOGIN(?,?,?)}");
+			cst.setString(1, user);
+			cst.setString(2, password);
+			
+			cst.registerOutParameter(3, java.sql.Types.INTEGER);
+			
+			cst.execute();
+			
+			int resultado = cst.getInt(3);
+			cst.close();
+			return resultado;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -2;
+		}
+	
+	}
+	
 }
