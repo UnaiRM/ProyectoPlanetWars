@@ -3,18 +3,19 @@ d_metal out defense.metal_cost%TYPE, d_crystal out defense.crystal_cost%TYPE, d_
 d_initial out defense.initial_armor%TYPE, d_armor out defense.armor%TYPE, d_base out defense.base_damage%TYPE,
 d_speed out defense.speed%TYPE, d_generate out defense.generate_wastings%TYPE)
 
-as   
+as
    existe int;
    
    excp_existe exception;
    
 begin
+--VERIFICA QUE LA ID EXISTA
    select count(id_defense) into existe from defense where id_defense = d_id;
    if existe = 0 then
       raise excp_existe;
       
    end if;
-   
+--DEVUELVE LOS DATOS
    select name, metal_cost, crystal_cost, deuterium_cost, initial_armor, armor, base_damage,speed, generate_wastings
    into d_name, d_metal, d_crystal, d_deuterium, d_initial, d_armor, d_base, d_speed, d_generate from defense
    where id_defense = d_id;
@@ -25,8 +26,9 @@ exception
    
    when others then
    dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR');
+   
 end;
-/
+/*/
 set SERVEROUTPUT ON
 declare
 d_id int;
@@ -42,4 +44,4 @@ generate int;
 
 begin
    get_defense_05(1, d_nombre, metal,crystal,deuterium,d_initial, armor, base, speed, generate);
-end;
+end;*/
