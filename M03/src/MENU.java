@@ -52,7 +52,7 @@ public class MENU extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		ImageIcon imagen= new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\menu.png");
-		lblNewLabel.setBounds(10, 10, 1920, 1080);
+		lblNewLabel.setBounds(47, 10, 1920, 1080);
 		imagen=new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_AREA_AVERAGING));
 		lblNewLabel.setIcon(imagen);
 		lblNewLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
@@ -73,6 +73,15 @@ public class MENU extends JFrame {
 		JButton botonbuild = new JButton("");
 		botonbuild.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\BUILD.jpeg"));
 		botonbuild.setBounds(443, 572, 122, 103);
+		botonbuild.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new DefenseAttack().main(null);
+			}
+		});
+		
 		botonbuild.setFocusable(false);
 		contentPane.add(botonbuild);
 		

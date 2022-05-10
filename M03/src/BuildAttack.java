@@ -287,12 +287,22 @@ public class BuildAttack extends JFrame {
 		});
 		contentPane.add(sumar);
 		
-		JButton btnNewButton = new JButton("EXIT");
-		btnNewButton.setBackground(Color.BLACK);
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setBounds(65, 796, 85, 21);
-		btnNewButton.setFocusable(false);
-		contentPane.add(btnNewButton);
+		JButton exit = new JButton("EXIT");
+		exit.setBackground(Color.BLACK);
+		exit.setForeground(Color.WHITE);
+		exit.setBounds(65, 796, 85, 21);
+		exit.setFocusable(false);
+		exit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new DefenseAttack().main(null);
+				
+				
+			}
+		});
+		contentPane.add(exit);
 		lblNewLabel.setIcon(imagen);
 		lblNewLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(lblNewLabel);
