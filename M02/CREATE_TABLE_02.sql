@@ -38,8 +38,9 @@ begin
    EXECUTE IMMEDIATE 'CREATE TABLE PLANET_SHIP
    (ID_planet numeric,
    ID_ship numeric,
-   cuantity numeric,
-   lvl numeric,
+   quantity numeric,
+   level_defense numeric,
+   level_atack numeric,
    CONSTRAINT Planet_Ship_fk FOREIGN KEY (ID_planet)
       REFERENCES PLANET (ID_planet),
    CONSTRAINT Ship_Planet_fk FOREIGN KEY (ID_ship)
@@ -61,8 +62,9 @@ begin
    EXECUTE IMMEDIATE 'CREATE TABLE PLANET_DEFENSE
    (ID_planet numeric,
    ID_defense numeric,
-   cuantity numeric,
-   lvl numeric,
+   quantity numeric,
+   level_defense numeric,
+   level_atack numeric,
    CONSTRAINT Planet_Defense_fk FOREIGN KEY (ID_planet)
       REFERENCES PLANET (ID_planet),
    CONSTRAINT Defense_Planet_fk FOREIGN KEY (ID_defense)
