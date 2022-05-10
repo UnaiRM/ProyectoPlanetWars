@@ -43,7 +43,7 @@ public class BuildDefense extends JFrame {
 	 * Create the frame.
 	 */
 	public BuildDefense() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\BATALLA ESPACIAL.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -58,7 +58,7 @@ public class BuildDefense extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel("");
-		ImageIcon imagen= new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\DEFENSA.png");
+		ImageIcon imagen= new ImageIcon("fotos proyecto/DEFENSA.png");
 		lblNewLabel.setBounds(75, -16, 1920, 1080);
 		imagen=new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_AREA_AVERAGING));
 		
@@ -84,18 +84,18 @@ public class BuildDefense extends JFrame {
 		contentPane.add(contador_1);
 		
 		JLabel lblNewLabel_5_1_1 = new JLabel("");
-		lblNewLabel_5_1_1.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\negro.jpg"));
+		lblNewLabel_5_1_1.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
 		lblNewLabel_5_1_1.setBounds(941, 522, 60, 33);
 		contentPane.add(lblNewLabel_5_1_1);
 		
 		JLabel lblNewLabel_5_1 = new JLabel("");
-		lblNewLabel_5_1.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\negro.jpg"));
+		lblNewLabel_5_1.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
 		lblNewLabel_5_1.setBounds(694, 522, 60, 33);
 		contentPane.add(lblNewLabel_5_1);
 		
 		JButton sumar_2 = new JButton("");
 		sumar_2.setBounds(1080, 528, 27, 21);
-		sumar_2.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\mas.png"));
+		sumar_2.setIcon(new ImageIcon("fotos proyecto/mas.png"));
 		sumar_2.addActionListener(new ActionListener() {
 			
 			@Override
@@ -115,7 +115,7 @@ public class BuildDefense extends JFrame {
 		contentPane.add(sumar_2);
 		
 		JButton restar_2 = new JButton("");
-		restar_2.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\menos.png"));
+		restar_2.setIcon(new ImageIcon("fotos proyecto/menos.png"));
 		restar_2.setBounds(1043, 528, 27, 21);
 		restar_2.addActionListener(new ActionListener() {
 			
@@ -139,7 +139,7 @@ public class BuildDefense extends JFrame {
 		contentPane.add(restar_2);
 		
 		JButton restar_1 = new JButton("");
-		restar_1.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\menos.png"));
+		restar_1.setIcon(new ImageIcon("fotos proyecto/menos.png"));
 		restar_1.setBounds(782, 528, 27, 21);
 		restar_1.addActionListener(new ActionListener() {
 			
@@ -162,7 +162,7 @@ public class BuildDefense extends JFrame {
 		
 		JButton sumar_1 = new JButton("");
 		sumar_1.setBounds(819, 528, 27, 21);
-		sumar_1.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\mas.png"));
+		sumar_1.setIcon(new ImageIcon("fotos proyecto/mas.png"));
 		sumar_1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -187,12 +187,12 @@ public class BuildDefense extends JFrame {
 		contentPane.add(contador);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\negro.jpg"));
+		lblNewLabel_5.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
 		lblNewLabel_5.setBounds(436, 516, 60, 33);
 		contentPane.add(lblNewLabel_5);
 		
 		JButton restar = new JButton("");
-		restar.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\menos.png"));
+		restar.setIcon(new ImageIcon("fotos proyecto/menos.png"));
 		restar.setBounds(531, 522, 27, 21);
 		contentPane.add(restar);
 		restar.addActionListener(new ActionListener() {
@@ -213,7 +213,7 @@ public class BuildDefense extends JFrame {
 		});
 		
 		JButton sumar = new JButton("");
-		sumar.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\mas.png"));
+		sumar.setIcon(new ImageIcon("fotos proyecto/mas.png"));
 		sumar.setBounds(568, 522, 27, 21);
 		sumar.addActionListener(new ActionListener() {
 			

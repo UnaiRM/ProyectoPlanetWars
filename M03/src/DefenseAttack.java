@@ -105,7 +105,7 @@ public class DefenseAttack extends JFrame {
 			}
 		});
 		contentPane.add(exit);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Escritorio\\fotos proyecto\\space.png"));
+		lblNewLabel.setIcon(new ImageIcon("fotos proyecto/space.png"));
 		lblNewLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(lblNewLabel);
 		
