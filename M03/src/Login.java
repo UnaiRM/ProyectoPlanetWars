@@ -32,7 +32,6 @@ public class Login extends JFrame {
 	private JPanel panel_6;
 	private JPanel panel_1;
 	private JLabel lblNewLabel_2;
-	
 	private JLabel lblNewLabel_1;
 	private JTextField name;
 	private JPasswordField passwordField;
@@ -62,7 +61,7 @@ public class Login extends JFrame {
 		getContentPane().setLayout(null);
 		
 		this.setSize(486,448);
-		
+		this.setTitle("Login");
 		JButton login = new JButton("");
 		login.setIcon(new ImageIcon("fotos proyecto/BOTON.jpg"));
 		login.setBounds(175, 356, 109, 35);
@@ -73,10 +72,9 @@ public class Login extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MENU().main(null);
-				
+				dispose();
 				System.out.println(name.getText()); 
-				System.out.println(passwordField.getText()); 
-			
+				System.out.println(passwordField.getText()); 			
 			}
 		});
 		passwordField = new JPasswordField();

@@ -42,6 +42,7 @@ public class MENU extends JFrame {
 	public MENU() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("Menu");
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(100, 100,dimAncho,dimAlto );
 		setLocationRelativeTo(null);

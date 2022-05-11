@@ -50,7 +50,7 @@ public class ReportStats extends JFrame {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(100, 100, dimAncho,dimAlto);
 		
-		this.setTitle("ATTACK");
+		this.setTitle("Report Stats");
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

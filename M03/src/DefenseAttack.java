@@ -47,7 +47,7 @@ public class DefenseAttack extends JFrame {
 		this.setBounds(100, 100,  dimAncho, dimAlto);
 		
 		
-		this.setTitle("ATTACK");
+		this.setTitle("Defense Attack");
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -77,7 +77,7 @@ public class DefenseAttack extends JFrame {
 		
 		contentPane.add(defense);
 		
-		JButton attack = new JButton("ATTACK");
+		JButton attack = new JButton("Choose Build");
 		attack.setBackground(Color.BLACK);
 		attack.setForeground(Color.WHITE);
 		attack.setFocusable(false);

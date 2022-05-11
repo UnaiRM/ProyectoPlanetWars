@@ -50,7 +50,7 @@ public class ReportChoose extends JFrame {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(100, 100, dimAncho,dimAlto);
 		
-		this.setTitle("ATTACK");
+		this.setTitle("Report Choose");
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
