@@ -22,7 +22,8 @@ import java.awt.Font;
 public class BuildDefense extends JFrame {
 
 	private JPanel contentPane;
-
+	public  int dimAncho=1536;
+	public  int dimAlto=864;
 	/**
 	 * Launch the application.
 	 */
@@ -45,12 +46,16 @@ public class BuildDefense extends JFrame {
 	
 	
 	public BuildDefense() {
+		
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setBounds(100, 100, (int) dim.getWidth(), (int) dim.getHeight());
+		System.out.println((int) dim.getWidth() + " "+(int) dim.getHeight());
+		
+		this.setBounds(100, 100, dimAncho, dimAlto);
 		
 		this.setTitle("DEFENSE");
 		setLocationRelativeTo(null);
@@ -60,9 +65,9 @@ public class BuildDefense extends JFrame {
 		
 		setContentPane(contentPane);
 		
-		JLabel lblNewLabel = new JLabel("");
+		JLabel fondo = new JLabel("");
 		ImageIcon imagen= new ImageIcon("fotos proyecto/DEFENSA.png");
-		lblNewLabel.setBounds(75, -16, 1920, 1080);
+		fondo.setBounds(75, -16, 1920, 1080);
 		imagen=new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_AREA_AVERAGING));
 		
 		JButton CONSTRUIR = new JButton("BUILD");
@@ -86,15 +91,15 @@ public class BuildDefense extends JFrame {
 		contador_1.setBounds(735, 522, 45, 27);
 		contentPane.add(contador_1);
 		
-		JLabel lblNewLabel_5_1_1 = new JLabel("");
-		lblNewLabel_5_1_1.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
-		lblNewLabel_5_1_1.setBounds(941, 522, 60, 33);
-		contentPane.add(lblNewLabel_5_1_1);
+		JLabel fondocont3 = new JLabel("");
+		fondocont3.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
+		fondocont3.setBounds(941, 522, 60, 33);
+		contentPane.add(fondocont3);
 		
-		JLabel lblNewLabel_5_1 = new JLabel("");
-		lblNewLabel_5_1.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
-		lblNewLabel_5_1.setBounds(694, 522, 60, 33);
-		contentPane.add(lblNewLabel_5_1);
+		JLabel fondocont2 = new JLabel("");
+		fondocont2.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
+		fondocont2.setBounds(694, 522, 60, 33);
+		contentPane.add(fondocont2);
 		
 		JButton sumar_2 = new JButton("");
 		sumar_2.setBounds(1080, 528, 27, 21);
@@ -103,12 +108,8 @@ public class BuildDefense extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				int numEntero = Integer.parseInt(contador_2.getText());
-				
+				int numEntero = Integer.parseInt(contador_2.getText());				
 				String numCadena= Integer.toString(numEntero+1);
-				
 				contador_2.setText(numCadena);
 				
 			}
@@ -170,12 +171,8 @@ public class BuildDefense extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				int numEntero = Integer.parseInt(contador_1.getText());
-				
-				String numCadena= Integer.toString(numEntero+1);
-				
+				int numEntero = Integer.parseInt(contador_1.getText());				
+				String numCadena= Integer.toString(numEntero+1);				
 				contador_1.setText(numCadena);
 				
 			}
@@ -189,10 +186,10 @@ public class BuildDefense extends JFrame {
 		contador.setBounds(475, 516, 45, 27);
 		contentPane.add(contador);
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
-		lblNewLabel_5.setBounds(436, 516, 60, 33);
-		contentPane.add(lblNewLabel_5);
+		JLabel fondocont = new JLabel("");
+		fondocont.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
+		fondocont.setBounds(436, 516, 60, 33);
+		contentPane.add(fondocont);
 		
 		JButton restar = new JButton("");
 		restar.setIcon(new ImageIcon("fotos proyecto/menos.png"));
@@ -222,8 +219,6 @@ public class BuildDefense extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
 				int numEntero = Integer.parseInt(contador.getText());
 				
 				String numCadena= Integer.toString(numEntero+1);
@@ -250,9 +245,9 @@ public class BuildDefense extends JFrame {
 			}
 		});
 		contentPane.add(exit);
-		lblNewLabel.setIcon(imagen);
-		lblNewLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
-		contentPane.add(lblNewLabel);
+		fondo.setIcon(imagen);
+		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+		contentPane.add(fondo);
 		
 	}
 }

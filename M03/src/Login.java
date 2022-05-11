@@ -88,10 +88,10 @@ public class Login extends JFrame {
 		getContentPane().add(name);
 		name.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("fotos proyecto/login8.jpg"));
-		lblNewLabel_3.setBounds(0, 0, 480, 417);
-		getContentPane().add(lblNewLabel_3);
+		JLabel fondo = new JLabel("");
+		fondo.setIcon(new ImageIcon("fotos proyecto/login8.jpg"));
+		fondo.setBounds(0, 0, 480, 417);
+		getContentPane().add(fondo);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
