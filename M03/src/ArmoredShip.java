@@ -21,6 +21,8 @@ public class ArmoredShip extends Ship {
 		super.setArmor(armor);
 		super.setInitialArmor(armor);
 		super.setBaseDamage(baseDamage);
+		super.setLevel_Attack(planeta.getTechnologyAttack());
+		super.setLevel_Defense(planeta.getTechnologyDefense());
 	}
 	
 	// IMPLEMENTAR MILITARYUNIT

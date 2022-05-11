@@ -143,7 +143,7 @@ public class Planet {
 				this.deuterium -= costeUnidadDeuterium;
 				LightHunter nave = new LightHunter();
 				nave.setArmorAndDamage(this);
-				this.army[0].add(new LightHunter());
+				this.army[0].add(nave);
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
@@ -157,7 +157,9 @@ public class Planet {
 			
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
-				this.army[0].add(new LightHunter());
+				LightHunter nave = new LightHunter();
+				nave.setArmorAndDamage(this);
+				this.army[0].add(nave);
 			}
 		}
 	}
@@ -175,7 +177,7 @@ public class Planet {
 				this.deuterium -= costeUnidadDeuterium;
 				HeavyHunter nave = new HeavyHunter();
 				nave.setArmorAndDamage(this);
-				this.army[1].add(new HeavyHunter());
+				this.army[1].add(nave);
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
@@ -189,7 +191,9 @@ public class Planet {
 			
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
-				this.army[1].add(new HeavyHunter());
+				HeavyHunter nave = new HeavyHunter();
+				nave.setArmorAndDamage(this);
+				this.army[1].add(nave);
 			}
 		}
 	}
@@ -207,7 +211,7 @@ public class Planet {
 				this.deuterium -= costeUnidadDeuterium;
 				BattleShip nave = new BattleShip();
 				nave.setArmorAndDamage(this);
-				this.army[2].add(new BattleShip());
+				this.army[2].add(nave);
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
@@ -221,7 +225,9 @@ public class Planet {
 			
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
-				this.army[2].add(new BattleShip());
+				BattleShip nave = new BattleShip();
+				nave.setArmorAndDamage(this);
+				this.army[2].add(nave);
 			}
 		}
 	}
@@ -239,7 +245,7 @@ public class Planet {
 				this.deuterium -= costeUnidadDeuterium;
 				ArmoredShip nave = new ArmoredShip();
 				nave.setArmorAndDamage(this);
-				this.army[3].add(new ArmoredShip());
+				this.army[3].add(nave);
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
@@ -253,7 +259,9 @@ public class Planet {
 			
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
-				this.army[3].add(new ArmoredShip());
+				ArmoredShip nave = new ArmoredShip();
+				nave.setArmorAndDamage(this);
+				this.army[3].add(nave);
 			}
 		}
 	}
@@ -271,7 +279,7 @@ public class Planet {
 				this.deuterium -= costeUnidadDeuterium;
 				MissileLauncher nave = new MissileLauncher();
 				nave.setArmorAndDamage(this);
-				this.army[4].add(new MissileLauncher());
+				this.army[4].add(nave);
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
@@ -285,7 +293,9 @@ public class Planet {
 			
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
-				this.army[4].add(new MissileLauncher());
+				MissileLauncher nave = new MissileLauncher();
+				nave.setArmorAndDamage(this);
+				this.army[4].add(nave);
 			}
 		}
 	}
@@ -303,7 +313,7 @@ public class Planet {
 				this.deuterium -= costeUnidadDeuterium;
 				IonCannon nave = new IonCannon();
 				nave.setArmorAndDamage(this);
-				this.army[5].add(new IonCannon());
+				this.army[5].add(nave);
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
@@ -317,7 +327,9 @@ public class Planet {
 			
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
-				this.army[5].add(new IonCannon());
+				IonCannon nave = new IonCannon();
+				nave.setArmorAndDamage(this);
+				this.army[5].add(nave);
 			}
 		}
 	}
@@ -337,7 +349,7 @@ public class Planet {
 				this.deuterium -= costeUnidadDeuterium;
 				PlasmaCannon nave = new PlasmaCannon();
 				nave.setArmorAndDamage(this);
-				this.army[6].add(new PlasmaCannon());
+				this.army[6].add(nave);
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
@@ -351,7 +363,9 @@ public class Planet {
 			
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
-				this.army[6].add(new PlasmaCannon());
+				PlasmaCannon nave = new PlasmaCannon();
+				nave.setArmorAndDamage(this);
+				this.army[6].add(nave);
 			}
 		}
 	}
