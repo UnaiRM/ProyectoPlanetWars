@@ -77,7 +77,7 @@ public class DefenseAttack extends JFrame {
 		
 		contentPane.add(defense);
 		
-		JButton attack = new JButton("Choose Build");
+		JButton attack = new JButton("Attack");
 		attack.setBackground(Color.BLACK);
 		attack.setForeground(Color.WHITE);
 		attack.setFocusable(false);
