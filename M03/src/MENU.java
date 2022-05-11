@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 
+
 public class MENU extends JFrame {
 
 	private JPanel contentPane;
