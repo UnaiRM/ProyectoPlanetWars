@@ -281,6 +281,34 @@ public class Battle {
 		}
 	}
 	
+	public int[] probabilityWasteByShip(Ship nave) {
+		if (nave instanceof LightHunter) {
+			int[] probRecursos = {ConnectionBDD.getDefenseMetalCost(1),ConnectionBDD.getDefenseMetalCost(1),Variables.CHANCE_GENERATNG_WASTE_LIGTHHUNTER};
+			return probRecursos;
+		} else if (nave instanceof HeavyHunter) {
+			int[] probRecursos = {ConnectionBDD.getDefenseMetalCost(2),ConnectionBDD.getDefenseMetalCost(2),Variables.CHANCE_GENERATNG_WASTE_HEAVYHUNTER};
+			return probRecursos;
+		} else if (nave instanceof BattleShip) {
+			int[] probRecursos = {ConnectionBDD.getDefenseMetalCost(3),ConnectionBDD.getDefenseMetalCost(3),Variables.CHANCE_GENERATNG_WASTE_BATTLESHIP};
+			return probRecursos;
+		} else if (nave instanceof ArmoredShip) {
+			int[] probRecursos = {ConnectionBDD.getDefenseMetalCost(4),ConnectionBDD.getDefenseMetalCost(4),Variables.CHANCE_GENERATNG_WASTE_ARMOREDSHIP};
+			return probRecursos;
+		} else if (nave instanceof MissileLauncher) {
+			int[] probRecursos = {ConnectionBDD.getDefenseMetalCost(5),ConnectionBDD.getDefenseMetalCost(5),Variables.CHANCE_GENERATNG_WASTE_MISSILELAUNCHER};
+			return probRecursos;
+		} else if (nave instanceof IonCannon) {
+			int[] probRecursos = {ConnectionBDD.getDefenseMetalCost(6),ConnectionBDD.getDefenseMetalCost(6),Variables.CHANCE_GENERATNG_WASTE_IONCANNON};
+			return probRecursos;
+		} else if (nave instanceof PlasmaCannon) {
+			int[] probRecursos = {ConnectionBDD.getDefenseMetalCost(7),ConnectionBDD.getDefenseMetalCost(7),Variables.CHANCE_GENERATNG_WASTE_PLASMACANNON};
+			return probRecursos;
+		} else {
+			int[] probRecursos = {0,0,0};
+			return probRecursos;
+		}
+	}
+	
 	// BATALLA
 	
 	public void startBattle() {
@@ -368,6 +396,12 @@ public class Battle {
 				// HACER QUE SE BORRE LA NAVE SI SE QUEDA SIN ARMOR
 				if (armor <= 0) {
 					// SI SE BORRA COMPROBAR ANTES SI SE GENERAN RESIDUIOS
+					int probWasteRecursos[] = probabilityWasteByShip((Ship) defensa[grupoDefensa].get(naveRandom2));
+					int probW = probWasteRecursos[0]; // Probablidad
+					int recMetal = probWasteRecursos[1]; // Valor en metal
+					int recDeuterium = probWasteRecursos[2]; // Valor en Deuterio
+					
+					// MIRAR DONDE SE GUARDA EL WASTE Y REVISAR EL ARRAY DE RESOURCESLOSES
 					
 					// SI SE GENERAN HACER EL CALCULO
 					defensa[grupoDefensa].remove(naveRandom2);

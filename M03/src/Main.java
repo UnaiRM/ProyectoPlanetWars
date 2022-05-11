@@ -7,11 +7,12 @@ import java.util.TimerTask;
 public class Main {
 	
 	// Recursos para crear la flota enemiga
-	// HACER METODO QUE LOS RESETEE Y AUMENTE A CADA BATALLA
+	
 	private int enemyMetal = Variables.METAL_BASE_ENEMY_ARMY;
 	private int enemyDeuterium = Variables.DEUTERIUM_BASE_ENEMY_ARMY;
 	
-	public boolean flagLogin = false;
+	// MIRAR COMO HACER	LAS FLAGS
+	private boolean flagLogin = false;
 	
 	private int timeGeneration = 10000;
 	
