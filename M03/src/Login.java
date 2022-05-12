@@ -65,6 +65,7 @@ public class Login extends JFrame {
 		JButton login = new JButton("");
 		login.setIcon(new ImageIcon("fotos proyecto/BOTON.jpg"));
 		login.setBounds(175, 356, 109, 35);
+		this.setResizable(false);
 		
 		getContentPane().add(login);
 		login.addActionListener(new ActionListener() {

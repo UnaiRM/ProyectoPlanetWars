@@ -40,22 +40,19 @@ public class ReportStats extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
+	
 	public ReportStats() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(100, 100, dimAncho,dimAlto);
-		
 		this.setTitle("Report Stats");
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		
+		this.setResizable(false);
 		setContentPane(contentPane);
 		
 		JLabel fondo = new JLabel("");
@@ -69,7 +66,6 @@ public class ReportStats extends JFrame {
 		exit.setBounds(65, 796, 85, 21);
 		exit.setFocusable(false);
 		exit.addActionListener(new ActionListener() {
-		
 			
 			public void actionPerformed(ActionEvent e) {
 				dispose();

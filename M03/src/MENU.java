@@ -5,6 +5,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -36,7 +39,6 @@ public class MENU extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -47,8 +49,8 @@ public class MENU extends JFrame {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(100, 100,dimAncho,dimAlto );
 		setLocationRelativeTo(null);
-		contentPane = new JPanel();
-		
+		this.setResizable(false);
+		contentPane = new JPanel();		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -57,22 +59,33 @@ public class MENU extends JFrame {
 		ImageIcon imagen= new ImageIcon("fotos proyecto/menu.png");
 		fondo.setBounds(47, 10, 1920, 1080);
 		imagen=new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_AREA_AVERAGING));
+		
+		JLabel Ataque = new JLabel("");
+		Ataque.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		Ataque.setForeground(Color.WHITE);
+		Ataque.setBounds(42, 502, 256, 315);
+				
+		
+		Timer time= new Timer();
+		TimerTask tarea= new TimerTask() {
+			
+			public void run() {		
+			//String enemy=Main.ViewThreat();
+			//Ataque.setText(enemy);		
+			}
+		};
+		time.schedule(tarea, 0,100);
+		contentPane.add(Ataque);
+		
 		fondo.setIcon(imagen);
 		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(fondo);
-		
-		
 		JLabel stats = new JLabel("Hello");
 		stats.setFont(new Font("Arial", Font.PLAIN, 17));
 		stats.setForeground(Color.WHITE);
-		stats.setBounds(37, 93, 296, 38);
+		stats.setBounds(37, 93, 296, 263);
 		contentPane.add(stats);
-		
-		
-		
-		
-		
-		
+
 		JButton botonbuild = new JButton("");
 		botonbuild.setIcon(new ImageIcon("fotos proyecto/BUILD.jpeg"));
 		
@@ -119,5 +132,4 @@ public class MENU extends JFrame {
 		});
 		contentPane.add(batalla);
 	}
-
 }

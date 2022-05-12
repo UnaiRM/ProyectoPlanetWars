@@ -54,7 +54,7 @@ public class Upgrade extends JFrame {
 		contentPane.setLayout(null);
 		
 		setContentPane(contentPane);
-		
+		this.setResizable(false);
 		JLabel fondo = new JLabel("");
 		ImageIcon imagen= new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Documents\\GitHub\\ProyecyoPlanetWars\\M03\\fotos proyecto\\Upgra.png");
 		fondo.setBounds(75, -16, 1920, 1080);

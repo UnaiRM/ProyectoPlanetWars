@@ -107,8 +107,7 @@ public class DefenseAttack extends JFrame {
 				
 			}
 		});
-		
-		
+
 		contentPane.add(exit);
 		fondo.setIcon(new ImageIcon("fotos proyecto/space.png"));
 		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());

@@ -18,6 +18,7 @@ import javax.swing.JSpinner;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
+import javax.swing.JScrollPane;
 
 public class ReportRead extends JFrame {
 
@@ -40,6 +41,7 @@ public class ReportRead extends JFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
@@ -55,7 +57,7 @@ public class ReportRead extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		
+		this.setResizable(false);
 		setContentPane(contentPane);
 		
 		JLabel fondo = new JLabel("");

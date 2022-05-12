@@ -40,9 +40,7 @@ public class ReportChoose extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public ReportChoose() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
@@ -77,8 +75,7 @@ public class ReportChoose extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				new MENU().main(null);
-				
-				
+								
 			}
 		});
 		
