@@ -578,6 +578,7 @@ public class Battle {
 		
 		Battle batalla = new Battle(planeta.getArmy(),planetaEnemy.getArmy());
 		batalla.startBattle();
+		System.out.println(batalla.getBattleDevolpment());
 	}
 		
 }

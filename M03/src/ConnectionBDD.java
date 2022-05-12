@@ -13,7 +13,7 @@ public class ConnectionBDD {
 
 	// PREGUNTAR SI PUEDE SER ESTATICA
 	private static Connection con;
-	private String ip = "@192.168.40.2";
+	private String ip = "@192.168.56.101"; //"@192.168.40.2" instituto
 	private String usuario = "alumnoAMS8";
 	private String contrasena = "alumnoAMS8";
 	
@@ -22,6 +22,7 @@ public class ConnectionBDD {
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			con = DriverManager.getConnection("jdbc:oracle:thin:"+ip+":1521:orcl", usuario, contrasena);
+			System.out.println("Conexion creada correctamente");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
