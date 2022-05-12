@@ -8,7 +8,11 @@ begin
    execute immediate  'DROP TABLE SHIP';
    execute immediate  'DROP TABLE PLANET';
    execute immediate  'DROP TABLE USERS';
+   commit;
+   
 exception
    when others then
    dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR DROP TABLE');
+   rollback;
+   
 end;

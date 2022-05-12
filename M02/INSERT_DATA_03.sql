@@ -16,9 +16,10 @@ begin
    execute immediate  'INSERT INTO DEFENSE VALUES(1,''Missile Launcher'',2000,0,0,200,0,80,5,10)';
    execute immediate  'INSERT INTO DEFENSE VALUES(2,''Ion Cannon'',4000,0,500,1200,0,250,12,25)';
    execute immediate  'INSERT INTO DEFENSE VALUES(3,''Plasma Cannon'',50000,0,5000,7000,0,2000,30,50)';
+   commit;
 
 exception
    when others then
    dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
-
+   rollback;
 end;
