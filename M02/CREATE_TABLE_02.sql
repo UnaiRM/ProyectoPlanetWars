@@ -11,14 +11,14 @@ begin
    
    EXECUTE IMMEDIATE 'CREATE TABLE PLANET
    (ID_planet numeric primary key,
-   ID_user numeric,
+   ID_user numeric not null,
    name varchar(30) unique,
    technology_atack numeric,
    technology_defense numeric,
    update_defense_cost numeric,
    update_atack_cost numeric,
    crystal_quantity numeric,
-   iron_quantity numeric,
+   metal_quantity numeric,
    deuterium_quantity numeric,
    CONSTRAINT Planet_User_fk FOREIGN KEY (ID_user)
       REFERENCES USERS (ID_user))';
