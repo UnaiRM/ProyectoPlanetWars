@@ -16,7 +16,7 @@ public class Main {
 	
 	private int timeGeneration = 10000;
 	
-	private ArrayList<MilitaryUnit>[] enemyArmy = new ArrayList[7];
+	private static ArrayList<MilitaryUnit>[] enemyArmy = new ArrayList[7];
 
 	public static void main(String[] args) {
 		
@@ -196,7 +196,7 @@ public class Main {
 		enemyArmy = enemyArmyTemp;
 	}
 	
-	public String ViewThreat() {
+	public static String ViewThreat() {
 		int cantidad = 0;
 		int LightHunter = 0, HeavyHunter = 0, BattleShip = 0, ArmoredShip = 0, MissileLauncher = 0, IonCannon = 0, PlasmaCannon;
 		for (int i = 0; i < enemyArmy.length; i++) {

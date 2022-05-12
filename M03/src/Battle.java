@@ -16,8 +16,8 @@ public class Battle {
 	
 	private int[] wasteMetalDeuterium;
 	
-	private int[] enemyDrops;
-	private int[] planetDrops;
+	private int[] enemyDrops = {0,0,0,0,0,0,0};
+	private int[] planetDrops = {0,0,0,0,0,0,0};
 	
 	private int[][] resourcesLoses;
 	
@@ -185,7 +185,7 @@ public class Battle {
 			for (int i = 0; i < cantPlanetArmy.length; i++) {
 				sumaTotal += cantPlanetArmy[i];
 			}
-			int numAleatorio = generador.nextInt(1,sumaTotal);
+			int numAleatorio = generador.nextInt(0,sumaTotal);
 			int total = 0;
 			for (int i = 0; i < cantPlanetArmy.length; i++) {
 				total += cantPlanetArmy[i];
@@ -201,7 +201,7 @@ public class Battle {
 			for (int i = 0; i < cantEnemyArmy.length; i++) {
 				sumaTotal += cantEnemyArmy[i];
 			}
-			int numAleatorio = generador.nextInt(1,sumaTotal);
+			int numAleatorio = generador.nextInt(0,sumaTotal);
 			int total = 0;
 			for (int i = 0; i < cantEnemyArmy.length; i++) {
 				total += cantEnemyArmy[i];
@@ -309,9 +309,63 @@ public class Battle {
 		}
 	}
 	
+	public void initInitialCostFleet() {
+		int metalPlanet = 0, deutPlanet = 0;
+		int metalEnemy = 0, deutEnemy = 0;
+		
+		int[] unidadesPlaneta = calcularActualUnitsPlanet();
+		int[] unidadesEnemy = calcularActualUnitsEnemy();
+		
+		for (int i = 0; i < unidadesPlaneta.length; i++) {
+			switch (i) {
+			case 0:
+				metalPlanet += unidadesPlaneta[i] * ConnectionBDD.getShipMetalCost(1);
+				deutPlanet += unidadesPlaneta[i] * ConnectionBDD.getShipDeuteriumCost(1);
+				break;
+
+			case 1:
+				metalPlanet += unidadesPlaneta[i] * ConnectionBDD.getShipMetalCost(2);
+				deutPlanet += unidadesPlaneta[i] * ConnectionBDD.getShipDeuteriumCost(2);
+				break;
+				
+			case 2:
+				metalPlanet += unidadesPlaneta[i] * ConnectionBDD.getShipMetalCost(3);
+				deutPlanet += unidadesPlaneta[i] * ConnectionBDD.getShipDeuteriumCost(3);
+				break;
+				
+			case 3:
+				metalPlanet += unidadesPlaneta[i] * ConnectionBDD.getShipMetalCost(4);
+				deutPlanet += unidadesPlaneta[i] * ConnectionBDD.getShipDeuteriumCost(4);
+				break;
+				
+			case 4:
+				metalPlanet += unidadesPlaneta[i] * ConnectionBDD.getDefenseMetalCost(1);
+				deutPlanet += unidadesPlaneta[i] * ConnectionBDD.getDefenseDeuteriumCost(1);
+				break;
+			
+			case 5:
+				metalPlanet += unidadesPlaneta[i] * ConnectionBDD.getDefenseMetalCost(2);
+				deutPlanet += unidadesPlaneta[i] * ConnectionBDD.getDefenseDeuteriumCost(2);
+				break;
+				
+			case 6:
+				metalPlanet += unidadesPlaneta[i] * ConnectionBDD.getDefenseMetalCost(3);
+				deutPlanet += unidadesPlaneta[i] * ConnectionBDD.getDefenseDeuteriumCost(3);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	
 	// BATALLA
 	
 	public void startBattle() {
+		
+		battleDevolpment = "\nSTART THE BATTLE";
+		String jAtacante = "";
+		String atacanteString = "";
+		String defensaString = "";
 		
 		ArrayList<MilitaryUnit>[] atacante;
 		ArrayList<MilitaryUnit>[] defensa;
@@ -319,6 +373,8 @@ public class Battle {
 		int grupoAtacante = 0, grupoDefensa, naveRandom, naveRandom2;
 		String naveAtancante, naveDefensora;
 		int ataque = 0, armor = 0;
+		
+		
 		
 		Random generador = new Random();
 		
@@ -350,16 +406,17 @@ public class Battle {
 			// TURNO
 			// Se establece que flota ataca y que flota defiende
 			
-			System.out.println("jugador: "+jugador);
+//			System.out.println("jugador: "+jugador);
 			if (jugador == 0) {
 				atacante = armies[0];
 				defensa = armies[1];
-				
+				jAtacante = "Planet";
 			} else {
 				atacante = armies[1];
 				defensa = armies[0];
-				
+				jAtacante = "Enemy fleet";
 			}
+			battleDevolpment += "\nAttacks "+jAtacante+": ";
 			// ATAQUE
 			boolean attackAgain = true;
 			while (attackAgain) {
@@ -385,13 +442,56 @@ public class Battle {
 				
 				// HACER UN SWITCH PARA GUARDAR QUE TIPO DE NAVE ATACA Y DEFIENDE
 				
+				if (atacante[grupoAtacante].get(naveRandom) instanceof LightHunter) {
+					atacanteString = "Light Hunter";
+				} else if (atacante[grupoAtacante].get(naveRandom) instanceof HeavyHunter) {
+					atacanteString = "Heavy Hunter";
+				} else if (atacante[grupoAtacante].get(naveRandom) instanceof BattleShip) {
+					atacanteString =  "Battle Ship";
+				} else if (atacante[grupoAtacante].get(naveRandom) instanceof ArmoredShip) {
+					atacanteString = "Armored Ship";
+				} else if (atacante[grupoAtacante].get(naveRandom) instanceof MissileLauncher) {
+					atacanteString = "Missile Launcher";
+				} else if (atacante[grupoAtacante].get(naveRandom) instanceof IonCannon) {
+					atacanteString = "Ion Cannon";
+				} else if (atacante[grupoAtacante].get(naveRandom) instanceof PlasmaCannon) {
+					atacanteString = "Plasma Cannon";
+				} else {
+					atacanteString = "test";
+				}
+				
+				battleDevolpment += atacanteString+" attacks ";
+				
+				if (defensa[grupoDefensa].get(naveRandom2) instanceof LightHunter) {
+					defensaString = "Light Hunter";
+				} else if (defensa[grupoDefensa].get(naveRandom2) instanceof HeavyHunter) {
+					defensaString = "Heavy Hunter";
+				} else if (defensa[grupoDefensa].get(naveRandom2) instanceof BattleShip) {
+					defensaString = "Battle Ship";
+				} else if (defensa[grupoDefensa].get(naveRandom2) instanceof ArmoredShip) {
+					defensaString = "Armored Ship";
+				} else if (defensa[grupoDefensa].get(naveRandom2) instanceof MissileLauncher) {
+					defensaString = "Missile Ship";
+				} else if (defensa[grupoDefensa].get(naveRandom2) instanceof IonCannon) {
+					defensaString = "Ion Cannon";
+				} else if (defensa[grupoDefensa].get(naveRandom2) instanceof PlasmaCannon) {
+					defensaString = "Plasma Cannon";
+				} else {
+					defensaString = "test";
+				}
+				
+				battleDevolpment += defensaString;
 				
 				ataque = atacante[grupoAtacante].get(naveRandom).attack(); // Para report
+				
+				battleDevolpment += "\n"+atacanteString + " generates the damage = "+ ataque;
 				
 				// El ataque baja el armor de la naveDefensa
 				defensa[grupoDefensa].get(naveRandom2).takeDamage(ataque);
 
 				armor = defensa[grupoDefensa].get(naveRandom2).getActualArmor(); // Para report
+				
+				battleDevolpment += "\n"+defensaString + " stays with armor = "+armor;
 				
 				// HACER QUE SE BORRE LA NAVE SI SE QUEDA SIN ARMOR
 				if (armor <= 0) {
@@ -403,9 +503,11 @@ public class Battle {
 					
 					// MIRAR DONDE SE GUARDA EL WASTE Y REVISAR EL ARRAY DE RESOURCESLOSES
 					
+					
 					// SI SE GENERAN HACER EL CALCULO
 					defensa[grupoDefensa].remove(naveRandom2);
-					System.out.println("Nave eliminada");
+					battleDevolpment += "\nWe eliminate "+defensaString;
+//					System.out.println("Nave eliminada");
 					break;
 				}
 				
@@ -413,7 +515,7 @@ public class Battle {
 				int numAleatorio = generador.nextInt(0,100);
 				if (numAleatorio <= probAttackAgain) {
 					attackAgain = true;
-					System.out.println("Ataque de nuevo");
+					battleDevolpment += "\nAttacks again";
 				}
 				this.actualNumberUnitsEnemy = calcularActualUnitsEnemy();
 				this.actualNumberUnitsPlanet = calcularActualUnitsPlanet();
@@ -428,19 +530,19 @@ public class Battle {
 			for (int i = 0; i < actualNumberUnitsPlanet.length; i++) {
 				actualNumPlanet += actualNumberUnitsPlanet[i];
 			}
-			System.out.println("Cantidad actual Planeta: "+actualNumPlanet);
-			System.out.println("Cantidad actual Enemy: "+actualNumEnemy);
-			System.out.println();
+//			System.out.println("Cantidad actual Planeta: "+actualNumPlanet);
+//			System.out.println("Cantidad actual Enemy: "+actualNumEnemy);
+//			System.out.println();
 			if (jugador == 0) {
 				jugador = 1;
 			} else {
 				jugador = 0;
 			}
+			
+			// MIRAR DE HACER QUE LO DEVUELVA SI ES EL ULTIMO TURNO
+			battleDevolpment += "\n\n**************CHANGE ATTACKER**************";
+			
 		}
-		
-		
-		
-		
 		
 	}
 	
@@ -449,24 +551,26 @@ public class Battle {
 		ConnectionBDD con = new ConnectionBDD();
 		
 		Planet planeta = new Planet();
-		planeta.setMetal(2000000);
-		planeta.setDeuterium(2000000);
+		planeta.setMetal(2000000000);
+		planeta.setDeuterium(2000000000);
+		
+		Random generador = new Random();
 		try {
-			planeta.newBattleShip(3);
-			planeta.newLigthHunter(1);
-			planeta.newHeavyHunter(5);
+			planeta.newBattleShip(generador.nextInt(500,1000));
+			planeta.newLigthHunter(generador.nextInt(500,1000));
+			planeta.newHeavyHunter(generador.nextInt(500,1000));
 		} catch (ResourceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		Planet planetaEnemy = new Planet();
-		planetaEnemy.setMetal(2000000);
-		planetaEnemy.setDeuterium(2000000);
+		planetaEnemy.setMetal(2000000000);
+		planetaEnemy.setDeuterium(2000000000);
 		try {
-			planetaEnemy.newBattleShip(3);
-			planetaEnemy.newLigthHunter(1);
-			planetaEnemy.newHeavyHunter(5);
+			planetaEnemy.newBattleShip(generador.nextInt(500,1000));
+			planetaEnemy.newLigthHunter(generador.nextInt(500,1000));
+			planetaEnemy.newHeavyHunter(generador.nextInt(500,1000));
 		} catch (ResourceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
