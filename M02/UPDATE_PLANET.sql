@@ -4,8 +4,9 @@ cristal planet.crystal_quantity%type, metal planet.metal_quantity%type, deuteriu
 as
 begin
 update planet set  name = nombre, technology_atack = tec_ataque, technology_defense = tec_defensa, update_defense_cost = update_defensa, update_atack_cost = update_ataque where id_planet = id_planeta;
+commit;
 exception
 when others then
    dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
-
+    rollback;
 end;
