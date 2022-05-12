@@ -5,8 +5,9 @@ as
 begin
    INSERT INTO PLANET (id_planet, id_user, name, technology_atack, technology_defense, update_defense_cost, update_atack_cost, crystal_quantity, metal_quantity, deuterium_quantity)
    VALUES (id_planeta, id_user, nombre, tec_ataque, tec_defensa, update_defensa, update_ataque, cristal, metal, deuterium);
+   commit;
 exception
 when others then
    dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
-
+   rollback;
 end;
