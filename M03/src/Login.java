@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.BoxLayout;
@@ -33,7 +32,6 @@ public class Login extends JFrame {
 	private JPanel panel_6;
 	private JPanel panel_1;
 	private JLabel lblNewLabel_2;
-	
 	private JLabel lblNewLabel_1;
 	private JTextField name;
 	private JPasswordField passwordField;
@@ -63,51 +61,21 @@ public class Login extends JFrame {
 		getContentPane().setLayout(null);
 		
 		this.setSize(486,448);
-		
+		this.setTitle("Login");
 		JButton login = new JButton("");
 		login.setIcon(new ImageIcon("fotos proyecto/BOTON.jpg"));
 		login.setBounds(175, 356, 109, 35);
+		this.setResizable(false);
 		
 		getContentPane().add(login);
 		login.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				String nombre = name.getText();
-				String contr = passwordField.getText();
-				
-				boolean val = false;
-				int comp = ConnectionBDD.loginProcedure(nombre, contr);
-				
-				switch (comp) {
-				case 0:
-					// Usuario incorrecto
-					JOptionPane.showMessageDialog(new errorUsuario(), 
-			                "Incorrect user or password", "Login incorrect", 
-			                JOptionPane.WARNING_MESSAGE);
-					break;
-					
-				case -1:
-					// Contraseña incorrecta
-					JOptionPane.showMessageDialog(new errorContrasena(), 
-			                "Incorrect password", "Login incorrect", 
-			                JOptionPane.WARNING_MESSAGE);
-					break;
-					
-				case 1:
-					// Login correcto
-					val = true;
-					break;
-				default:
-					break;
-				}
-				if (val) {
-					Main.setFlagLogin(true);
-					new MENU().main(null); // MIRAR COMO HACER QUE SIGA EL PROGRAMA
-				}
-				
+				new MENU().main(null);
+				dispose();
+				System.out.println(name.getText()); 
+				System.out.println(passwordField.getText()); 			
 			}
 		});
 		passwordField = new JPasswordField();
@@ -119,33 +87,13 @@ public class Login extends JFrame {
 		getContentPane().add(name);
 		name.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("fotos proyecto/login8.jpg"));
-		lblNewLabel_3.setBounds(0, 0, 480, 417);
-		getContentPane().add(lblNewLabel_3);
-		
-		setVisible(true);
+		JLabel fondo = new JLabel("");
+		fondo.setIcon(new ImageIcon("fotos proyecto/login8.jpg"));
+		fondo.setBounds(0, 0, 480, 417);
+		getContentPane().add(fondo);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 
-	}
-	
 }
-
-class errorUsuario extends JFrame{
-	
-	errorUsuario(){
-		
-	}
-	
-}
-
-class errorContrasena extends JFrame{
-	
-	errorContrasena(){
-		
-	}
-	
-	
 }

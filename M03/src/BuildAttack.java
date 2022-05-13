@@ -22,7 +22,8 @@ import java.awt.Font;
 public class BuildAttack extends JFrame {
 
 	private JPanel contentPane;
-
+	public  int dimAncho=1536;
+	public  int dimAlto=864;
 	/**
 	 * Launch the application.
 	 */
@@ -47,19 +48,19 @@ public class BuildAttack extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setBounds(100, 100, (int) dim.getWidth(), (int) dim.getHeight());
+		this.setBounds(100, 100, dimAncho,dimAlto);
 		
 		this.setTitle("ATTACK");
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		
+		this.setResizable(false);
 		setContentPane(contentPane);
 		
-		JLabel lblNewLabel = new JLabel("");
+		JLabel fondo = new JLabel("");
 		ImageIcon imagen= new ImageIcon("fotos proyecto/tropas.png");
-		lblNewLabel.setBounds(75, -16, 1920, 1080);
+		fondo.setBounds(75, -16, 1920, 1080);
 		imagen=new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_AREA_AVERAGING));
 		
 		JButton CONSTRUIR = new JButton("BUILD");
@@ -91,20 +92,20 @@ public class BuildAttack extends JFrame {
 		contentPane.add(contador_1);
 		
 		
-		JLabel lblNewLabel_5_1_1_1 = new JLabel("");
-		lblNewLabel_5_1_1_1.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
-		lblNewLabel_5_1_1_1.setBounds(966, 578, 60, 33);
-		contentPane.add(lblNewLabel_5_1_1_1);
+		JLabel fondocont4 = new JLabel("");
+		fondocont4.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
+		fondocont4.setBounds(966, 578, 60, 33);
+		contentPane.add(fondocont4);
 		
-		JLabel lblNewLabel_5_1_1 = new JLabel("");
-		lblNewLabel_5_1_1.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
-		lblNewLabel_5_1_1.setBounds(694, 578, 60, 33);
-		contentPane.add(lblNewLabel_5_1_1);
+		JLabel fondocont3 = new JLabel("");
+		fondocont3.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
+		fondocont3.setBounds(694, 578, 60, 33);
+		contentPane.add(fondocont3);
 		
-		JLabel lblNewLabel_5_1 = new JLabel("");
-		lblNewLabel_5_1.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
-		lblNewLabel_5_1.setBounds(436, 576, 60, 33);
-		contentPane.add(lblNewLabel_5_1);
+		JLabel fondocont2 = new JLabel("");
+		fondocont2.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
+		fondocont2.setBounds(436, 576, 60, 33);
+		contentPane.add(fondocont2);
 		
 		JButton restar_3 = new JButton("");
 		restar_3.setIcon(new ImageIcon("fotos proyecto/menos.png"));
@@ -147,21 +148,15 @@ public class BuildAttack extends JFrame {
 		});
 		
 		
-		contentPane.add(sumar_3);
-		
+		contentPane.add(sumar_3);		
 		JButton sumar_2 = new JButton("");
 		sumar_2.setBounds(834, 583, 27, 21);
 		sumar_2.setIcon(new ImageIcon("fotos proyecto/mas.png"));
 		sumar_2.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
 				int numEntero = Integer.parseInt(contador_2.getText());
-				
-				String numCadena= Integer.toString(numEntero+1);
-				
+				String numCadena= Integer.toString(numEntero+1);				
 				contador_2.setText(numCadena);
 				
 			}
@@ -222,13 +217,9 @@ public class BuildAttack extends JFrame {
 		sumar_1.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				int numEntero = Integer.parseInt(contador_1.getText());
-				
-				String numCadena= Integer.toString(numEntero+1);
-				
+			public void actionPerformed(ActionEvent e) {	
+				int numEntero = Integer.parseInt(contador_1.getText());		
+				String numCadena= Integer.toString(numEntero+1);				
 				contador_1.setText(numCadena);
 				
 			}
@@ -244,10 +235,10 @@ public class BuildAttack extends JFrame {
 		contador.setBounds(212, 578, 45, 27);
 		contentPane.add(contador);
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
-		lblNewLabel_5.setBounds(173, 578, 60, 33);
-		contentPane.add(lblNewLabel_5);
+		JLabel fondocont = new JLabel("");
+		fondocont.setIcon(new ImageIcon("fotos proyecto/negro.jpg"));
+		fondocont.setBounds(173, 578, 60, 33);
+		contentPane.add(fondocont);
 		
 		JButton restar = new JButton("");
 		restar.setIcon(new ImageIcon("fotos proyecto/menos.png"));
@@ -255,7 +246,7 @@ public class BuildAttack extends JFrame {
 		contentPane.add(restar);
 		restar.addActionListener(new ActionListener() {
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent e) {
 				int numEntero = Integer.parseInt(contador.getText());
 				int resta=numEntero-1;
@@ -276,15 +267,10 @@ public class BuildAttack extends JFrame {
 		sumar.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				int numEntero = Integer.parseInt(contador.getText());
-				
-				String numCadena= Integer.toString(numEntero+1);
-				
-				contador.setText(numCadena);
-				
+			public void actionPerformed(ActionEvent e) {				
+				int numEntero = Integer.parseInt(contador.getText());				
+				String numCadena= Integer.toString(numEntero+1);				
+				contador.setText(numCadena);	
 			}
 		});
 		contentPane.add(sumar);
@@ -299,15 +285,13 @@ public class BuildAttack extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new DefenseAttack().main(null);
-				
-				
+				new DefenseAttack().main(null);	
 			}
 		});
 		contentPane.add(exit);
-		lblNewLabel.setIcon(imagen);
-		lblNewLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
-		contentPane.add(lblNewLabel);
+		fondo.setIcon(imagen);
+		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+		contentPane.add(fondo);
 		
 	}
 }

@@ -5,6 +5,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,10 +18,12 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 
+
 public class MENU extends JFrame {
 
 	private JPanel contentPane;
-
+	public  int dimAncho=1536;
+	public  int dimAlto=864;
 	/**
 	 * Launch the application.
 	 */
@@ -34,42 +39,53 @@ public class MENU extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
 	public MENU() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("Menu");
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setBounds(100, 100, (int) dim.getWidth(), (int) dim.getHeight());
+		this.setBounds(100, 100,dimAncho,dimAlto );
 		setLocationRelativeTo(null);
-		contentPane = new JPanel();
-		
+		this.setResizable(false);
+		contentPane = new JPanel();		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("");
+		JLabel fondo = new JLabel("");
 		ImageIcon imagen= new ImageIcon("fotos proyecto/menu.png");
-		lblNewLabel.setBounds(47, 10, 1920, 1080);
+		fondo.setBounds(47, 10, 1920, 1080);
 		imagen=new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_AREA_AVERAGING));
-		lblNewLabel.setIcon(imagen);
-		lblNewLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
-		contentPane.add(lblNewLabel);
 		
+		JLabel Ataque = new JLabel("");
+		Ataque.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		Ataque.setForeground(Color.WHITE);
+		Ataque.setBounds(42, 502, 256, 315);
+				
 		
-		JLabel lblNewLabel_1 = new JLabel("Hello");
-		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 17));
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBounds(37, 93, 296, 38);
-		contentPane.add(lblNewLabel_1);
+		Timer time= new Timer();
+		TimerTask tarea= new TimerTask() {
+			
+			public void run() {		
+			//String enemy=Main.ViewThreat();
+			//Ataque.setText(enemy);		
+			}
+		};
+		time.schedule(tarea, 0,100);
+		contentPane.add(Ataque);
 		
-		
-		
-		
-		
-		
+		fondo.setIcon(imagen);
+		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+		contentPane.add(fondo);
+		JLabel stats = new JLabel("Hello");
+		stats.setFont(new Font("Arial", Font.PLAIN, 17));
+		stats.setForeground(Color.WHITE);
+		stats.setBounds(37, 93, 296, 263);
+		contentPane.add(stats);
+
 		JButton botonbuild = new JButton("");
 		botonbuild.setIcon(new ImageIcon("fotos proyecto/BUILD.jpeg"));
 		
@@ -90,15 +106,30 @@ public class MENU extends JFrame {
 		botonUpgrade.setIcon(new ImageIcon("fotos proyecto/ION.png"));
 		botonUpgrade.setBounds(795, 572, 107, 113);
 		botonUpgrade.setFocusable(false);
-		
+		botonUpgrade.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new Upgrade().main(null);
+			}
+		});
 		
 		contentPane.add(botonUpgrade);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon("fotos proyecto/batalla.png"));
-		btnNewButton.setBounds(1172, 582, 107, 96);
-		btnNewButton.setFocusable(false);
-		contentPane.add(btnNewButton);
+		JButton batalla = new JButton("");
+		batalla.setIcon(new ImageIcon("fotos proyecto/batalla2.png"));
+		batalla.setBounds(1172, 582, 107, 96);
+		batalla.setFocusable(false);
+		batalla.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				new ReportChoose().main(null);
+				dispose();
+			}
+		});
+		contentPane.add(batalla);
 	}
-
 }
