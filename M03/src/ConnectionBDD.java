@@ -17,6 +17,10 @@ public class ConnectionBDD {
 	private String usuario = "alumnoAMS8";
 	private String contrasena = "alumnoAMS8";
 	
+	// CONSTANTES PARA EL PROGRAMA
+	private static int idUsuario = 0;
+	private static int idPlaneta = 0;
+	
 	
 	public ConnectionBDD() {
 		try {
@@ -29,6 +33,78 @@ public class ConnectionBDD {
 		}	
 	}
 	
+	public static Connection getCon() {
+		return con;
+	}
+
+
+
+	public static void setCon(Connection con) {
+		ConnectionBDD.con = con;
+	}
+
+
+
+	public String getIp() {
+		return ip;
+	}
+
+
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+
+
+
+	public static int getIdUsuario() {
+		return idUsuario;
+	}
+
+
+
+	public static void setIdUsuario(int idUsuario) {
+		ConnectionBDD.idUsuario = idUsuario;
+	}
+
+
+
+	public static int getIdPlaneta() {
+		return idPlaneta;
+	}
+
+
+
+	public static void setIdPlaneta(int idPlaneta) {
+		ConnectionBDD.idPlaneta = idPlaneta;
+	}
+
+
+
 	public boolean initalizeBDD() {
 		CallableStatement cst;
 		try {
@@ -161,10 +237,10 @@ public class ConnectionBDD {
 		}
 	}
 	
-	public static int loginProcedure(String user, String password) {
+	public static String[] loginProcedure(String user, String password) {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call LOGIN(?,?,?)}");
+			cst = con.prepareCall("{call LOGIN(?,?,?,?)}");
 			cst.setString(1, user);
 			cst.setString(2, password);
 			
@@ -172,14 +248,17 @@ public class ConnectionBDD {
 			
 			cst.execute();
 			
-			int resultado = cst.getInt(3);
+			String idUsuario = String.valueOf(cst.getInt(3));
+			String idPlanetas = cst.getString(4);
 			cst.close();
+			String resultado[] = {idUsuario, idPlanetas};
 			return resultado;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return -2;
+			String resultado[] = {"",""};
+			return resultado;
 		}
 	
 	}

@@ -28,21 +28,10 @@ public class Main {
 		
 		Login login = new Login();
 		
+		
 		Planet planeta = new Planet();
 		
-		if (main.isFlagLogin()) {
-			Timer time = new Timer();
-			TimerTask autoIncrease = new TimerTask() {
-				
-				@Override
-				public void run() {
-					autoIncreaseResources(planeta);
-					System.out.println(planeta.getMetal());
-					System.out.println(planeta.getDeuterium());
-				}
-			};
-			time.schedule(autoIncrease,0, main.getTimeGeneration());
-		}
+		
 	}
 	
 	
