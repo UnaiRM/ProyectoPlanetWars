@@ -1,7 +1,7 @@
 create or replace procedure GET_PLANET (p_id in out planet.id_planet%TYPE, p_user out planet.id_user%TYPE,
 p_name out planet.name%TYPE, p_tecno_attack out planet.technology_atack%TYPE, p_tecno_defense out planet.technology_defense%TYPE,
 p_upt_defense out planet.update_defense_cost%TYPE, p_upt_attack out planet.update_atack_cost%TYPE,
-p_crystal out planet.crystal_quantity%TYPE, p_iron out planet.metal_quantity%TYPE, p_deuterium out planet.deuterium_quantity%TYPE)
+p_crystal out planet.crystal_quantity%TYPE, p_iron out planet.iron_quantity%TYPE, p_deuterium out planet.deuterium_quantity%TYPE)
 
 as
    existe int;
