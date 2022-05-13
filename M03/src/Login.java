@@ -40,12 +40,13 @@ public class Login extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		ConnectionBDD con = new ConnectionBDD();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					
 					Login frame = new Login();
-					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -83,14 +84,16 @@ public class Login extends JFrame {
 				} else {
 					ConnectionBDD.setIdUsuario(idUsuario);
 					// SACAR LA INTERFAZ PARA ELEGIR EL PLANETA
-//					if () {
-//						
-//					} else {
-//
-//					}
+					if (idPlanetas.charAt(0) == '0') {
+						Main.flagNoTienePlanetas = true;
+						System.out.println("Comp login");
+					} else {
+						Main.flagTienePlanetas = true;
+					}
 					
 					// CAMBIAR PARA CUANDO SE HAYA ELEGIDO
-					dispose();	
+					dispose();
+					Main.flagLogin = false;
 				}
 						
 			}
@@ -110,6 +113,7 @@ public class Login extends JFrame {
 		getContentPane().add(fondo);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
 		
 
 }

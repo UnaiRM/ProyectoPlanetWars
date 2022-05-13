@@ -12,7 +12,10 @@ public class Main {
 	private int enemyDeuterium = Variables.DEUTERIUM_BASE_ENEMY_ARMY;
 	
 	// MIRAR COMO HACER	LAS FLAGS
-	private boolean flagLogin = false;
+	private boolean flagOn = true;
+	static boolean flagLogin = true;
+	static boolean flagTienePlanetas = false;
+	static boolean flagNoTienePlanetas = false;
 	
 	private int timeGeneration = 10000;
 	
@@ -21,15 +24,20 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Main main = new Main();
-		
 		ConnectionBDD con = new ConnectionBDD();
 		
+		while (main.flagOn) {
+			if (flagLogin) {
+				Login login = new Login();
+				flagLogin = false;
+			} else if (flagNoTienePlanetas) {
+				flagNoTienePlanetas = false;
+				System.out.println("No tiene");
+			} else if (flagTienePlanetas) {
+				flagTienePlanetas = false;
+			}
+		}
 		
-		
-		Login login = new Login();
-		
-		
-		Planet planeta = new Planet();
 		
 		
 	}
@@ -37,6 +45,34 @@ public class Main {
 	
 	
 	
+	public boolean isFlagTienePlanetas() {
+		return flagTienePlanetas;
+	}
+
+
+
+
+	public static void setFlagTienePlanetas(boolean flagTienePlanetas) {
+		flagTienePlanetas = flagTienePlanetas;
+	}
+
+
+
+
+	public static boolean isFlagNoTienePlanetas() {
+		return flagNoTienePlanetas;
+	}
+
+
+
+
+	public void setFlagNoTienePlanetas(boolean flagNoTienePlanetas) {
+		this.flagNoTienePlanetas = flagNoTienePlanetas;
+	}
+
+
+
+
 	public int getEnemyMetal() {
 		return enemyMetal;
 	}

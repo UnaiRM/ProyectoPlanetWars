@@ -13,13 +13,13 @@ public class ConnectionBDD {
 
 	// PREGUNTAR SI PUEDE SER ESTATICA
 	private static Connection con;
-	private String ip = "@192.168.56.101"; //"@192.168.40.2" instituto
+	private String ip = "@192.168.40.2"; //"@192.168.40.2" instituto "@192.168.56.101" casa
 	private String usuario = "alumnoAMS8";
 	private String contrasena = "alumnoAMS8";
 	
 	// CONSTANTES PARA EL PROGRAMA
-	private static int idUsuario = 0;
-	private static int idPlaneta = 0;
+	static int idUsuario = 0;
+	static int idPlaneta = 0;
 	
 	
 	public ConnectionBDD() {
@@ -240,11 +240,12 @@ public class ConnectionBDD {
 	public static String[] loginProcedure(String user, String password) {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call LOGIN(?,?,?,?)}");
+			cst = con.prepareCall("{call PLANET_WARS.LOGIN(?,?,?,?)}");
 			cst.setString(1, user);
 			cst.setString(2, password);
 			
 			cst.registerOutParameter(3, java.sql.Types.INTEGER);
+			cst.registerOutParameter(4, java.sql.Types.VARCHAR);
 			
 			cst.execute();
 			
