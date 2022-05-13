@@ -26,10 +26,10 @@ as
    procedure LOGIN(user in users.username%TYPE, password in users.password%TYPE, p_user out int,
    lista_id out varchar);
    
-   procedure INSERTAR_SHIP_ATTACK(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   procedure INSERT_PLANET_SHIP(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
    cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type);
    
-   procedure INSERT_SHIP_DEFENSE(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   procedure INSERT_PLANET_DEFENSE(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
    cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type);
    
    procedure INSERT_PLANET(id_planeta planet.id_planet%type, id_user planet.id_user%type, nombre planet.name%type,
@@ -387,7 +387,7 @@ as
       
    end;
 -------------------------------------------------------------------------------------------------------
-   procedure INSERTAR_SHIP_ATTACK(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   procedure INSERT_PLANET_SHIP(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
    cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type)
    as
    
@@ -402,7 +402,7 @@ as
    
    end;
 ----------------------------------------------------------------------------------------------------------
-   procedure INSERT_SHIP_DEFENSE(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   procedure INSERT_PLANET_DEFENSE(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
    cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type)
    as
    
