@@ -131,5 +131,6 @@ public class MENU extends JFrame {
 			}
 		});
 		contentPane.add(batalla);
+		setVisible(true);
 	}
 }

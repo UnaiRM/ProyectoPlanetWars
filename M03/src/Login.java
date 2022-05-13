@@ -76,24 +76,19 @@ public class Login extends JFrame {
 				String idUsuarioPlanetas[] = ConnectionBDD.loginProcedure(name.getText(), passwordField.getText()); 
 				int idUsuario = Integer.valueOf(idUsuarioPlanetas[0]);
 				String idPlanetas = idUsuarioPlanetas[1];
-				System.out.println("idUsuario: "+idUsuario);
-				System.out.println("idPlanetas: "+idPlanetas);
 				if (idUsuario < 1) {
 					// POPUP DE ERROR
 					System.out.println("Usuario incorrecta");
 				} else {
 					ConnectionBDD.setIdUsuario(idUsuario);
-					// SACAR LA INTERFAZ PARA ELEGIR EL PLANETA
 					if (idPlanetas.charAt(0) == '0') {
-						Main.flagNoTienePlanetas = true;
-						System.out.println("Comp login");
+						Main.setFlagNoTienePlanetas(true);
 					} else {
-						Main.flagTienePlanetas = true;
+						Main.setFlagTienePlanetas(true);
 					}
 					
-					// CAMBIAR PARA CUANDO SE HAYA ELEGIDO
 					dispose();
-					Main.flagLogin = false;
+					
 				}
 						
 			}

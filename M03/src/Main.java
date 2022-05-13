@@ -12,10 +12,10 @@ public class Main {
 	private int enemyDeuterium = Variables.DEUTERIUM_BASE_ENEMY_ARMY;
 	
 	// MIRAR COMO HACER	LAS FLAGS
-	private boolean flagOn = true;
-	static boolean flagLogin = true;
-	static boolean flagTienePlanetas = false;
-	static boolean flagNoTienePlanetas = false;
+	private static boolean flagOn = true;
+	private static boolean flagLogin = true;
+	private static boolean flagTienePlanetas = false;
+	private static boolean flagNoTienePlanetas = false;
 	
 	private int timeGeneration = 10000;
 	
@@ -25,16 +25,29 @@ public class Main {
 		
 		Main main = new Main();
 		ConnectionBDD con = new ConnectionBDD();
-		
-		while (main.flagOn) {
-			if (flagLogin) {
+		while (Main.isFlagOn()) {
+			System.out.println(""); // SOLO FUNCIONA SI HAY UN PRINT POR ALGUN MOTIVO (????????????????????)
+			if (Main.isFlagLogin()) {
 				Login login = new Login();
-				flagLogin = false;
-			} else if (flagNoTienePlanetas) {
-				flagNoTienePlanetas = false;
-				System.out.println("No tiene");
-			} else if (flagTienePlanetas) {
-				flagTienePlanetas = false;
+				Main.setFlagLogin(false);
+			} else if (Main.isFlagNoTienePlanetas()) {
+				// Se crea un nuevo planeta
+				Planet planeta = new Planet();
+				
+				// FALTA METER EL PROCEDIMIENTO NEXT_ID EN EL PAQUETE (!!!!!!!)
+				
+				// Se le busca una id nueva y se establece para todo el programa
+				ConnectionBDD.idPlaneta = ConnectionBDD.idNewPlanet();
+				// Se inserta el nuevo planeta
+				ConnectionBDD.insertarPlaneta(planeta);
+				MENU menu = new MENU();
+				Main.setFlagNoTienePlanetas(false);
+			} else if (Main.isFlagTienePlanetas()) {
+				// Entra aqui sin problema
+				// HACER QUE SALGA LA INTERFAZ
+				Main.setFlagTienePlanetas(false);
+			} else if (Main.isFlagOn() == false && Main.isFlagLogin() == false && Main.isFlagNoTienePlanetas() == false && Main.isFlagTienePlanetas() == false) {
+				Main.setFlagOn(false);
 			}
 		}
 		
@@ -45,16 +58,79 @@ public class Main {
 	
 	
 	
-	public boolean isFlagTienePlanetas() {
+	
+
+
+
+
+	public static boolean isFlagOn() {
+		return flagOn;
+	}
+
+
+
+
+
+
+
+
+
+	public static void setFlagOn(boolean flagOn) {
+		Main.flagOn = flagOn;
+	}
+
+
+
+
+
+
+
+
+
+	public static boolean isFlagLogin() {
+		return flagLogin;
+	}
+
+
+
+
+
+
+
+
+
+	public static void setFlagLogin(boolean flagLogin) {
+		Main.flagLogin = flagLogin;
+	}
+
+
+
+
+
+
+
+
+
+	public static boolean isFlagTienePlanetas() {
 		return flagTienePlanetas;
 	}
 
 
 
 
+
+
+
+
+
 	public static void setFlagTienePlanetas(boolean flagTienePlanetas) {
-		flagTienePlanetas = flagTienePlanetas;
+		Main.flagTienePlanetas = flagTienePlanetas;
 	}
+
+
+
+
+
 
 
 
@@ -66,9 +142,19 @@ public class Main {
 
 
 
-	public void setFlagNoTienePlanetas(boolean flagNoTienePlanetas) {
-		this.flagNoTienePlanetas = flagNoTienePlanetas;
+
+
+
+
+
+	public static void setFlagNoTienePlanetas(boolean flagNoTienePlanetas) {
+		Main.flagNoTienePlanetas = flagNoTienePlanetas;
 	}
+
+
+
+
+
 
 
 
@@ -97,21 +183,6 @@ public class Main {
 	public void setEnemyDeuterium(int enemyDeuterium) {
 		this.enemyDeuterium = enemyDeuterium;
 	}
-
-
-
-
-	public boolean isFlagLogin() {
-		return flagLogin;
-	}
-
-
-
-
-	public static void setFlagLogin(boolean flagLogin) {
-		flagLogin = flagLogin;
-	}
-
 
 
 

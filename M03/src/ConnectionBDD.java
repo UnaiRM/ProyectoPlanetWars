@@ -13,9 +13,10 @@ public class ConnectionBDD {
 
 	// PREGUNTAR SI PUEDE SER ESTATICA
 	private static Connection con;
-	private String ip = "@192.168.40.2"; //"@192.168.40.2" instituto "@192.168.56.101" casa
+	private String ip = "@192.168.56.101"; //"@192.168.40.2" instituto "@192.168.56.101" casa
 	private String usuario = "alumnoAMS8";
 	private String contrasena = "alumnoAMS8";
+	private String tipo = "xe"; // "orcl" instituto "xe" casa
 	
 	// CONSTANTES PARA EL PROGRAMA
 	static int idUsuario = 0;
@@ -25,7 +26,7 @@ public class ConnectionBDD {
 	public ConnectionBDD() {
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			con = DriverManager.getConnection("jdbc:oracle:thin:"+ip+":1521:orcl", usuario, contrasena);
+			con = DriverManager.getConnection("jdbc:oracle:thin:"+ip+":1521:"+tipo, usuario, contrasena);
 			System.out.println("Conexion creada correctamente");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -108,7 +109,7 @@ public class ConnectionBDD {
 	public boolean initalizeBDD() {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call INITALIZE_04(0)}");
+			cst = con.prepareCall("{call PLANETWARS.INITALIZE_04(0)}");
 			cst.execute();
 			cst.close();
 			return true;
@@ -122,7 +123,7 @@ public class ConnectionBDD {
 	public boolean resetBDD() {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call INITALIZE_04(1)}");
+			cst = con.prepareCall("{call PLANETWARS.INITALIZE_04(1)}");
 			cst.execute();
 			cst.close();
 			return true;
@@ -136,7 +137,7 @@ public class ConnectionBDD {
 	public static int getShipMetalCost(int id) {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call GET_SHIP_06(?,?,?,?,?,?,?,?,?,?)}");
+			cst = con.prepareCall("{call PLANETWARS.GET_SHIP_06(?,?,?,?,?,?,?,?,?,?)}");
 			cst.setInt(1, id);
 			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
 			cst.registerOutParameter(3, java.sql.Types.INTEGER);
@@ -162,7 +163,7 @@ public class ConnectionBDD {
 	public static int getShipDeuteriumCost(int id) {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call GET_SHIP_06(?,?,?,?,?,?,?,?,?,?)}");
+			cst = con.prepareCall("{call PLANETWARS.GET_SHIP_06(?,?,?,?,?,?,?,?,?,?)}");
 			cst.setInt(1, id);
 			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
 			cst.registerOutParameter(3, java.sql.Types.INTEGER);
@@ -188,7 +189,7 @@ public class ConnectionBDD {
 	public static int getDefenseMetalCost(int id) {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call GET_DEFENSE_05(?,?,?,?,?,?,?,?,?,?)}");
+			cst = con.prepareCall("{call PLANETWARS.GET_DEFENSE_05(?,?,?,?,?,?,?,?,?,?)}");
 			cst.setInt(1, id);
 			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
 			cst.registerOutParameter(3, java.sql.Types.INTEGER);
@@ -214,7 +215,7 @@ public class ConnectionBDD {
 	public static int getDefenseDeuteriumCost(int id) {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call GET_DEFENSE_05(?,?,?,?,?,?,?,?,?,?)}");
+			cst = con.prepareCall("{call PLANETWARS.GET_DEFENSE_05(?,?,?,?,?,?,?,?,?,?)}");
 			cst.setInt(1, id);
 			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
 			cst.registerOutParameter(3, java.sql.Types.INTEGER);
@@ -262,6 +263,48 @@ public class ConnectionBDD {
 			return resultado;
 		}
 	
+	}
+	
+	public static int idNewPlanet() {
+		CallableStatement cst;
+		try {
+			cst = con.prepareCall("{call PLANET_WARS.NEXT_ID(?)}");
+			cst.registerOutParameter(1, java.sql.Types.INTEGER);
+			cst.execute();
+			
+			int idNewPlanet = cst.getInt(1);
+			cst.close();
+			return idNewPlanet;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public static void insertarPlaneta(Planet planeta) {
+		CallableStatement cst;
+		try {
+			cst = con.prepareCall("{call PLANET_WARS.INSERT_PLANET(?,?,?,?,?,?,?,?,?,?)}");
+			cst.setInt(1, ConnectionBDD.idPlaneta);
+			cst.setInt(2, ConnectionBDD.idUsuario);
+			cst.setString(3, "Planeta "+ConnectionBDD.idPlaneta);
+			cst.setInt(4, planeta.getTechnologyAttack());
+			cst.setInt(5, planeta.getTechnologyDefense());
+			cst.setInt(6, planeta.getUpgradeDefenseTechnologyDeuteriumCost());
+			cst.setInt(7, planeta.getUpgradeAttackTechnologyDeuteriumCost());
+			cst.setInt(8, 0);
+			cst.setInt(9, planeta.getMetal());
+			cst.setInt(10, planeta.getDeuterium());
+			
+			cst.execute();
+			
+			cst.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(-1);
+		}
 	}
 	
 }
