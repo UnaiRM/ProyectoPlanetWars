@@ -23,7 +23,8 @@ as
    p_upt_defense out planet.update_defense_cost%TYPE, p_upt_attack out planet.update_atack_cost%TYPE,
    p_crystal out planet.crystal_quantity%TYPE, p_iron out planet.metal_quantity%TYPE, p_deuterium out planet.deuterium_quantity%TYPE);
    
-   procedure LOGIN(user in users.username%TYPE, password in users.password%TYPE, resultado out int);
+   procedure LOGIN(user in users.username%TYPE, password in users.password%TYPE, p_user out int,
+   lista_id out varchar);
    
    procedure INSERTAR_SHIP_ATTACK(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
    cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type);
@@ -322,10 +323,15 @@ as
       
    end;
 -------------------------------------------------------------------------------------------------------
-   procedure LOGIN(user in users.username%TYPE, password in users.password%TYPE, resultado out int)
+   procedure LOGIN(user in users.username%TYPE, password in users.password%TYPE, p_user out int,
+   lista_id out varchar)
    as
       existe_user int;
       existe_password int;
+      existe_planet int;
+      
+      planet_id int;
+      cursor c1 is select id_planet from planet where id_user = p_user;
       
       excp_user exception;
       excp_password exception;
@@ -334,7 +340,7 @@ as
       select count(username) into existe_user from users where username = user;
       --SI EL USUARIO ES INCORRECTO EL RESULTADO ES UN 0
       if existe_user = 0 then
-         resultado := 0;
+         p_user := 0;
          raise excp_user;
       
       end if;
@@ -342,12 +348,31 @@ as
       select password into existe_password from users where username = user;
       --SI EL USUARIO ES CORRECTO Y LA PASSWORD ES INCORRECTA EL RESULTADO ES UN -1
       if existe_password != password then
-         resultado := -1;
+         p_user := -1;
          raise excp_password;
       
       end if;
-      --SI EL USUARIO Y LA PASSWORD SON CORRECTAS EL RESULTADO ES UN 1
-      resultado := 1;
+      select id_user into p_user from users where username = user;--DEVUELVE LA ID DEL USUARIO
+      --SI EL USUARIO Y LA PASSWORD SON CORRECTAS EL RESULTADO ES MAYOR QUE 0
+      
+      open c1;
+      
+      loop
+         fetch c1 into planet_id;
+         exit when c1%notfound;
+         if lista_id is null then
+            lista_id := to_char(planet_id);
+            
+         else
+            lista_id := lista_id||','||to_char(planet_id);
+         end if;
+      end loop;
+      
+      close c1;
+      
+      if lista_id is null then
+         lista_id := 0;
+      end if;
       DBMS_OUTPUT.PUT_LINE('SE HA LOGEADO CORRECTAMENTE');
       
    exception
