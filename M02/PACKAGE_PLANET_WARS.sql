@@ -32,7 +32,7 @@ as
    procedure INSERT_PLANET_DEFENSE(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
    cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type);
    
-   procedure INSERT_PLANET(id_planeta planet.id_planet%type, id_user planet.id_user%type, nombre planet.name%type,
+   procedure INSERT_PLANET(id_user planet.id_user%type, nombre planet.name%type,
    tec_ataque planet.technology_atack%type, tec_defensa planet.technology_defense%type, update_defensa planet.update_defense_cost%type,
    update_ataque planet.update_atack_cost%type, cristal planet.crystal_quantity%type, metal planet.metal_quantity%type,
    deuterium planet.deuterium_quantity%type);
@@ -417,17 +417,26 @@ as
    
    end;
 -------------------------------------------------------------------------------------------------------------
-   procedure INSERT_PLANET(id_planeta planet.id_planet%type, id_user planet.id_user%type, nombre planet.name%type,
+   procedure INSERT_PLANET(id_user planet.id_user%type, nombre planet.name%type,
    tec_ataque planet.technology_atack%type, tec_defensa planet.technology_defense%type, update_defensa planet.update_defense_cost%type,
    update_ataque planet.update_atack_cost%type, cristal planet.crystal_quantity%type, metal planet.metal_quantity%type,
    deuterium planet.deuterium_quantity%type)
    as
+      next_id int;
    
    begin
+      select max(id_planet)+1 into next_id from planet;
+      if next_id is null then
+         next_id := 1;
+         
+      end if;
+   
       insert into PLANET (id_planet, id_user, name, technology_atack, technology_defense, update_defense_cost, update_atack_cost,
       crystal_quantity, metal_quantity, deuterium_quantity)
-      values (id_planeta, id_user, nombre, tec_ataque, tec_defensa, update_defensa, update_ataque, cristal, metal, deuterium);
+      values (next_id, id_user, nombre, tec_ataque, tec_defensa, update_defensa, update_ataque, cristal, metal, deuterium);
       commit;
+      
+      DBMS_OUTPUT.PUT_LINE('SE HA INSERTADO LA FILA CORRECTAMENTE');
       
    exception
       when others then
