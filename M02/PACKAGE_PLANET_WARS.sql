@@ -24,6 +24,23 @@ as
    p_crystal out planet.crystal_quantity%TYPE, p_iron out planet.metal_quantity%TYPE, p_deuterium out planet.deuterium_quantity%TYPE);
    
    procedure LOGIN(user in users.username%TYPE, password in users.password%TYPE, resultado out int);
+   
+   procedure INSERTAR_SHIP_ATTACK(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type);
+   
+   procedure INSERT_SHIP_DEFENSE(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type);
+   
+   procedure INSERT_PLANET(id_planeta planet.id_planet%type, id_user planet.id_user%type, nombre planet.name%type,
+   tec_ataque planet.technology_atack%type, tec_defensa planet.technology_defense%type, update_defensa planet.update_defense_cost%type,
+   update_ataque planet.update_atack_cost%type, cristal planet.crystal_quantity%type, metal planet.metal_quantity%type,
+   deuterium planet.deuterium_quantity%type);
+   
+   procedure UPDATE_PLANET(id_planeta planet.id_planet%type,  nombre planet.name%type, tec_ataque planet.technology_atack%type,
+   tec_defensa planet.technology_defense%type, update_defensa planet.update_defense_cost%type, update_ataque planet.update_atack_cost%type,
+   cristal planet.crystal_quantity%type, metal planet.metal_quantity%type, deuterium planet.deuterium_quantity%type);
+   
+   procedure DELETE_SHIP;
 
 end;
 /
@@ -343,5 +360,116 @@ as
       when others then
       dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR');
       
+   end;
+-------------------------------------------------------------------------------------------------------
+   procedure INSERTAR_SHIP_ATTACK(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type)
+   as
+   
+   begin
+      insert into PLANET_SHIP values (id_planeta, id_defensa, cantidad, nivel_ataque, nivel_defensa);
+      commit;
+   
+   exception
+      when others then
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      rollback;
+   
+   end;
+----------------------------------------------------------------------------------------------------------
+   procedure INSERT_SHIP_DEFENSE(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type)
+   as
+   
+   begin
+      insert into PLANET_DEFENSE values (id_planeta, id_defensa, cantidad, nivel_ataque, nivel_defensa);
+      commit;
+      
+   exception
+      when others then
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      rollback;
+   
+   end;
+-------------------------------------------------------------------------------------------------------------
+   procedure INSERT_PLANET(id_planeta planet.id_planet%type, id_user planet.id_user%type, nombre planet.name%type,
+   tec_ataque planet.technology_atack%type, tec_defensa planet.technology_defense%type, update_defensa planet.update_defense_cost%type,
+   update_ataque planet.update_atack_cost%type, cristal planet.crystal_quantity%type, metal planet.metal_quantity%type,
+   deuterium planet.deuterium_quantity%type)
+   as
+   
+   begin
+      insert into PLANET (id_planet, id_user, name, technology_atack, technology_defense, update_defense_cost, update_atack_cost,
+      crystal_quantity, metal_quantity, deuterium_quantity)
+      values (id_planeta, id_user, nombre, tec_ataque, tec_defensa, update_defensa, update_ataque, cristal, metal, deuterium);
+      commit;
+      
+   exception
+      when others then
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      rollback;
+   
+   end;
+--------------------------------------------------------------------------------------------------------------
+   procedure UPDATE_PLANET(id_planeta planet.id_planet%type,  nombre planet.name%type, tec_ataque planet.technology_atack%type,
+   tec_defensa planet.technology_defense%type, update_defensa planet.update_defense_cost%type, update_ataque planet.update_atack_cost%type,
+   cristal planet.crystal_quantity%type, metal planet.metal_quantity%type, deuterium planet.deuterium_quantity%type)
+   as
+   
+   begin
+      update planet
+      set  name = nombre, technology_atack = tec_ataque, technology_defense = tec_defensa, update_defense_cost = update_defensa,
+      update_atack_cost = update_ataque where id_planet = id_planeta;
+      commit;
+   
+   exception
+      when others then
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      rollback;
+      
+   end;
+----------------------------------------------------------------------------------------------------------------
+   procedure DELETE_SHIP
+   as
+   
+   begin
+      execute immediate  'DROP TABLE PLANET_SHIP';
+      
+      execute immediate  'DROP TABLE PLANET_DEFENSE';
+      dbms_output.put_line('Se ha eliminado correctamente la table plante_ship y planet_defense');
+         
+      EXECUTE IMMEDIATE 'CREATE TABLE PLANET_DEFENSE
+      (ID_planet numeric,
+      ID_defense numeric,
+      quantity numeric,
+      level_defense numeric,
+      level_atack numeric,
+      CONSTRAINT Planet_Defense_fk FOREIGN KEY (ID_planet)
+      REFERENCES PLANET (ID_planet),
+      CONSTRAINT Defense_Planet_fk FOREIGN KEY (ID_defense)
+      REFERENCES DEFENSE (ID_defense),
+      PRIMARY KEY(ID_planet, ID_defense))';
+      
+      EXECUTE IMMEDIATE 'CREATE TABLE PLANET_SHIP
+      (ID_planet numeric,
+      ID_ship numeric,
+      quantity numeric,
+      level_defense numeric,
+      level_atack numeric,
+      CONSTRAINT Planet_Ship_fk FOREIGN KEY (ID_planet)
+      REFERENCES PLANET (ID_planet),
+      CONSTRAINT Ship_Planet_fk FOREIGN KEY (ID_ship)
+      REFERENCES SHIP (ID_ship),
+      PRIMARY KEY(ID_planet, ID_ship))';
+      
+      dbms_output.put_line('Se ha creado correctamente la table plante_ship y planet_defense');
+      commit;
+   
+      
+   exception
+      when others then
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR DROP TABLE');
+      rollback;
+   
    end;
 end;

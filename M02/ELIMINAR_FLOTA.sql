@@ -1,12 +1,13 @@
-create or replace procedure eliminarFlota
+create or replace procedure DELETE_SHIP
 as
+
 begin
    execute immediate  'DROP TABLE PLANET_SHIP';
    
    execute immediate  'DROP TABLE PLANET_DEFENSE';
-      dbms_output.put_line('Se ha eliminado correctamente la table plante_ship y planet_defense');
+   dbms_output.put_line('Se ha eliminado correctamente la table plante_ship y planet_defense');
       
-    EXECUTE IMMEDIATE 'CREATE TABLE PLANET_DEFENSE
+   EXECUTE IMMEDIATE 'CREATE TABLE PLANET_DEFENSE
    (ID_planet numeric,
    ID_defense numeric,
    quantity numeric,
@@ -30,11 +31,13 @@ begin
    REFERENCES SHIP (ID_ship),
    PRIMARY KEY(ID_planet, ID_ship))';
    
-    dbms_output.put_line('Se ha creado correctamente la table plante_ship y planet_defense');
+   dbms_output.put_line('Se ha creado correctamente la table plante_ship y planet_defense');
+   commit;
 
    
 exception
-when others then
+   when others then
    dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR DROP TABLE');
+   rollback;
 
 end;
