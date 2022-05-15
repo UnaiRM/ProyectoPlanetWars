@@ -22,11 +22,14 @@ public class DefenseAttack extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
+//	private boolean flagAttack = false, flagDefense = false, flagExit = false;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DefenseAttack frame = new DefenseAttack();
+					DefenseAttack frame = new DefenseAttack(new Planet());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +41,7 @@ public class DefenseAttack extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DefenseAttack() {
+	public DefenseAttack(Planet planeta) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
 		
@@ -69,8 +72,9 @@ public class DefenseAttack extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new BuildDefense().main(null);
+//				flagDefense = true;
 				dispose();
+				BuildDefense buildDefense = new BuildDefense(planeta);
 			}
 		});
 		
@@ -86,9 +90,9 @@ public class DefenseAttack extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new BuildAttack().main(null);
+//				flagAttack = true;
 				dispose();
-				
+				BuildAttack buildAttack = new BuildAttack(planeta);
 			}
 		});
 		contentPane.add(attack);
@@ -102,9 +106,9 @@ public class DefenseAttack extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new MENU().main(null);
+//				flagExit = true;
 				dispose();
-				
+				MENU menu = new MENU(planeta);
 			}
 		});
 
@@ -112,7 +116,34 @@ public class DefenseAttack extends JFrame {
 		fondo.setIcon(new ImageIcon("fotos proyecto/space.png"));
 		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(fondo);
-		
+		setVisible(true);
 		
 	}
+
+//	public boolean isFlagAttack() {
+//		return flagAttack;
+//	}
+//
+//	public void setFlagAttack(boolean flagAttack) {
+//		this.flagAttack = flagAttack;
+//	}
+//
+//	public boolean isFlagDefense() {
+//		return flagDefense;
+//	}
+//
+//	public void setFlagDefense(boolean flagDefense) {
+//		this.flagDefense = flagDefense;
+//	}
+//
+//	public boolean isFlagExit() {
+//		return flagExit;
+//	}
+//
+//	public void setFlagExit(boolean flagExit) {
+//		this.flagExit = flagExit;
+//	}
+	
+	
+	
 }

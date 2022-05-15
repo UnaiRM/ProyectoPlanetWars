@@ -107,9 +107,8 @@ public class Planet {
 			// Gasto de deuterium y subida de nivel
 			this.deuterium -= this.upgradeDefenseTechnologyDeuteriumCost;
 			this.technologyDefense += 1;
-			
 			// Subida de coste (se usa una constante para subir un %)
-			this.upgradeDefenseTechnologyDeuteriumCost += this.upgradeDefenseTechnologyDeuteriumCost * (Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_DEUTERIUM_COST/100);
+			this.upgradeDefenseTechnologyDeuteriumCost += (double)this.upgradeDefenseTechnologyDeuteriumCost * ((double)(Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_DEUTERIUM_COST)/100.0);
 		}
 	}
 	
@@ -123,7 +122,7 @@ public class Planet {
 			this.technologyAttack += 1;
 			
 			// Subida de coste (se usa una constante para subir un %)
-			this.upgradeAttackTechnologyDeuteriumCost += this.upgradeAttackTechnologyDeuteriumCost * (Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_DEUTERIUM_COST/100);
+			this.upgradeAttackTechnologyDeuteriumCost += (double)this.upgradeAttackTechnologyDeuteriumCost * ((double)(Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_DEUTERIUM_COST)/100.0);
 		}
 	}
 	

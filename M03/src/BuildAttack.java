@@ -27,11 +27,14 @@ public class BuildAttack extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
+	public boolean flagExit = false;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuildAttack frame = new BuildAttack();
+					BuildAttack frame = new BuildAttack(new Planet());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +46,7 @@ public class BuildAttack extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BuildAttack() {
+	public BuildAttack(Planet planeta) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -285,13 +288,13 @@ public class BuildAttack extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new DefenseAttack().main(null);	
+				DefenseAttack build = new DefenseAttack(planeta);
 			}
 		});
 		contentPane.add(exit);
 		fondo.setIcon(imagen);
 		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(fondo);
-		
+		setVisible(true);
 	}
 }

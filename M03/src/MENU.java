@@ -24,6 +24,8 @@ public class MENU extends JFrame {
 	private JPanel contentPane;
 	public  int dimAncho=1536;
 	public  int dimAlto=864;
+	
+	//private boolean flagBuildButton = false, flagBattleButton = false, flagUpgradeButton = false;
 	/**
 	 * Launch the application.
 	 */
@@ -31,7 +33,7 @@ public class MENU extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MENU frame = new MENU();
+					MENU frame = new MENU(new Planet());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +44,7 @@ public class MENU extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MENU() {
+	public MENU(Planet planeta) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Menu");
@@ -66,15 +68,14 @@ public class MENU extends JFrame {
 		Ataque.setBounds(42, 502, 256, 315);
 				
 		
-		Timer time= new Timer();
-		TimerTask tarea= new TimerTask() {
-			
-			public void run() {		
-			//String enemy=Main.ViewThreat();
-			//Ataque.setText(enemy);		
-			}
-		};
-		time.schedule(tarea, 0,100);
+//		Timer time= new Timer();
+//		TimerTask viewThreat= new TimerTask() {
+//			
+//			public void run() {		
+//			System.out.println(Main.ViewThreat());	
+//			}
+//		};
+//		time.schedule(viewThreat, 0,100);
 		contentPane.add(Ataque);
 		
 		fondo.setIcon(imagen);
@@ -94,8 +95,9 @@ public class MENU extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+//				flagBuildButton = true;
 				dispose();
-				new DefenseAttack().main(null);
+				DefenseAttack build = new DefenseAttack(planeta);
 			}
 		});
 		
@@ -110,8 +112,10 @@ public class MENU extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+//				System.out.println("botonUpgrade");
+//				flagUpgradeButton = true;
 				dispose();
-				new Upgrade().main(null);
+				Upgrade upgrade = new Upgrade(planeta);
 			}
 		});
 		
@@ -126,11 +130,33 @@ public class MENU extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				new ReportChoose().main(null);
+//				flagBattleButton = true;
+				System.out.println("Battle");
 				dispose();
 			}
 		});
 		contentPane.add(batalla);
 		setVisible(true);
 	}
+//	public boolean isFlagBuildButton() {
+//		return flagBuildButton;
+//	}
+//	public void setFlagBuildButton(boolean flagBuildButton) {
+//		this.flagBuildButton = flagBuildButton;
+//	}
+//	public boolean isFlagBattleButton() {
+//		return flagBattleButton;
+//	}
+//	public void setFlagBattleButton(boolean flagBattleButton) {
+//		this.flagBattleButton = flagBattleButton;
+//	}
+//	public boolean isFlagUpgradeButton() {
+//		return flagUpgradeButton;
+//	}
+//	public void setFlagUpgradeButton(boolean flagUpgradeButton) {
+//		this.flagUpgradeButton = flagUpgradeButton;
+//	}
+	
+	
+	
 }

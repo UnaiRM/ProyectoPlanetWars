@@ -11,11 +11,20 @@ public class Main {
 	private int enemyMetal = Variables.METAL_BASE_ENEMY_ARMY;
 	private int enemyDeuterium = Variables.DEUTERIUM_BASE_ENEMY_ARMY;
 	
-	// MIRAR COMO HACER	LAS FLAGS
-	private static boolean flagOn = true;
-	private static boolean flagLogin = true;
-	private static boolean flagTienePlanetas = false;
-	private static boolean flagNoTienePlanetas = false;
+//	// CAMBIAR FLAGS DEL LOGIN A NO ESTATICAS
+//	private boolean flagOn = true;
+//	// Flags login
+//	private static boolean flagLogin = true;
+//	private static boolean flagTienePlanetas = false;
+//	private static boolean flagNoTienePlanetas = false;
+//	// Flags menu
+//	private boolean flagMenuPrincipal = false;
+//	private boolean flagMenuUpgrade = false;
+//	private boolean flagMenuBuild = false;
+//	private boolean flagMenuBattle = false;
+//	// Flags build
+//	private boolean flagBuildAttack = false;
+//	private boolean flagBuildDefense = false;
 	
 	private int timeGeneration = 10000;
 	
@@ -24,35 +33,127 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Main main = new Main();
-		ConnectionBDD con = new ConnectionBDD();
-		while (Main.isFlagOn()) {
-			System.out.println(""); // SOLO FUNCIONA SI HAY UN PRINT POR ALGUN MOTIVO (????????????????????)
-			if (Main.isFlagLogin()) {
-				Login login = new Login();
-				Main.setFlagLogin(false);
-			} else if (Main.isFlagNoTienePlanetas()) {
-				// Se crea un nuevo planeta
-				Planet planeta = new Planet();
-				
-				// FALTA METER EL PROCEDIMIENTO NEXT_ID EN EL PAQUETE (!!!!!!!)
-				
-				// Se le busca una id nueva y se establece para todo el programa
-				ConnectionBDD.idPlaneta = ConnectionBDD.idNewPlanet();
-				// Se inserta el nuevo planeta
-				ConnectionBDD.insertarPlaneta(planeta);
-				MENU menu = new MENU();
-				Main.setFlagNoTienePlanetas(false);
-			} else if (Main.isFlagTienePlanetas()) {
-				// Entra aqui sin problema
-				// HACER QUE SALGA LA INTERFAZ
-				Main.setFlagTienePlanetas(false);
-			} else if (Main.isFlagOn() == false && Main.isFlagLogin() == false && Main.isFlagNoTienePlanetas() == false && Main.isFlagTienePlanetas() == false) {
-				Main.setFlagOn(false);
-			}
+		
+		// Inicia la flota enemiga vacia para evitar errores
+		for (int i = 0; i < 7; i++) {
+			enemyArmy[i] = new ArrayList<MilitaryUnit>();
 		}
 		
+		ConnectionBDD con = new ConnectionBDD();
 		
 		
+		Login login = new Login();
+		
+		
+		
+//		// Ventana Login y creacion/eleccion de planeta
+//		
+//		if (Main.isFlagLogin()) {
+//			Login login = new Login();
+//			while (Login.isFlagButton() == false) { // 	BUCLE PARA QUE EL PROGRAMA NO CONTINUE HASTA QUE SE HAYA HECHO UN LOGIN CORRECTO
+////				System.out.println("");				//	POR ALGUN MOTIVO REQUIERE CODIGO SI O SI
+//			}
+//			Main.setFlagLogin(false);
+//		}
+//		
+//		if (Main.isFlagNoTienePlanetas()) {
+//			// Se crea un nuevo planeta
+//			planeta = new Planet();
+//			
+//			// FALTA METER EL PROCEDIMIENTO NEXT_ID EN EL PAQUETE (!!!!!!!)
+//			
+//			// Se le busca una id nueva y se establece para todo el programa
+//			ConnectionBDD.idPlaneta = ConnectionBDD.idNewPlanet();
+//			// Se inserta el nuevo planeta
+//			ConnectionBDD.insertarPlaneta(planeta);
+//			MENU menu = new MENU();
+//			Main.setFlagNoTienePlanetas(false);
+//		} else if (Main.isFlagTienePlanetas()){
+//			// Entra aqui sin problema
+//			// HACER QUE SALGA LA INTERFAZ
+//			planeta = new Planet(); // CAMBIAR AL OTRO CONSTRUCTOR
+//			Main.setFlagTienePlanetas(false);
+//		} else {
+//			planeta = new Planet();
+//		}
+//		
+//		Timer time= new Timer();
+//		TimerTask tarea= new TimerTask() {
+//			
+//			public void run() {		
+//			main.autoIncreaseResources(planeta);		
+//			}
+//		};
+//		
+//		TimerTask nuevaFlota = new TimerTask() {
+//			
+//			@Override
+//			public void run() {
+//				main.createEnemyArmy();
+//			}
+//		};
+//		
+//		// MIRAR DE HACER UNA TAREA QUE ATAQUE SOLA CADA 3 MINUTOS 
+//		
+//		time.schedule(tarea, 10000,10000); // 10 segundos
+//		time.schedule(nuevaFlota, 120000, 120000); // 2 minutos
+//		main.setFlagOn(true);
+//		main.setFlagMenuPrincipal(true);
+//		
+//
+//		
+//		
+//		while (main.isFlagOn()) {
+//			System.out.println("");
+//			if (main.isFlagMenuPrincipal()) {
+//				MENU menu = new MENU();
+//				while (main.isFlagMenuPrincipal()) {
+//					System.out.println("");
+//					if (menu.isFlagUpgradeButton()) {
+//
+//						main.setFlagMenuPrincipal(false);
+//						main.setFlagMenuUpgrade(true);
+//					} else if (menu.isFlagBuildButton()) {
+//						main.setFlagMenuPrincipal(false);
+//						main.setFlagMenuBuild(true);
+//					} else if (menu.isFlagBattleButton()) {
+//						main.setFlagMenuPrincipal(false);
+//						main.setFlagMenuBattle(true);
+//					}
+//				}
+//			} else if (main.isFlagMenuUpgrade()) {
+//				Upgrade upgrade = new Upgrade(planeta);
+//				while (main.isFlagMenuUpgrade()) {
+//					System.out.println("");
+//					if (upgrade.isFlagExit()) {
+//						main.setFlagMenuUpgrade(false);
+//						main.setFlagMenuPrincipal(true);
+//					}
+//				}
+//			} else if (main.isFlagMenuBuild()) {
+//				DefenseAttack defenseAttack = new DefenseAttack();
+//				while (main.isFlagMenuBuild()) {
+//					System.out.println("");
+//					if (defenseAttack.isFlagAttack()) {
+//						main.setFlagMenuBuild(false);
+//						main.setFlagBuildAttack(true);
+//					} else if (defenseAttack.isFlagDefense()) {
+//						main.setFlagMenuBuild(false);
+//						main.setFlagBuildDefense(true);
+//					} else if (defenseAttack.isFlagExit()) {
+//						main.setFlagMenuBuild(false);
+//						main.setFlagMenuPrincipal(true);
+//					}
+//				}
+//			} else if (main.isFlagBuildAttack()) {
+//				System.out.println("buildAttack");
+//			} else if (main.isFlagBuildDefense()) {
+//				System.out.println("build defense");
+//			}
+//		
+//		
+//		}
+		
 	}
 	
 	
@@ -63,93 +164,237 @@ public class Main {
 
 
 
-	public static boolean isFlagOn() {
-		return flagOn;
-	}
-
-
-
-
-
-
-
-
-
-	public static void setFlagOn(boolean flagOn) {
-		Main.flagOn = flagOn;
-	}
-
-
-
-
-
-
-
-
-
-	public static boolean isFlagLogin() {
-		return flagLogin;
-	}
-
-
-
-
-
-
-
-
-
-	public static void setFlagLogin(boolean flagLogin) {
-		Main.flagLogin = flagLogin;
-	}
-
-
-
-
-
-
-
-
-
-	public static boolean isFlagTienePlanetas() {
-		return flagTienePlanetas;
-	}
-
-
-
-
-
-
-
-
-
-	public static void setFlagTienePlanetas(boolean flagTienePlanetas) {
-		Main.flagTienePlanetas = flagTienePlanetas;
-	}
-
-
-
-
-
-
-
-
-
-	public static boolean isFlagNoTienePlanetas() {
-		return flagNoTienePlanetas;
-	}
-
-
-
-
-
-
-
-
-
-	public static void setFlagNoTienePlanetas(boolean flagNoTienePlanetas) {
-		Main.flagNoTienePlanetas = flagNoTienePlanetas;
-	}
+//	public boolean isFlagBuildAttack() {
+//		return flagBuildAttack;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public void setFlagBuildAttack(boolean flagBuildAttack) {
+//		this.flagBuildAttack = flagBuildAttack;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public boolean isFlagBuildDefense() {
+//		return flagBuildDefense;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public void setFlagBuildDefense(boolean flagBuildDefense) {
+//		this.flagBuildDefense = flagBuildDefense;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public boolean isFlagMenuBuild() {
+//		return flagMenuBuild;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public void setFlagMenuBuild(boolean flagMenuBuild) {
+//		this.flagMenuBuild = flagMenuBuild;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public boolean isFlagMenuBattle() {
+//		return flagMenuBattle;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public void setFlagMenuBattle(boolean flagMenuBattle) {
+//		this.flagMenuBattle = flagMenuBattle;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public boolean isFlagMenuUpgrade() {
+//		return flagMenuUpgrade;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public void setFlagMenuUpgrade(boolean flagMenuUpgrade) {
+//		this.flagMenuUpgrade = flagMenuUpgrade;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public boolean isFlagMenuPrincipal() {
+//		return flagMenuPrincipal;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public void setFlagMenuPrincipal(boolean flagMenuPrincipal) {
+//		this.flagMenuPrincipal = flagMenuPrincipal;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public boolean isFlagOn() {
+//		return flagOn;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public void setFlagOn(boolean flagOn) {
+//		this.flagOn = flagOn;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public static boolean isFlagLogin() {
+//		return flagLogin;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public static void setFlagLogin(boolean flagLogin) {
+//		Main.flagLogin = flagLogin;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public static boolean isFlagTienePlanetas() {
+//		return flagTienePlanetas;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public static void setFlagTienePlanetas(boolean flagTienePlanetas) {
+//		Main.flagTienePlanetas = flagTienePlanetas;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public static boolean isFlagNoTienePlanetas() {
+//		return flagNoTienePlanetas;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public static void setFlagNoTienePlanetas(boolean flagNoTienePlanetas) {
+//		Main.flagNoTienePlanetas = flagNoTienePlanetas;
+//	}
 
 
 
@@ -250,44 +495,24 @@ public class Main {
 				enemyMetal -= costeMetalLightHunter;
 				enemyDeuterium -= costeDeuteriumLightHunter;
 				enemyArmyTemp[0].add(new LightHunter());
-				System.out.println(enemyMetal);
-				System.out.println(enemyDeuterium);
-				System.out.println();
 			} else if (numRandom >= 35 && numRandom < 60) {
 				enemyMetal -= costeMetalHeavyHunter;
 				enemyDeuterium -= costeDeuteriumHeavyHunter;
 				enemyArmyTemp[1].add(new HeavyHunter());
-				System.out.println(enemyMetal);
-				System.out.println(enemyDeuterium);
-				System.out.println();
 			} else if (numRandom >= 60 && numRandom < 80) {
 				enemyMetal -= costeMetalBattleShip;
 				enemyDeuterium -= costeDeuteriumBattleShip;
 				enemyArmyTemp[2].add(new BattleShip());
-				System.out.println(enemyMetal);
-				System.out.println(enemyDeuterium);
-				System.out.println();
 			} else if (numRandom >= 80 && numRandom < 100) {
 				enemyMetal -= costeMetalArmoredShip;
 				enemyDeuterium -= costeDeuteriumArmoredShip;
 				enemyArmyTemp[3].add(new ArmoredShip());
-				System.out.println(enemyMetal);
-				System.out.println(enemyDeuterium);
-				System.out.println();
 			}
 		}
 		// Aumento de recursos
 		
-		System.out.println(enemyMetalTemp);
-		System.out.println(enemyDeuteriumTemp);
-		System.out.println();
-		
-		
 		enemyMetal = (enemyMetalTemp * (100 + Variables.ENEMY_FLEET_INCREASE)) / 100;
 		enemyDeuterium = (enemyDeuteriumTemp * (100 + Variables.ENEMY_FLEET_INCREASE)) / 100;
-		
-		System.out.println(enemyMetal);
-		System.out.println(enemyDeuterium);
 		
 		enemyArmy = enemyArmyTemp;
 	}
@@ -314,19 +539,12 @@ public class Main {
 			default:
 				break;
 			}
-		}
-		
-		System.out.println("\nNEW THREAD COMING");
-		System.out.println("\nLight Hunter "+LightHunter);
-		System.out.println("\nHeavy Hunter " + HeavyHunter);
-		System.out.println("\nBattle Ship " + BattleShip);
-		System.out.println("\nArmored Ship " + ArmoredShip);
-		
+		}	
 		String threat = "\nNEW THREAD COMING"+"\nLight Hunter "+LightHunter+"\nHeavy Hunter " + HeavyHunter + "\nBattle Ship " + BattleShip + "\nArmored Ship " + ArmoredShip;
 		return threat;
 	}
 	
-	public static void autoIncreaseResources(Planet planeta) {
+	public void autoIncreaseResources(Planet planeta) {
 		planeta.setMetal(planeta.getMetal() + Variables.PLANET_METAL_GENERATED);
 		planeta.setDeuterium(planeta.getDeuterium() + Variables.PLANET_DEUTERIUM_GENERATED);
 	}

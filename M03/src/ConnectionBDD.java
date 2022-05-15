@@ -109,7 +109,7 @@ public class ConnectionBDD {
 	public boolean initalizeBDD() {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call PLANETWARS.INITALIZE_04(0)}");
+			cst = con.prepareCall("{call PLANET_WARS.INITALIZE_04(0)}");
 			cst.execute();
 			cst.close();
 			return true;
@@ -123,7 +123,7 @@ public class ConnectionBDD {
 	public boolean resetBDD() {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call PLANETWARS.INITALIZE_04(1)}");
+			cst = con.prepareCall("{call PLANET_WARS.INITALIZE_04(1)}");
 			cst.execute();
 			cst.close();
 			return true;
@@ -137,7 +137,7 @@ public class ConnectionBDD {
 	public static int getShipMetalCost(int id) {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call PLANETWARS.GET_SHIP_06(?,?,?,?,?,?,?,?,?,?)}");
+			cst = con.prepareCall("{call PLANET_WARS.GET_SHIP_06(?,?,?,?,?,?,?,?,?,?)}");
 			cst.setInt(1, id);
 			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
 			cst.registerOutParameter(3, java.sql.Types.INTEGER);
@@ -163,7 +163,7 @@ public class ConnectionBDD {
 	public static int getShipDeuteriumCost(int id) {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call PLANETWARS.GET_SHIP_06(?,?,?,?,?,?,?,?,?,?)}");
+			cst = con.prepareCall("{call PLANET_WARS.GET_SHIP_06(?,?,?,?,?,?,?,?,?,?)}");
 			cst.setInt(1, id);
 			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
 			cst.registerOutParameter(3, java.sql.Types.INTEGER);
@@ -189,7 +189,7 @@ public class ConnectionBDD {
 	public static int getDefenseMetalCost(int id) {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call PLANETWARS.GET_DEFENSE_05(?,?,?,?,?,?,?,?,?,?)}");
+			cst = con.prepareCall("{call PLANET_WARS.GET_DEFENSE_05(?,?,?,?,?,?,?,?,?,?)}");
 			cst.setInt(1, id);
 			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
 			cst.registerOutParameter(3, java.sql.Types.INTEGER);
@@ -215,7 +215,7 @@ public class ConnectionBDD {
 	public static int getDefenseDeuteriumCost(int id) {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call PLANETWARS.GET_DEFENSE_05(?,?,?,?,?,?,?,?,?,?)}");
+			cst = con.prepareCall("{call PLANET_WARS.GET_DEFENSE_05(?,?,?,?,?,?,?,?,?,?)}");
 			cst.setInt(1, id);
 			cst.registerOutParameter(2, java.sql.Types.VARCHAR);
 			cst.registerOutParameter(3, java.sql.Types.INTEGER);

@@ -24,11 +24,14 @@ public class Upgrade extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
+//	private boolean flagExit = false;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Upgrade frame = new Upgrade();
+					Upgrade frame = new Upgrade(new Planet());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +43,7 @@ public class Upgrade extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Upgrade() {
+	public Upgrade(Planet planeta) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,20 +59,20 @@ public class Upgrade extends JFrame {
 		setContentPane(contentPane);
 		this.setResizable(false);
 		JLabel fondo = new JLabel("");
-		ImageIcon imagen= new ImageIcon("C:\\Users\\isidoro\\OneDrive\\Documents\\GitHub\\ProyecyoPlanetWars\\M03\\fotos proyecto\\Upgra.png");
+		ImageIcon imagen= new ImageIcon("fotos proyecto/Upgra.png");
 		fondo.setBounds(75, -16, 1920, 1080);
 		imagen=new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_AREA_AVERAGING));
 		
 		
 		
-		JLabel attack = new JLabel("2000");
+		JLabel attack = new JLabel(String.valueOf(planeta.getUpgradeAttackTechnologyDeuteriumCost()));
 		attack.setHorizontalAlignment(SwingConstants.CENTER);
 		attack.setForeground(Color.WHITE);
 		attack.setFont(new Font("Tahoma", Font.PLAIN, 39));
 		attack.setBounds(878, 542, 156, 63);
 		contentPane.add(attack);
 		
-		JLabel defense = new JLabel("2000");
+		JLabel defense = new JLabel(String.valueOf(planeta.getUpgradeDefenseTechnologyDeuteriumCost()));
 		defense.setHorizontalAlignment(SwingConstants.CENTER);
 		defense.setFont(new Font("Tahoma", Font.PLAIN, 39));
 		defense.setForeground(Color.WHITE);
@@ -78,14 +81,14 @@ public class Upgrade extends JFrame {
 		
 		
 		
-		JLabel actualAttack = new JLabel("0");
+		JLabel actualAttack = new JLabel(String.valueOf(planeta.getTechnologyAttack()));
 		actualAttack.setHorizontalAlignment(SwingConstants.RIGHT);
 		actualAttack.setForeground(Color.WHITE);
 		actualAttack.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		actualAttack.setBounds(779, 133, 45, 55);
 		contentPane.add(actualAttack);
 		
-		JLabel actualDefense = new JLabel("0");
+		JLabel actualDefense = new JLabel(String.valueOf(planeta.getTechnologyDefense()));
 		actualDefense.setHorizontalAlignment(SwingConstants.RIGHT);
 		actualDefense.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		actualDefense.setForeground(Color.WHITE);
@@ -101,14 +104,18 @@ public class Upgrade extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int numEntero = Integer.parseInt(defense.getText());
-				int resta=(numEntero*106)/100;
-				String numCadena= Integer.toString(resta);
-				defense.setText(numCadena);
+				try {
+					planeta.upgradeTechnologyDefense();
+//					int numEntero = Integer.parseInt(defense.getText());
+//					int resta=(numEntero*106)/100;
+//					String numCadena= Integer.toString(resta);
+					defense.setText(String.valueOf(planeta.getUpgradeDefenseTechnologyDeuteriumCost()));
+				} catch (ResourceException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
-				int numEntero2 = Integer.parseInt(actualDefense.getText());
-				int suma=numEntero2+1;
-				String numCadena2= Integer.toString(suma);
+				String numCadena2= Integer.toString(planeta.getTechnologyDefense());
 				actualDefense.setText(numCadena2);
 				
 			}
@@ -124,14 +131,18 @@ public class Upgrade extends JFrame {
 		upgradeA.addActionListener(new ActionListener() {
 					
 			public void actionPerformed(ActionEvent e) {
-				int numEntero = Integer.parseInt(attack.getText());
-				int resta=(numEntero*106)/100;
-				String numCadena= Integer.toString(resta);
-				attack.setText(numCadena);
+				try {
+					planeta.upgradeTechnologyAttack();
+//					int numEntero = Integer.parseInt(attack.getText());
+//					int resta=(numEntero*106)/100;
+//					String numCadena= Integer.toString(resta);
+					attack.setText(String.valueOf(planeta.getUpgradeAttackTechnologyDeuteriumCost()));
+				} catch (ResourceException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
-				int numEntero2 = Integer.parseInt(actualAttack.getText());
-				int suma=numEntero2+1;
-				String numCadena2= Integer.toString(suma);
+				String numCadena2= Integer.toString(planeta.getTechnologyAttack());
 				actualAttack.setText(numCadena2);
 			}
 		} );
@@ -146,10 +157,9 @@ public class Upgrade extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+//				flagExit = true;
 				dispose();
-				new MENU().main(null);
-				
-				
+				MENU menu = new MENU(planeta);
 			}
 		});
 		contentPane.add(exit);
@@ -159,6 +169,18 @@ public class Upgrade extends JFrame {
 		fondo.setIcon(imagen);
 		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(fondo);
+		setVisible(true);
 		
 	}
+
+//	public boolean isFlagExit() {
+//		return flagExit;
+//	}
+//
+//	public void setFlagExit(boolean flagExit) {
+//		this.flagExit = flagExit;
+//	}
+	
+	
+	
 }

@@ -35,6 +35,8 @@ public class Login extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JTextField name;
 	private JPasswordField passwordField;
+	
+//	private static boolean flagButton = false;
 
 	/**
 	 * Launch the application.
@@ -81,13 +83,27 @@ public class Login extends JFrame {
 					System.out.println("Usuario incorrecta");
 				} else {
 					ConnectionBDD.setIdUsuario(idUsuario);
+					Planet planeta;
 					if (idPlanetas.charAt(0) == '0') {
-						Main.setFlagNoTienePlanetas(true);
+//						Main.setFlagNoTienePlanetas(true);
+						// Se crea un nuevo planeta
+						planeta = new Planet();
+						
+						// FALTA METER EL PROCEDIMIENTO NEXT_ID EN EL PAQUETE (!!!!!!!)
+						
+						// Se le busca una id nueva y se establece para todo el programa
+						ConnectionBDD.idPlaneta = ConnectionBDD.idNewPlanet();
+						// Se inserta el nuevo planeta
+						ConnectionBDD.insertarPlaneta(planeta);
 					} else {
-						Main.setFlagTienePlanetas(true);
+//						Main.setFlagTienePlanetas(true);
+						// CAMBIAR A LA INTERFAZ PARA ELEGIR
+						planeta = new Planet();
 					}
 					
+//					flagButton = true;
 					dispose();
+					MENU menu = new MENU(planeta);
 					
 				}
 						
@@ -111,5 +127,15 @@ public class Login extends JFrame {
 		this.setVisible(true);
 		
 
-}
+	}
+
+//	public static boolean isFlagButton() {
+//		return flagButton;
+//	}
+//
+//	public static void setFlagButton(boolean flagButton) {
+//		Login.flagButton = flagButton;
+//	}
+	
+	
 }

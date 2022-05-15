@@ -31,7 +31,7 @@ public class BuildDefense extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuildDefense frame = new BuildDefense();
+					BuildDefense frame = new BuildDefense(new Planet());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class BuildDefense extends JFrame {
 	 */
 	
 	
-	public BuildDefense() {
+	public BuildDefense(Planet planeta) {
 		
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
@@ -53,7 +53,7 @@ public class BuildDefense extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		System.out.println((int) dim.getWidth() + " "+(int) dim.getHeight());
+//		System.out.println((int) dim.getWidth() + " "+(int) dim.getHeight());
 		
 		this.setBounds(100, 100, dimAncho, dimAlto);
 		
@@ -239,15 +239,13 @@ public class BuildDefense extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new DefenseAttack().main(null);
-				
-				
+				DefenseAttack build = new DefenseAttack(planeta);
 			}
 		});
 		contentPane.add(exit);
 		fondo.setIcon(imagen);
 		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(fondo);
-		
+		setVisible(true);
 	}
 }
