@@ -17,4 +17,8 @@ public interface MilitaryUnit {
 	
 	public abstract void resetArmor();
 	
+	public abstract int getAttackLevel();
+	
+	public abstract int getDefenseLevel();
+	
 }

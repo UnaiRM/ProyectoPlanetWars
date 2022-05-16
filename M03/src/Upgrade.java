@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -31,7 +32,7 @@ public class Upgrade extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Upgrade frame = new Upgrade(new Planet());
+					Upgrade frame = new Upgrade(new Planet(), new Timer());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +44,7 @@ public class Upgrade extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Upgrade(Planet planeta) {
+	public Upgrade(Planet planeta, Timer time) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -159,7 +160,8 @@ public class Upgrade extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 //				flagExit = true;
 				dispose();
-				MENU menu = new MENU(planeta);
+				ConnectionBDD.updatePlaneta(planeta);
+				MENU menu = new MENU(planeta, time);
 			}
 		});
 		contentPane.add(exit);

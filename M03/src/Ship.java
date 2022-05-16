@@ -49,6 +49,15 @@ public abstract class Ship implements MilitaryUnit, Variables{
 	public void setBaseDamage(int baseDamage) {
 		this.baseDamage = baseDamage;
 	}
+	
+	public int getAttackLevel() {
+		return getLevel_Attack();
+	}
+	
+	public int getDefenseLevel() {
+		return getLevel_Defense();
+	}
+	
 
 	public abstract int attack();
 	

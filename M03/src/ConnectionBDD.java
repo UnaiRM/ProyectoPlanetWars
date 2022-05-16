@@ -5,7 +5,9 @@ import java.io.InputStreamReader;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,10 +15,10 @@ public class ConnectionBDD {
 
 	// PREGUNTAR SI PUEDE SER ESTATICA
 	private static Connection con;
-	private String ip = "@192.168.56.101"; //"@192.168.40.2" instituto "@192.168.56.101" casa
+	private String ip = "@192.168.40.2"; //"@192.168.40.2" instituto "@192.168.56.101" casa
 	private String usuario = "alumnoAMS8";
 	private String contrasena = "alumnoAMS8";
-	private String tipo = "xe"; // "orcl" instituto "xe" casa
+	private String tipo = "orcl"; // "orcl" instituto "xe" casa
 	
 	// CONSTANTES PARA EL PROGRAMA
 	static int idUsuario = 0;
@@ -262,7 +264,7 @@ public class ConnectionBDD {
 			String resultado[] = {"",""};
 			return resultado;
 		}
-	
+		
 	}
 	
 	public static int idNewPlanet() {
@@ -303,7 +305,213 @@ public class ConnectionBDD {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.exit(-1);
+		}
+	}
+	
+	public static void updatePlaneta(Planet planeta) {
+		CallableStatement cst;
+		try {
+			cst = con.prepareCall("{call PLANET_WARS.UPDATE_PLANET(?,?,?,?,?,?,?,?,?)}");
+			cst.setInt(1, idPlaneta);
+			cst.setString(2, "Planeta "+ConnectionBDD.idPlaneta);
+			cst.setInt(3, planeta.getTechnologyAttack());
+			cst.setInt(4, planeta.getTechnologyDefense());
+			cst.setInt(5, planeta.getUpgradeDefenseTechnologyDeuteriumCost());
+			cst.setInt(6, planeta.getUpgradeAttackTechnologyDeuteriumCost());
+			cst.setInt(7, 0);
+			cst.setInt(8, planeta.getMetal());
+			cst.setInt(9, planeta.getDeuterium());
+			
+			cst.execute();
+			
+			cst.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void updateArmy(Planet planeta) {
+		CallableStatement cst;
+		try {
+			cst = con.prepareCall("{call PLANET_WARS.DELETE_USER_SHIP(?)}");
+			cst.setInt(1, idPlaneta);
+			cst.execute();
+			
+			ArrayList<MilitaryUnit>[] army = planeta.getArmy();
+			ArrayList<String> navesAtaque = new ArrayList<String>();
+			
+			
+			for (int i = 0; i < 4; i++) {
+				for (MilitaryUnit unidad : army[i]) {
+					if (unidad instanceof LightHunter) {
+						navesAtaque.add("1,"+unidad.getDefenseLevel()+","+unidad.getAttackLevel());
+					} else if (unidad instanceof HeavyHunter) {
+						navesAtaque.add("2,"+unidad.getDefenseLevel()+","+unidad.getAttackLevel());
+					} else if (unidad instanceof BattleShip) {
+						navesAtaque.add("3,"+unidad.getDefenseLevel()+","+unidad.getAttackLevel());
+					} else if (unidad instanceof ArmoredShip) {
+						navesAtaque.add("4,"+unidad.getDefenseLevel()+","+unidad.getAttackLevel());
+					}
+				}
+			}
+			
+			ArrayList<String> navesAtaqueCalculadas = new ArrayList<String>();
+			String temp = "";
+			String temp2 = "";
+			int cnt = 1;
+			int cnt2 = 0;
+			for (String string : navesAtaque) {
+				if (cnt2 == 0) {
+					temp = string;
+				} else if (cnt2 == navesAtaque.size() - 1){
+					cnt++;
+					temp2 = temp.charAt(0) +","+ temp.charAt(2)+","+temp.charAt(4)+","+cnt;
+					navesAtaqueCalculadas.add(temp2);
+				} else if (string.equalsIgnoreCase(temp)) {
+					cnt++;
+				} else {
+					temp2 = temp.charAt(0) +","+ temp.charAt(2)+","+temp.charAt(4)+","+cnt;
+					navesAtaqueCalculadas.add(temp2);
+					temp = string;
+					cnt = 1;
+				}
+				cnt2++;
+			}
+			
+			cst.close();
+//			cst = con.prepareCall("{call PLANET_WARS.INSERT_PLANET_SHIP(?,?,?,?,?)}");
+
+			PreparedStatement ps;
+			ps = con.prepareStatement("insert into PLANET_SHIP values (?,?,?,?,?)");
+			for (String string : navesAtaqueCalculadas) {
+				// 1,2,5,0,0
+				ps.setInt(1, idPlaneta);
+				ps.setInt(2, Character.getNumericValue(string.charAt(0)));
+				ps.setInt(3, Character.getNumericValue(string.charAt(6)));
+				ps.setInt(4, Character.getNumericValue(string.charAt(4)));
+				ps.setInt(5, Character.getNumericValue(string.charAt(2)));
+				ps.addBatch();
+//				System.out.println(ps.execute());
+				ps.clearParameters();
+//				ps.clearParameters();
+			}
+			ps.executeBatch();
+			ps.close();
+			
+			
+			ArrayList<String> navesDefensa = new ArrayList<String>();
+			
+			for (int i = 4; i < 7; i++) {
+				for (MilitaryUnit unidad : army[i]) {
+					if (unidad instanceof MissileLauncher) {
+						navesDefensa.add("1,"+unidad.getDefenseLevel()+","+unidad.getAttackLevel());
+					} else if (unidad instanceof IonCannon) {
+						navesDefensa.add("2,"+unidad.getDefenseLevel()+","+unidad.getAttackLevel());
+					} else if (unidad instanceof PlasmaCannon) {
+						navesDefensa.add("3,"+unidad.getDefenseLevel()+","+unidad.getAttackLevel());
+					}
+				}
+			}
+			
+			ArrayList<String> navesDefensaCalculadas = new ArrayList<String>();
+			temp = "";
+			temp2 = "";
+			cnt = 1;
+			cnt2 = 0;
+			for (String string : navesDefensa) {
+				if (cnt2 == 0) {
+					temp = string;
+				} else if (cnt2 == navesDefensa.size() - 1){
+					cnt++;
+					temp2 = temp.charAt(0) +","+ temp.charAt(2)+","+temp.charAt(4)+","+cnt;
+					navesDefensaCalculadas.add(temp2);
+				} else if (string.equalsIgnoreCase(temp)) {
+					cnt++;
+				} else {
+					temp2 = temp.charAt(0) +","+ temp.charAt(2)+","+temp.charAt(4)+","+cnt;
+					navesDefensaCalculadas.add(temp2);
+					temp = string;
+					cnt = 1;
+				}
+				cnt2++;
+			}
+			
+//			cst = con.prepareCall("{call PLANET_WARS.INSERT_PLANET_SHIP(?,?,?,?,?)}");
+
+			PreparedStatement ps2;
+			ps2 = con.prepareStatement("insert into PLANET_DEFENSE values (?,?,?,?,?)");
+			for (String string : navesDefensaCalculadas) {
+				// 1,2,5,0,0
+				ps2.setInt(1, idPlaneta);
+				ps2.setInt(2, Character.getNumericValue(string.charAt(0)));
+				ps2.setInt(3, Character.getNumericValue(string.charAt(6)));
+				ps2.setInt(4, Character.getNumericValue(string.charAt(4)));
+				ps2.setInt(5, Character.getNumericValue(string.charAt(2)));
+				ps2.addBatch();
+//				System.out.println(ps.execute());
+				ps2.clearParameters();
+//				ps.clearParameters();
+			}
+			ps2.executeBatch();
+			ps2.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static String infoPlanets(String idPlanetas) {
+		ArrayList idsConvertidas = new ArrayList<>();
+		
+		for (int i = 0; i < idPlanetas.length(); i++) {
+			if (i % 2 == 0) {
+				idsConvertidas.add(idPlanetas.charAt(i));
+			}
+		}
+		
+		String salida = "<html><body>";
+		
+		for (Object object : idsConvertidas) {
+			salida += String.valueOf(object)+") Planeta "+String.valueOf(object)+"<br>";
+		}
+		
+		salida += "<body><html>";
+		return salida;
+	}
+	
+	public static Planet loadPlanet() {
+		CallableStatement cst;
+		try {
+			cst = con.prepareCall("{call PLANET_WARS.GET_PLANET(?,?,?,?,?,?,?,?,?,?)}");
+			cst.setInt(1, idPlaneta);
+			cst.registerOutParameter(2, java.sql.Types.INTEGER);
+			cst.registerOutParameter(3, java.sql.Types.VARCHAR);
+			cst.registerOutParameter(4, java.sql.Types.INTEGER);
+			cst.registerOutParameter(5, java.sql.Types.INTEGER);
+			cst.registerOutParameter(6, java.sql.Types.INTEGER);
+			cst.registerOutParameter(7, java.sql.Types.INTEGER);
+			cst.registerOutParameter(8, java.sql.Types.INTEGER);
+			cst.registerOutParameter(9, java.sql.Types.INTEGER);
+			cst.registerOutParameter(10, java.sql.Types.INTEGER);
+			cst.execute();
+			
+			
+			// SACAR LA FLOTA 
+			ArrayList<MilitaryUnit>[] army = new ArrayList[7];
+			for (int i = 0; i < 7; i++) {
+				army[i] = new ArrayList<MilitaryUnit>();
+			}
+			
+			
+			Planet planeta = new Planet(cst.getInt(5), cst.getInt(4), cst.getInt(9), cst.getInt(10), cst.getInt(6), cst.getInt(7), army);
+			cst.close();
+			return planeta;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Planet planeta = new Planet();
+			return planeta;
 		}
 	}
 	

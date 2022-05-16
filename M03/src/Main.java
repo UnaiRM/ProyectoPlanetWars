@@ -26,6 +26,7 @@ public class Main {
 //	private boolean flagBuildAttack = false;
 //	private boolean flagBuildDefense = false;
 	
+	
 	private int timeGeneration = 10000;
 	
 	private static ArrayList<MilitaryUnit>[] enemyArmy = new ArrayList[7];
@@ -46,7 +47,7 @@ public class Main {
 		
 		
 		
-//		// Ventana Login y creacion/eleccion de planeta
+//		// Ventana Login y creacion/eleccion de planetaystem.out.println(planeta.printStats());
 //		
 //		if (Main.isFlagLogin()) {
 //			Login login = new Login();

@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -34,7 +35,7 @@ public class BuildAttack extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuildAttack frame = new BuildAttack(new Planet());
+					BuildAttack frame = new BuildAttack(new Planet(), new Timer());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +47,7 @@ public class BuildAttack extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BuildAttack(Planet planeta) {
+	public BuildAttack(Planet planeta, Timer time) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,12 +67,7 @@ public class BuildAttack extends JFrame {
 		fondo.setBounds(75, -16, 1920, 1080);
 		imagen=new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_AREA_AVERAGING));
 		
-		JButton CONSTRUIR = new JButton("BUILD");
-		CONSTRUIR.setFocusable(false);
-		CONSTRUIR.setForeground(Color.WHITE);
-		CONSTRUIR.setBackground(Color.BLACK);
-		CONSTRUIR.setBounds(683, 702, 159, 73);
-		contentPane.add(CONSTRUIR);
+		
 		
 		JLabel contador_2_1 = new JLabel("0");
 		contador_2_1.setForeground(Color.WHITE);
@@ -288,10 +284,39 @@ public class BuildAttack extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				DefenseAttack build = new DefenseAttack(planeta);
+				DefenseAttack build = new DefenseAttack(planeta, time);
 			}
 		});
+		
 		contentPane.add(exit);
+		JButton CONSTRUIR = new JButton("BUILD");
+		CONSTRUIR.setFocusable(false);
+		CONSTRUIR.setForeground(Color.WHITE);
+		CONSTRUIR.setBackground(Color.BLACK);
+		CONSTRUIR.setBounds(683, 702, 159, 73);
+		CONSTRUIR.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					planeta.newBattleShip(Integer.valueOf(contador.getText()));
+					planeta.newLigthHunter(Integer.valueOf(contador_1.getText()));
+					planeta.newHeavyHunter(Integer.valueOf(contador_2.getText()));
+					planeta.newArmoredShip(Integer.valueOf(contador_2_1.getText()));
+					contador.setText("0");
+					contador_1.setText("0");
+					contador_2.setText("0");
+					contador_2_1.setText("0");
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ResourceException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		contentPane.add(CONSTRUIR);
 		fondo.setIcon(imagen);
 		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(fondo);

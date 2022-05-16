@@ -10,6 +10,8 @@ import java.awt.Toolkit;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
@@ -84,26 +86,38 @@ public class Login extends JFrame {
 				} else {
 					ConnectionBDD.setIdUsuario(idUsuario);
 					Planet planeta;
+					
 					if (idPlanetas.charAt(0) == '0') {
 //						Main.setFlagNoTienePlanetas(true);
 						// Se crea un nuevo planeta
 						planeta = new Planet();
-						
-						// FALTA METER EL PROCEDIMIENTO NEXT_ID EN EL PAQUETE (!!!!!!!)
-						
+												
 						// Se le busca una id nueva y se establece para todo el programa
 						ConnectionBDD.idPlaneta = ConnectionBDD.idNewPlanet();
 						// Se inserta el nuevo planeta
 						ConnectionBDD.insertarPlaneta(planeta);
+						dispose();
+						System.out.println("ID planeta: "+ConnectionBDD.idPlaneta);
+						Timer time= new Timer();
+						TimerTask viewThreat= new TimerTask() {
+							
+							public void run() {		
+							planeta.setDeuterium(planeta.getDeuterium()+Variables.PLANET_DEUTERIUM_GENERATED);
+							planeta.setMetal(planeta.getMetal()+Variables.PLANET_METAL_GENERATED);
+							ConnectionBDD.updatePlaneta(planeta);
+							}
+						};
+						time.schedule(viewThreat, 0,60000);
+						MENU menu = new MENU(planeta, time);
 					} else {
 //						Main.setFlagTienePlanetas(true);
 						// CAMBIAR A LA INTERFAZ PARA ELEGIR
-						planeta = new Planet();
+						ChoosePlanet choose = new ChoosePlanet(ConnectionBDD.infoPlanets(idPlanetas));
+						
 					}
 					
 //					flagButton = true;
-					dispose();
-					MENU menu = new MENU(planeta);
+					
 					
 				}
 						

@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -29,7 +30,7 @@ public class DefenseAttack extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DefenseAttack frame = new DefenseAttack(new Planet());
+					DefenseAttack frame = new DefenseAttack(new Planet(), new Timer());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +42,7 @@ public class DefenseAttack extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DefenseAttack(Planet planeta) {
+	public DefenseAttack(Planet planeta, Timer time) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
 		
@@ -74,7 +75,7 @@ public class DefenseAttack extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 //				flagDefense = true;
 				dispose();
-				BuildDefense buildDefense = new BuildDefense(planeta);
+				BuildDefense buildDefense = new BuildDefense(planeta,time);
 			}
 		});
 		
@@ -92,7 +93,7 @@ public class DefenseAttack extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 //				flagAttack = true;
 				dispose();
-				BuildAttack buildAttack = new BuildAttack(planeta);
+				BuildAttack buildAttack = new BuildAttack(planeta,time);
 			}
 		});
 		contentPane.add(attack);
@@ -108,7 +109,9 @@ public class DefenseAttack extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 //				flagExit = true;
 				dispose();
-				MENU menu = new MENU(planeta);
+				ConnectionBDD.updatePlaneta(planeta);
+				ConnectionBDD.updateArmy(planeta);
+				MENU menu = new MENU(planeta, time);
 			}
 		});
 

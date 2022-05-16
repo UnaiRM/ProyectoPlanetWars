@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,7 +34,7 @@ public class MENU extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MENU frame = new MENU(new Planet());
+					MENU frame = new MENU(new Planet(), new Timer());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +45,7 @@ public class MENU extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MENU(Planet planeta) {
+	public MENU(Planet planeta, Timer time) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Menu");
@@ -97,7 +98,8 @@ public class MENU extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 //				flagBuildButton = true;
 				dispose();
-				DefenseAttack build = new DefenseAttack(planeta);
+//				setVisible(false);
+				DefenseAttack build = new DefenseAttack(planeta, time);
 			}
 		});
 		
@@ -115,7 +117,7 @@ public class MENU extends JFrame {
 //				System.out.println("botonUpgrade");
 //				flagUpgradeButton = true;
 				dispose();
-				Upgrade upgrade = new Upgrade(planeta);
+				Upgrade upgrade = new Upgrade(planeta,time);
 			}
 		});
 		
