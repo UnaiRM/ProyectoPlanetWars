@@ -12,7 +12,7 @@ begin
    
 exception
    when others then
-   dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+   dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR NEXT_ID');
    rollback;
    
 end;
