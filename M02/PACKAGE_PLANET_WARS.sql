@@ -449,7 +449,7 @@ as
    begin
       update planet
       set  name = nombre, technology_atack = tec_ataque, technology_defense = tec_defensa, update_defense_cost = update_defensa,
-      update_atack_cost = update_ataque where id_planet = id_planeta;
+      update_atack_cost = update_ataque, crystal_quantity = cristal, metal_quantity = metal, deuterium_quantity = deuterium where id_planet = id_planeta;
       commit;
    
    exception
