@@ -117,8 +117,8 @@ as
       CONSTRAINT Planet_Ship_fk FOREIGN KEY (ID_planet)
          REFERENCES PLANET (ID_planet),
       CONSTRAINT Ship_Planet_fk FOREIGN KEY (ID_ship)
-         REFERENCES SHIP (ID_ship),
-      PRIMARY KEY(ID_planet, ID_ship))';
+         REFERENCES SHIP (ID_ship))';
+      --PRIMARY KEY(ID_planet, ID_ship))';
       
       EXECUTE IMMEDIATE 'CREATE TABLE DEFENSE
       (ID_defense numeric primary key,
@@ -141,8 +141,8 @@ as
       CONSTRAINT Planet_Defense_fk FOREIGN KEY (ID_planet)
          REFERENCES PLANET (ID_planet),
       CONSTRAINT Defense_Planet_fk FOREIGN KEY (ID_defense)
-         REFERENCES DEFENSE (ID_defense),
-      PRIMARY KEY(ID_planet, ID_defense))';
+         REFERENCES DEFENSE (ID_defense))';
+      --PRIMARY KEY(ID_planet, ID_defense))';
       
       EXECUTE IMMEDIATE 'CREATE TABLE BATTLE
       (ID_battle numeric primary key,
