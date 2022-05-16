@@ -133,8 +133,8 @@ public class MENU extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 //				flagBattleButton = true;
-				System.out.println("Battle");
 				dispose();
+				ReportChoose batalla = new ReportChoose(planeta,time);
 			}
 		});
 		contentPane.add(batalla);

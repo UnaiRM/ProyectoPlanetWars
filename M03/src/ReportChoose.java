@@ -5,16 +5,20 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JList;
 
 import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -31,7 +35,7 @@ public class ReportChoose extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ReportChoose frame = new ReportChoose();
+					ReportChoose frame = new ReportChoose(new Planet(), new Timer());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +45,7 @@ public class ReportChoose extends JFrame {
 	}
 
 	
-	public ReportChoose() {
+	public ReportChoose(Planet planeta, Timer time) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,7 +78,7 @@ public class ReportChoose extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new MENU().main(null);
+				MENU menu = new MENU(planeta, time);
 								
 			}
 		});
@@ -89,8 +93,20 @@ public class ReportChoose extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-						new ReportRead().main(null);
-						dispose();
+				dispose();
+				JFrame frame = new JFrame ("Report Read");
+                frame.setSize(486,448);
+                JTextArea textArea = new JTextArea ();
+                textArea.setBackground(Color.black);
+                textArea.setLineWrap(false);
+                textArea.setEditable(false);
+                textArea.setForeground(Color.white);
+                JScrollPane scroll = new JScrollPane (textArea, 
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+                frame.setLocationRelativeTo(null);
+                frame.setResizable(false);
+                frame.add(scroll);
+                frame.setVisible (true);
 			}
 		});
 		
@@ -105,8 +121,20 @@ public class ReportChoose extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new ReportStats().main(null);
 				dispose();
+				JFrame frame = new JFrame ("Report Stats");
+                frame.setSize(486,448);
+                JTextArea textArea = new JTextArea ();
+                textArea.setBackground(Color.black);
+                textArea.setLineWrap(false);
+                textArea.setEditable(false);
+                textArea.setForeground(Color.white);
+                JScrollPane scroll = new JScrollPane (textArea, 
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+                frame.setLocationRelativeTo(null);
+                frame.setResizable(false);
+                frame.add(scroll);
+                frame.setVisible (true);
 			}
 		});
 		
@@ -118,6 +146,6 @@ public class ReportChoose extends JFrame {
 		fondo.setIcon(imagen);
 		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(fondo);
-		
+		setVisible(true);
 	}
 }

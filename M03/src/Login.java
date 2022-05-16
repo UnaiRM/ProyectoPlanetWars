@@ -112,6 +112,7 @@ public class Login extends JFrame {
 					} else {
 //						Main.setFlagTienePlanetas(true);
 						// CAMBIAR A LA INTERFAZ PARA ELEGIR
+						dispose();
 						ChoosePlanet choose = new ChoosePlanet(ConnectionBDD.infoPlanets(idPlanetas));
 						
 					}
