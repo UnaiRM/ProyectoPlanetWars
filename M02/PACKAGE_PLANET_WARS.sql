@@ -41,7 +41,7 @@ as
    tec_defensa planet.technology_defense%type, update_defensa planet.update_defense_cost%type, update_ataque planet.update_atack_cost%type,
    cristal planet.crystal_quantity%type, metal planet.metal_quantity%type, deuterium planet.deuterium_quantity%type);
    
-   procedure DELETE_SHIP;
+   procedure DELETE_USER_SHIP(id_planeta planet.id_planet%type);
    
    procedure NEXT_ID(next_id out int);
 
@@ -321,7 +321,7 @@ as
       DBMS_OUTPUT.PUT_LINE('ERROR: EL ID DEL PLANETA NO EXISTE');
       
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR GET_PLANET');
       
    end;
 -------------------------------------------------------------------------------------------------------
@@ -385,7 +385,7 @@ as
       DBMS_OUTPUT.PUT_LINE('ERROR: LA CONTRASENYA ES INCORRECTA');
       
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR LOGIN');
       
    end;
 -------------------------------------------------------------------------------------------------------
@@ -399,7 +399,7 @@ as
    
    exception
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT_PLANET_SHIP');
       rollback;
    
    end;
@@ -414,7 +414,7 @@ as
       
    exception
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT_PLANET_DEFENSE');
       rollback;
    
    end;
@@ -436,7 +436,7 @@ as
       
    exception
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT_PLANET');
       rollback;
    
    end;
@@ -454,53 +454,24 @@ as
    
    exception
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR UPDATE_PLANET');
       rollback;
       
    end;
 ----------------------------------------------------------------------------------------------------------------
-   procedure DELETE_SHIP
+   procedure DELETE_USER_SHIP(id_planeta planet.id_planet%type)
    as
-   
    begin
-      execute immediate  'DROP TABLE PLANET_SHIP';
-      
-      execute immediate  'DROP TABLE PLANET_DEFENSE';
-      dbms_output.put_line('Se ha eliminado correctamente la table plante_ship y planet_defense');
-         
-      EXECUTE IMMEDIATE 'CREATE TABLE PLANET_DEFENSE
-      (ID_planet numeric,
-      ID_defense numeric,
-      quantity numeric,
-      level_defense numeric,
-      level_atack numeric,
-      CONSTRAINT Planet_Defense_fk FOREIGN KEY (ID_planet)
-      REFERENCES PLANET (ID_planet),
-      CONSTRAINT Defense_Planet_fk FOREIGN KEY (ID_defense)
-      REFERENCES DEFENSE (ID_defense),
-      PRIMARY KEY(ID_planet, ID_defense))';
-      
-      EXECUTE IMMEDIATE 'CREATE TABLE PLANET_SHIP
-      (ID_planet numeric,
-      ID_ship numeric,
-      quantity numeric,
-      level_defense numeric,
-      level_atack numeric,
-      CONSTRAINT Planet_Ship_fk FOREIGN KEY (ID_planet)
-      REFERENCES PLANET (ID_planet),
-      CONSTRAINT Ship_Planet_fk FOREIGN KEY (ID_ship)
-      REFERENCES SHIP (ID_ship),
-      PRIMARY KEY(ID_planet, ID_ship))';
-      
-      dbms_output.put_line('Se ha creado correctamente la table plante_ship y planet_defense');
-      commit;
    
+      delete from planet_defense where id_planet = id_planeta;
+      delete from planet_ship where id_planet = id_planeta;
+      commit;
       
    exception
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR DROP TABLE');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR DELETE_USER_SHIP');
       rollback;
-   
+      
    end;
 -------------------------------------------------------------------------------------------------------------
    procedure NEXT_ID(next_id out int)
@@ -513,11 +484,11 @@ as
          
       end if;
       
-      DBMS_OUTPUT.PUT_LINE('SE HA INSERTADO LA FILA CORRECTAMENTE');
+      DBMS_OUTPUT.PUT_LINE('SE HA COMPLETADO EL PROCESO CORRECTAMENTE');
       
    exception
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR NEXT_ID');
       rollback;
       
    end;

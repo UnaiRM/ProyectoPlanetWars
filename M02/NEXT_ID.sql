@@ -8,7 +8,7 @@ begin
       
    end if;
    
-   DBMS_OUTPUT.PUT_LINE('SE HA INSERTADO LA FILA CORRECTAMENTE');
+   DBMS_OUTPUT.PUT_LINE('SE HA COMPLETADO EL PROCESO CORRECTAMENTE');
    
 exception
    when others then
