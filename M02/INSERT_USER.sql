@@ -1,4 +1,4 @@
-create or replace procedure INSERT_USER(nombre users.username%type, pas users.password%type)
+create or replace procedure INSERT_USER(nombre users.username%type, pas users.password%type, res out int)
 as
     cantidadUsuarios int;
     verNombre int;
@@ -8,7 +8,9 @@ as
 begin
     select count(username) into verNombre from users where username = nombre;
     if verNombre != 0 then
+        res := 0;
         raise nombre_existe_exc;
+        
     end if;
     select count(id_user) into cantidadUsuarios from users;
     
@@ -17,10 +19,9 @@ begin
     else 
        select max(id_user)+1 into id_usuario from users;
     end if;
-    dbms_output.put_line(id_usuario);
-
      insert into USERS(id_user, username,birth_date,password)
      values (id_usuario, nombre, current_date, pas);
+     res := 1;
    commit;
     
 exception
