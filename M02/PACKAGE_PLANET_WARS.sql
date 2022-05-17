@@ -26,13 +26,13 @@ as
    procedure LOGIN(user in users.username%TYPE, password in users.password%TYPE, p_user out int,
    lista_id out varchar);
    
-   procedure INSERTAR_SHIP_ATTACK(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   procedure INSERT_PLANET_SHIP(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
    cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type);
    
-   procedure INSERT_SHIP_DEFENSE(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   procedure INSERT_PLANET_DEFENSE(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
    cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type);
    
-   procedure INSERT_PLANET(id_planeta planet.id_planet%type, id_user planet.id_user%type, nombre planet.name%type,
+   procedure INSERT_PLANET(next_id planet.id_planet%TYPE,id_user planet.id_user%type, nombre planet.name%type,
    tec_ataque planet.technology_atack%type, tec_defensa planet.technology_defense%type, update_defensa planet.update_defense_cost%type,
    update_ataque planet.update_atack_cost%type, cristal planet.crystal_quantity%type, metal planet.metal_quantity%type,
    deuterium planet.deuterium_quantity%type);
@@ -41,7 +41,13 @@ as
    tec_defensa planet.technology_defense%type, update_defensa planet.update_defense_cost%type, update_ataque planet.update_atack_cost%type,
    cristal planet.crystal_quantity%type, metal planet.metal_quantity%type, deuterium planet.deuterium_quantity%type);
    
-   procedure DELETE_SHIP;
+   procedure DELETE_USER_SHIP(id_planeta planet.id_planet%type);
+   
+   procedure NEXT_ID(next_id out int);
+   
+   procedure RETURN_PLANET_SHIP(id_p in int, all_c out varchar);
+   
+   procedure RETURN_PLANET_DEFENSE(id_p in int, all_c out varchar);
 
 end;
 /
@@ -111,8 +117,8 @@ as
       CONSTRAINT Planet_Ship_fk FOREIGN KEY (ID_planet)
          REFERENCES PLANET (ID_planet),
       CONSTRAINT Ship_Planet_fk FOREIGN KEY (ID_ship)
-         REFERENCES SHIP (ID_ship),
-      PRIMARY KEY(ID_planet, ID_ship))';
+         REFERENCES SHIP (ID_ship))';
+      --PRIMARY KEY(ID_planet, ID_ship))';
       
       EXECUTE IMMEDIATE 'CREATE TABLE DEFENSE
       (ID_defense numeric primary key,
@@ -135,8 +141,8 @@ as
       CONSTRAINT Planet_Defense_fk FOREIGN KEY (ID_planet)
          REFERENCES PLANET (ID_planet),
       CONSTRAINT Defense_Planet_fk FOREIGN KEY (ID_defense)
-         REFERENCES DEFENSE (ID_defense),
-      PRIMARY KEY(ID_planet, ID_defense))';
+         REFERENCES DEFENSE (ID_defense))';
+      --PRIMARY KEY(ID_planet, ID_defense))';
       
       EXECUTE IMMEDIATE 'CREATE TABLE BATTLE
       (ID_battle numeric primary key,
@@ -319,7 +325,7 @@ as
       DBMS_OUTPUT.PUT_LINE('ERROR: EL ID DEL PLANETA NO EXISTE');
       
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR GET_PLANET');
       
    end;
 -------------------------------------------------------------------------------------------------------
@@ -383,11 +389,11 @@ as
       DBMS_OUTPUT.PUT_LINE('ERROR: LA CONTRASENYA ES INCORRECTA');
       
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR LOGIN');
       
    end;
 -------------------------------------------------------------------------------------------------------
-   procedure INSERTAR_SHIP_ATTACK(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   procedure INSERT_PLANET_SHIP(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
    cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type)
    as
    
@@ -397,12 +403,12 @@ as
    
    exception
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT_PLANET_SHIP');
       rollback;
    
    end;
 ----------------------------------------------------------------------------------------------------------
-   procedure INSERT_SHIP_DEFENSE(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
+   procedure INSERT_PLANET_DEFENSE(id_planeta planet_ship.id_planet%type, id_defensa planet_ship.id_ship%type,
    cantidad planet_ship.quantity%type, nivel_ataque planet_ship.level_atack%type, nivel_defensa planet_ship.level_defense%type)
    as
    
@@ -412,26 +418,29 @@ as
       
    exception
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT_PLANET_DEFENSE');
       rollback;
    
    end;
 -------------------------------------------------------------------------------------------------------------
-   procedure INSERT_PLANET(id_planeta planet.id_planet%type, id_user planet.id_user%type, nombre planet.name%type,
+   procedure INSERT_PLANET(next_id planet.id_planet%TYPE,id_user planet.id_user%type, nombre planet.name%type,
    tec_ataque planet.technology_atack%type, tec_defensa planet.technology_defense%type, update_defensa planet.update_defense_cost%type,
    update_ataque planet.update_atack_cost%type, cristal planet.crystal_quantity%type, metal planet.metal_quantity%type,
    deuterium planet.deuterium_quantity%type)
    as
    
    begin
+   
       insert into PLANET (id_planet, id_user, name, technology_atack, technology_defense, update_defense_cost, update_atack_cost,
       crystal_quantity, metal_quantity, deuterium_quantity)
-      values (id_planeta, id_user, nombre, tec_ataque, tec_defensa, update_defensa, update_ataque, cristal, metal, deuterium);
+      values (next_id, id_user, nombre, tec_ataque, tec_defensa, update_defensa, update_ataque, cristal, metal, deuterium);
       commit;
+      
+      DBMS_OUTPUT.PUT_LINE('SE HA INSERTADO LA FILA CORRECTAMENTE');
       
    exception
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT_PLANET');
       rollback;
    
    end;
@@ -444,56 +453,230 @@ as
    begin
       update planet
       set  name = nombre, technology_atack = tec_ataque, technology_defense = tec_defensa, update_defense_cost = update_defensa,
-      update_atack_cost = update_ataque where id_planet = id_planeta;
+      update_atack_cost = update_ataque, crystal_quantity = cristal, metal_quantity = metal, deuterium_quantity = deuterium where id_planet = id_planeta;
       commit;
    
    exception
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR INSERT DATA');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR UPDATE_PLANET');
       rollback;
       
    end;
 ----------------------------------------------------------------------------------------------------------------
-   procedure DELETE_SHIP
+   procedure DELETE_USER_SHIP(id_planeta planet.id_planet%type)
    as
-   
    begin
-      execute immediate  'DROP TABLE PLANET_SHIP';
-      
-      execute immediate  'DROP TABLE PLANET_DEFENSE';
-      dbms_output.put_line('Se ha eliminado correctamente la table plante_ship y planet_defense');
-         
-      EXECUTE IMMEDIATE 'CREATE TABLE PLANET_DEFENSE
-      (ID_planet numeric,
-      ID_defense numeric,
-      quantity numeric,
-      level_defense numeric,
-      level_atack numeric,
-      CONSTRAINT Planet_Defense_fk FOREIGN KEY (ID_planet)
-      REFERENCES PLANET (ID_planet),
-      CONSTRAINT Defense_Planet_fk FOREIGN KEY (ID_defense)
-      REFERENCES DEFENSE (ID_defense),
-      PRIMARY KEY(ID_planet, ID_defense))';
-      
-      EXECUTE IMMEDIATE 'CREATE TABLE PLANET_SHIP
-      (ID_planet numeric,
-      ID_ship numeric,
-      quantity numeric,
-      level_defense numeric,
-      level_atack numeric,
-      CONSTRAINT Planet_Ship_fk FOREIGN KEY (ID_planet)
-      REFERENCES PLANET (ID_planet),
-      CONSTRAINT Ship_Planet_fk FOREIGN KEY (ID_ship)
-      REFERENCES SHIP (ID_ship),
-      PRIMARY KEY(ID_planet, ID_ship))';
-      
-      dbms_output.put_line('Se ha creado correctamente la table plante_ship y planet_defense');
-      commit;
    
+      delete from planet_defense where id_planet = id_planeta;
+      delete from planet_ship where id_planet = id_planeta;
+      commit;
       
    exception
       when others then
-      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR DROP TABLE');
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR DELETE_USER_SHIP');
+      rollback;
+      
+   end;
+-------------------------------------------------------------------------------------------------------------
+   procedure NEXT_ID(next_id out int)
+   as
+   
+   begin
+      select max(id_planet)+1 into next_id from planet;
+      if next_id is null then
+         next_id := 1;
+         
+      end if;
+      
+      DBMS_OUTPUT.PUT_LINE('SE HA COMPLETADO EL PROCESO CORRECTAMENTE');
+      
+   exception
+      when others then
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR NEXT_ID');
+      rollback;
+      
+   end;
+-------------------------------------------------------------------------------------------------------------
+   procedure RETURN_PLANET_SHIP(id_p in int, all_c out varchar)
+   as
+      cursor c1 is select id_ship from planet_ship where id_planet = id_p;
+      cursor c2 is select quantity from planet_ship where id_planet = id_p;
+      cursor c3 is select level_defense from planet_ship where id_planet = id_p;
+      cursor c4 is select level_atack from planet_ship where id_planet = id_p;
+      x int;
+      
+      ver_id int;
+      excp_id exception;
+      
+   begin
+      select count(id_planet) into ver_id from planet_ship where id_planet = id_p;
+      
+      if ver_id = 0 then
+         raise excp_id;
+      end if;
+   
+   --CURSOR PARA LA ID_SHIP
+      open c1;
+      loop
+         fetch c1 into x;
+            exit when c1%notfound;
+            if all_c is null then
+                all_c := to_char(x);
+               
+            else
+               all_c := all_c||','||to_char(x);
+               
+            end if;
+      end loop;
+      close c1;
+      
+      all_c := all_c||';';
+   --CURSOR PARA LA QUANTITY
+      open c2;
+      loop
+         fetch c2 into x;
+            exit when c2%notfound;
+            if substr(all_c,-1,1) = ';' then
+                all_c := all_c ||to_char(x);
+               
+            else
+               all_c := all_c||','||to_char(x);
+            
+         end if;
+      end loop;
+      close c2;
+      
+      all_c := all_c||';';
+   --CURSOR PARA LEVEL_DEFENSE
+      open c3;
+      loop
+         fetch c3 into x;
+         exit when c3%notfound;
+         if substr(all_c,-1,1) = ';' then
+                all_c := all_c ||to_char(x);
+            
+         else
+            all_c := all_c||','||to_char(x);
+            
+         end if;
+      end loop;
+      close c3;
+      
+      all_c := all_c||';';
+   --CURSOR PARA LEVEL_ATTACK
+      open c4;
+      loop
+         fetch c4 into x;
+         exit when c4%notfound;
+         if substr(all_c,-1,1) = ';' then
+                all_c := all_c ||to_char(x);
+            
+         else
+            all_c := all_c||','||to_char(x);
+            
+         end if;
+      end loop;
+      
+      close c4;
+   
+   exception
+      when excp_id then
+      DBMS_OUTPUT.PUT_LINE('ERROR: EL ID '||id_p||' NO EXISTE');
+   
+      when others then
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR RETURN_PLANET_SHIP');
+      rollback;
+   
+   end;
+------------------------------------------------------------------------------------------------------------
+   procedure RETURN_PLANET_DEFENSE(id_p in int, all_c out varchar)
+   as
+      cursor c1 is select id_defense from planet_defense where id_planet = id_p;
+      cursor c2 is select quantity from planet_defense where id_planet = id_p;
+      cursor c3 is select level_defense from planet_defense where id_planet = id_p;
+      cursor c4 is select level_atack from planet_defense where id_planet = id_p;
+      x int;
+      
+      ver_id int;
+      excp_id exception;
+      
+   begin
+      select count(id_planet) into ver_id from planet_defense where id_planet = id_p;
+      
+      if ver_id = 0 then
+         raise excp_id;
+      end if;
+   
+   --CURSOR PARA LA ID_DEFENSE
+      open c1;
+      loop
+         fetch c1 into x;
+            exit when c1%notfound;
+            if all_c is null then
+                all_c := to_char(x);
+               
+            else
+               all_c := all_c||','||to_char(x);
+               
+            end if;
+      end loop;
+      close c1;
+      
+      all_c := all_c||';';
+   --CURSOR PARA LA QUANTITY
+      open c2;
+      loop
+         fetch c2 into x;
+            exit when c2%notfound;
+            if substr(all_c,-1,1) = ';' then
+                all_c := all_c ||to_char(x);
+               
+            else
+               all_c := all_c||','||to_char(x);
+            
+         end if;
+      end loop;
+      close c2;
+      
+      all_c := all_c||';';
+   --CURSOR PARA LEVEL_DEFENSE
+      open c3;
+      loop
+         fetch c3 into x;
+         exit when c3%notfound;
+         if substr(all_c,-1,1) = ';' then
+                all_c := all_c ||to_char(x);
+            
+         else
+            all_c := all_c||','||to_char(x);
+            
+         end if;
+      end loop;
+      close c3;
+      
+      all_c := all_c||';';
+   --CURSOR PARA LEVEL_ATTACK
+      open c4;
+      loop
+         fetch c4 into x;
+         exit when c4%notfound;
+         if substr(all_c,-1,1) = ';' then
+                all_c := all_c ||to_char(x);
+            
+         else
+            all_c := all_c||','||to_char(x);
+            
+         end if;
+      end loop;
+      
+      close c4;
+   
+   exception
+      when excp_id then
+      DBMS_OUTPUT.PUT_LINE('ERROR: EL ID '||id_p||' NO EXISTE');
+   
+      when others then
+      dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR RETURN_PLANET_SHIP');
       rollback;
    
    end;

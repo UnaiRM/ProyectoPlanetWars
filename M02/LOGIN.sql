@@ -61,7 +61,7 @@ exception
    dbms_output.put_line('ERROR: NO SE HA INDENTIFICADO EL ERROR');
    
 end;
-/*/
+/
 set SERVEROUTPUT ON
 declare
    x int;
@@ -70,4 +70,4 @@ declare
 begin
    login('Alex', '1234', x, ux);
    DBMS_OUTPUT.PUT_LINE('ID_USER: '||x ||' '||'LISTA_PLANETAS: '||ux );
-end;*/
+end;
