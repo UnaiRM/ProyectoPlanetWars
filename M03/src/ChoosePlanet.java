@@ -118,10 +118,11 @@ public class ChoosePlanet extends JFrame {
 						battle.startBattle();
 						BattleDevelopment developmentAuto = new BattleDevelopment(Main.getBattleDevelopment());
 						Main.createEnemyArmy();
+						MENU.setThreat("");
 					}
 				};
-				time.schedule(autoBattle, 180000,180000);
-				time.schedule(createEnemyArmy, 120000,120000);
+				time.schedule(autoBattle, 20000,180000);
+				time.schedule(createEnemyArmy, 10000,120000);
 				time.schedule(autoIncrease, 60000,60000);
 				MENU menu = new MENU(planeta, time);
 			}

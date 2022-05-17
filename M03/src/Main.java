@@ -497,19 +497,26 @@ public class Main {
 			if (numRandom >= 0 && numRandom < 35) {
 				enemyMetal -= costeMetalLightHunter;
 				enemyDeuterium -= costeDeuteriumLightHunter;
-				enemyArmyTemp[0].add(new LightHunter());
+				LightHunter nave = new LightHunter();
+				nave.setArmorAndDamage(0, 0);
+				enemyArmyTemp[0].add(nave);
 			} else if (numRandom >= 35 && numRandom < 60) {
 				enemyMetal -= costeMetalHeavyHunter;
 				enemyDeuterium -= costeDeuteriumHeavyHunter;
-				enemyArmyTemp[1].add(new HeavyHunter());
+				HeavyHunter nave = new HeavyHunter();
+				nave.setArmorAndDamage(0, 0);
+				enemyArmyTemp[1].add(nave);
 			} else if (numRandom >= 60 && numRandom < 80) {
 				enemyMetal -= costeMetalBattleShip;
 				enemyDeuterium -= costeDeuteriumBattleShip;
-				enemyArmyTemp[2].add(new BattleShip());
+				BattleShip nave = new BattleShip();
+				nave.setArmorAndDamage(0, 0);
+				enemyArmyTemp[2].add(nave);
 			} else if (numRandom >= 80 && numRandom < 100) {
 				enemyMetal -= costeMetalArmoredShip;
 				enemyDeuterium -= costeDeuteriumArmoredShip;
-				enemyArmyTemp[3].add(new ArmoredShip());
+				ArmoredShip nave = new ArmoredShip();
+				enemyArmyTemp[3].add(nave);
 			}
 		}
 		// Aumento de recursos
@@ -522,8 +529,8 @@ public class Main {
 	
 	public static String ViewThreat() {
 		int cantidad = 0;
-		int LightHunter = 0, HeavyHunter = 0, BattleShip = 0, ArmoredShip = 0, MissileLauncher = 0, IonCannon = 0, PlasmaCannon;
-		for (int i = 0; i < enemyArmy.length; i++) {
+		int LightHunter = 0, HeavyHunter = 0, BattleShip = 0, ArmoredShip = 0;
+		for (int i = 0; i < 4; i++) {
 			ArrayList<MilitaryUnit> flota = enemyArmy[i];
 			cantidad = flota.size();
 			switch (i) {
