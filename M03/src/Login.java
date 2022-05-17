@@ -1,6 +1,5 @@
-
-
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -70,10 +69,48 @@ public class Login extends JFrame {
 		this.setTitle("Login");
 		JButton login = new JButton("");
 		login.setIcon(new ImageIcon("fotos proyecto/BOTON.jpg"));
-		login.setBounds(175, 356, 109, 35);
+		login.setBounds(165, 335, 105, 28);
 		this.setResizable(false);
 		
+		JButton register = new JButton("Register");
+		register.setBackground(Color.RED);
+		register.setForeground(Color.WHITE);
+		register.setBounds(175, 373, 85, 21);
+		
+		register.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int comp = ConnectionBDD.newUser(name.getText(), passwordField.getText());
+				if (comp == 0) {
+					JOptionPane.showMessageDialog(new JFrame(), "El usuario ya existe", "Error register",
+					        JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		getContentPane().add(register);
+		
 		getContentPane().add(login);
+		JButton reset = new JButton("");
+		reset.setIcon(new ImageIcon("fotos proyecto/botonreset.png"));
+		reset.setBackground(Color.BLACK);
+		reset.setForeground(Color.WHITE);
+		reset.setBounds(369, 372, 63, 19);
+		reset.setFocusable(false);
+		reset.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ConnectionBDD.resetBDD();
+			}
+		});
+		
+		
+		
+		getContentPane().add(reset);
+		
+		
 		login.addActionListener(new ActionListener() {
 			
 			@Override
@@ -154,14 +191,4 @@ public class Login extends JFrame {
 		
 
 	}
-
-//	public static boolean isFlagButton() {
-//		return flagButton;
-//	}
-//
-//	public static void setFlagButton(boolean flagButton) {
-//		Login.flagButton = flagButton;
-//	}
-	
-	
 }

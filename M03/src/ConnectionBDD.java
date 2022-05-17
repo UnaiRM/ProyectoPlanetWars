@@ -107,11 +107,31 @@ public class ConnectionBDD {
 	}
 
 
-
-	public boolean initalizeBDD() {
+	public static int newUser(String user, String password) {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call PLANET_WARS.INITALIZE_04(0)}");
+			cst = con.prepareCall("{call PLANET_WARS.INSERT_USER(?,?,?)}");
+			cst.setString(1, user);
+			cst.setString(2, password);
+			cst.registerOutParameter(3, java.sql.Types.INTEGER);
+			cst.execute();
+			
+			int res = cst.getInt(3);
+			
+			cst.close();
+			return res;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+
+	public static boolean initalizeBDD() {
+		CallableStatement cst;
+		try {
+			cst = con.prepareCall("{call PLANET_WARS.INITIALIZE_04(0)}");
 			cst.execute();
 			cst.close();
 			return true;
@@ -122,10 +142,10 @@ public class ConnectionBDD {
 		}
 	}
 	
-	public boolean resetBDD() {
+	public static boolean resetBDD() {
 		CallableStatement cst;
 		try {
-			cst = con.prepareCall("{call PLANET_WARS.INITALIZE_04(1)}");
+			cst = con.prepareCall("{call PLANET_WARS.INITIALIZE_04(1)}");
 			cst.execute();
 			cst.close();
 			return true;

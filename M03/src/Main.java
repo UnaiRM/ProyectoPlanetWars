@@ -30,6 +30,8 @@ public class Main {
 	private int timeGeneration = 10000;
 	
 	private static ArrayList<MilitaryUnit>[] enemyArmy = new ArrayList[7];
+	
+	private static String battleDevelopment = "";
 
 	public static void main(String[] args) {
 		
@@ -432,7 +434,7 @@ public class Main {
 
 
 
-	public ArrayList<MilitaryUnit>[] getEnemyArmy() {
+	public static ArrayList<MilitaryUnit>[] getEnemyArmy() {
 		return enemyArmy;
 	}
 
@@ -549,5 +551,31 @@ public class Main {
 		planeta.setMetal(planeta.getMetal() + Variables.PLANET_METAL_GENERATED);
 		planeta.setDeuterium(planeta.getDeuterium() + Variables.PLANET_DEUTERIUM_GENERATED);
 	}
+
+
+
+
+
+
+
+
+
+	public static String getBattleDevelopment() {
+		return battleDevelopment;
+	}
+
+
+
+
+
+
+
+
+
+	public static void setBattleDevelopment(String battleDevelopment) {
+		Main.battleDevelopment = battleDevelopment;
+	}
+	
+	
 	
 }

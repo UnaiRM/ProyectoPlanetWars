@@ -395,12 +395,12 @@ public class Battle {
 		int minimoUnidadesPlanet = (int) (initialNumPlanet * 0.2);
 		int minimoUnidadesEnemy = (int) (initialNumEnemy * 0.2);
 		
-		System.out.println("Cantidad inicial flota Planet: "+initialNumPlanet);
-		System.out.println("Cantidad inicial flota Enemy: "+initialNumEnemy);
-		System.out.println("Minimo planet: "+ minimoUnidadesPlanet);
-		System.out.println("Minimo Enemy: "+minimoUnidadesEnemy);
-		System.out.println("Actual planet: "+ actualNumPlanet);
-		System.out.println("Actual enemy: "+ actualNumEnemy);
+//		System.out.println("Cantidad inicial flota Planet: "+initialNumPlanet);
+//		System.out.println("Cantidad inicial flota Enemy: "+initialNumEnemy);
+//		System.out.println("Minimo planet: "+ minimoUnidadesPlanet);
+//		System.out.println("Minimo Enemy: "+minimoUnidadesEnemy);
+//		System.out.println("Actual planet: "+ actualNumPlanet);
+//		System.out.println("Actual enemy: "+ actualNumEnemy);
 
 		while (actualNumPlanet > minimoUnidadesPlanet && actualNumEnemy > minimoUnidadesEnemy) {
 			// TURNO
@@ -539,11 +539,12 @@ public class Battle {
 				jugador = 0;
 			}
 			
-			// MIRAR DE HACER QUE LO DEVUELVA SI ES EL ULTIMO TURNO
-			battleDevolpment += "\n\n**************CHANGE ATTACKER**************";
-			
+			if (actualNumPlanet > minimoUnidadesPlanet && actualNumEnemy > minimoUnidadesEnemy) {
+				battleDevolpment += "\n\n**************CHANGE ATTACKER**************";
+
+			}
 		}
-		
+		Main.setBattleDevelopment(battleDevolpment);
 	}
 	
 	public static void main(String[] args) {
@@ -551,26 +552,26 @@ public class Battle {
 		ConnectionBDD con = new ConnectionBDD();
 		
 		Planet planeta = new Planet();
-		planeta.setMetal(2000000000);
-		planeta.setDeuterium(2000000000);
+		planeta.setMetal(200000);
+		planeta.setDeuterium(200000);
 		
 		Random generador = new Random();
 		try {
-			planeta.newBattleShip(generador.nextInt(500,1000));
-			planeta.newLigthHunter(generador.nextInt(500,1000));
-			planeta.newHeavyHunter(generador.nextInt(500,1000));
+			//planeta.newBattleShip(generador.nextInt(1,10));
+			planeta.newLigthHunter(generador.nextInt(1,5));
+			planeta.newHeavyHunter(generador.nextInt(1,5));
 		} catch (ResourceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		Planet planetaEnemy = new Planet();
-		planetaEnemy.setMetal(2000000000);
-		planetaEnemy.setDeuterium(2000000000);
+		planetaEnemy.setMetal(200000);
+		planetaEnemy.setDeuterium(200000);
 		try {
-			planetaEnemy.newBattleShip(generador.nextInt(500,1000));
-			planetaEnemy.newLigthHunter(generador.nextInt(500,1000));
-			planetaEnemy.newHeavyHunter(generador.nextInt(500,1000));
+			//planetaEnemy.newBattleShip(generador.nextInt(1,10));
+			planetaEnemy.newLigthHunter(generador.nextInt(1,5));
+			planetaEnemy.newHeavyHunter(generador.nextInt(1,5));
 		} catch (ResourceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -93,20 +93,7 @@ public class ReportChoose extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				JFrame frame = new JFrame ("Report Read");
-                frame.setSize(486,448);
-                JTextArea textArea = new JTextArea ();
-                textArea.setBackground(Color.black);
-                textArea.setLineWrap(false);
-                textArea.setEditable(false);
-                textArea.setForeground(Color.white);
-                JScrollPane scroll = new JScrollPane (textArea, 
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-                frame.setLocationRelativeTo(null);
-                frame.setResizable(false);
-                frame.add(scroll);
-                frame.setVisible (true);
+				BattleDevelopment development = new BattleDevelopment(Main.getBattleDevelopment());
 			}
 		});
 		
