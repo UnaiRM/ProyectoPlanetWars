@@ -114,7 +114,7 @@ public class ChoosePlanet extends JFrame {
 					
 					@Override
 					public void run() {
-						Battle battle = new Battle(planeta.getArmy(), Main.getEnemyArmy());
+						Battle battle = new Battle(Main.getEnemyArmy(),planeta.getArmy());
 						battle.startBattle();
 						BattleDevelopment developmentAuto = new BattleDevelopment(Main.getBattleDevelopment());
 						Main.createEnemyArmy();
@@ -122,7 +122,7 @@ public class ChoosePlanet extends JFrame {
 				};
 				time.schedule(autoBattle, 180000,180000);
 				time.schedule(createEnemyArmy, 120000,120000);
-				time.schedule(autoIncrease, 0,60000);
+				time.schedule(autoIncrease, 60000,60000);
 				MENU menu = new MENU(planeta, time);
 			}
 		});

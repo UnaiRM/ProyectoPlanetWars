@@ -568,6 +568,8 @@ public class Battle {
 		Planet planetaEnemy = new Planet();
 		planetaEnemy.setMetal(200000);
 		planetaEnemy.setDeuterium(200000);
+		planeta.setTechnologyAttack(2);
+		planeta.setTechnologyDefense(1);
 		try {
 			//planetaEnemy.newBattleShip(generador.nextInt(1,10));
 			planetaEnemy.newLigthHunter(generador.nextInt(1,5));
@@ -577,7 +579,7 @@ public class Battle {
 			e.printStackTrace();
 		}
 		
-		Battle batalla = new Battle(planeta.getArmy(),planetaEnemy.getArmy());
+		Battle batalla = new Battle(planetaEnemy.getArmy(),planeta.getArmy());
 		batalla.startBattle();
 		System.out.println(batalla.getBattleDevolpment());
 	}
