@@ -8,14 +8,12 @@ as
    
    ver_id int;
    excp_id exception;
-   
 begin
    select count(id_planet) into ver_id from planet_ship where id_planet = id_p;
    
    if ver_id = 0 then
       raise excp_id;
    end if;
-
 --CURSOR PARA LA ID_SHIP
    open c1;
    loop
