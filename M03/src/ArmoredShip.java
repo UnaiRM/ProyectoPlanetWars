@@ -14,15 +14,15 @@ public class ArmoredShip extends Ship {
 		super.setBaseDamage(0);
 	}
 
-	public void setArmorAndDamage(Planet planeta) {
-		int armor = (Variables.ARMOR_ARMOREDSHIP) + (planeta.getTechnologyDefense() * Variables.PLUS_ARMOR_ARMOREDSHIP_BY_TECHNOLOGY)*1000/100;
-		int baseDamage = (Variables.BASE_DAMAGE_ARMOREDSHIP) + (planeta.getTechnologyAttack() * Variables.PLUS_ATTACK_ARMOREDSHIP_BY_TECHNOLOGY)*1000/100;
+	public void setArmorAndDamage(int attackLevel, int defenseLevel) {
+		int armor = (Variables.ARMOR_ARMOREDSHIP) + (defenseLevel * Variables.PLUS_ARMOR_ARMOREDSHIP_BY_TECHNOLOGY)*1000/100;
+		int baseDamage = (Variables.BASE_DAMAGE_ARMOREDSHIP) + (attackLevel * Variables.PLUS_ATTACK_ARMOREDSHIP_BY_TECHNOLOGY)*1000/100;
 
 		super.setArmor(armor);
 		super.setInitialArmor(armor);
 		super.setBaseDamage(baseDamage);
-		super.setLevel_Attack(planeta.getTechnologyAttack());
-		super.setLevel_Defense(planeta.getTechnologyDefense());
+		super.setLevel_Attack(attackLevel);
+		super.setLevel_Defense(defenseLevel);
 	}
 	
 	// IMPLEMENTAR MILITARYUNIT

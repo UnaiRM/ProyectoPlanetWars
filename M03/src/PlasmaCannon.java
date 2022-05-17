@@ -14,15 +14,15 @@ public class PlasmaCannon extends Ship {
 		super.setBaseDamage(0);
 	}
 
-	public void setArmorAndDamage(Planet planeta) {
-		int armor = (Variables.ARMOR_PLASMACANNON) + (planeta.getTechnologyDefense() * Variables.PLUS_ARMOR_PLASMACANNON_BY_TECHNOLOGY)*1000/100;
-		int baseDamage = (Variables.BASE_DAMAGE_PLASMACANNON) + (planeta.getTechnologyAttack() * Variables.PLUS_ATTACK_PLASMACANNON_BY_TECHNOLOGY)*1000/100;
+	public void setArmorAndDamage(int attackLevel, int defenseLevel) {
+		int armor = (Variables.ARMOR_PLASMACANNON) + (defenseLevel * Variables.PLUS_ARMOR_PLASMACANNON_BY_TECHNOLOGY)*1000/100;
+		int baseDamage = (Variables.BASE_DAMAGE_PLASMACANNON) + (attackLevel * Variables.PLUS_ATTACK_PLASMACANNON_BY_TECHNOLOGY)*1000/100;
 
 		super.setArmor(armor);
 		super.setInitialArmor(armor);
 		super.setBaseDamage(baseDamage);
-		super.setLevel_Attack(planeta.getTechnologyAttack());
-		super.setLevel_Defense(planeta.getTechnologyDefense());
+		super.setLevel_Attack(attackLevel);
+		super.setLevel_Defense(defenseLevel);
 	}
 	
 	// IMPLEMENTAR MILITARYUNIT

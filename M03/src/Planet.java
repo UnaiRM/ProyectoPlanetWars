@@ -141,7 +141,7 @@ public class Planet {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
 				LightHunter nave = new LightHunter();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[0].add(nave);
 				cantidad++;
 			}
@@ -157,7 +157,7 @@ public class Planet {
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
 				LightHunter nave = new LightHunter();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[0].add(nave);
 			}
 		}
@@ -175,7 +175,7 @@ public class Planet {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
 				HeavyHunter nave = new HeavyHunter();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[1].add(nave);
 				cantidad++;
 			}
@@ -191,7 +191,7 @@ public class Planet {
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
 				HeavyHunter nave = new HeavyHunter();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[1].add(nave);
 			}
 		}
@@ -209,7 +209,7 @@ public class Planet {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
 				BattleShip nave = new BattleShip();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[2].add(nave);
 				cantidad++;
 			}
@@ -225,7 +225,7 @@ public class Planet {
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
 				BattleShip nave = new BattleShip();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[2].add(nave);
 			}
 		}
@@ -243,7 +243,7 @@ public class Planet {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
 				ArmoredShip nave = new ArmoredShip();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[3].add(nave);
 				cantidad++;
 			}
@@ -259,7 +259,7 @@ public class Planet {
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
 				ArmoredShip nave = new ArmoredShip();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[3].add(nave);
 			}
 		}
@@ -277,7 +277,7 @@ public class Planet {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
 				MissileLauncher nave = new MissileLauncher();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[4].add(nave);
 				cantidad++;
 			}
@@ -293,7 +293,7 @@ public class Planet {
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
 				MissileLauncher nave = new MissileLauncher();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[4].add(nave);
 			}
 		}
@@ -311,7 +311,7 @@ public class Planet {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
 				IonCannon nave = new IonCannon();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[5].add(nave);
 				cantidad++;
 			}
@@ -327,7 +327,7 @@ public class Planet {
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
 				IonCannon nave = new IonCannon();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[5].add(nave);
 			}
 		}
@@ -347,7 +347,7 @@ public class Planet {
 				this.metal -= costeUnidadMetal;
 				this.deuterium -= costeUnidadDeuterium;
 				PlasmaCannon nave = new PlasmaCannon();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[6].add(nave);
 				cantidad++;
 			}
@@ -363,7 +363,7 @@ public class Planet {
 			// Bucle que crea todas la unidades pedidas
 			for (int i = 0; i < n; i++) {
 				PlasmaCannon nave = new PlasmaCannon();
-				nave.setArmorAndDamage(this);
+				nave.setArmorAndDamage(technologyAttack, technologyDefense);
 				this.army[6].add(nave);
 			}
 		}
