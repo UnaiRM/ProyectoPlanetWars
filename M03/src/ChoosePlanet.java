@@ -94,7 +94,7 @@ public class ChoosePlanet extends JFrame {
 				System.out.println("ID planeta: "+ConnectionBDD.idPlaneta);
 				Planet planeta = ConnectionBDD.loadPlanet();
 				Timer time= new Timer();
-				TimerTask viewThreat= new TimerTask() {
+				TimerTask autoIncrease= new TimerTask() {
 					
 					public void run() {		
 					planeta.setDeuterium(planeta.getDeuterium()+Variables.PLANET_DEUTERIUM_GENERATED);
@@ -102,7 +102,16 @@ public class ChoosePlanet extends JFrame {
 					ConnectionBDD.updatePlaneta(planeta);
 					}
 				};
-				time.schedule(viewThreat, 0,60000);
+				Main.createEnemyArmy();
+				TimerTask createEnemyArmy = new TimerTask() {
+					
+					@Override
+					public void run() {
+						MENU.setThreat(Main.ViewThreat());	
+					}
+				};
+				time.schedule(createEnemyArmy, 120000,120000);
+				time.schedule(autoIncrease, 0,60000);
 				MENU menu = new MENU(planeta, time);
 			}
 		});

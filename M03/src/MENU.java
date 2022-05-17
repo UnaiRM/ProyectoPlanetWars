@@ -12,6 +12,7 @@ import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -25,6 +26,8 @@ public class MENU extends JFrame {
 	private JPanel contentPane;
 	public  int dimAncho=1536;
 	public  int dimAlto=864;
+	
+	private static String threat = "";
 	
 	//private boolean flagBuildButton = false, flagBattleButton = false, flagUpgradeButton = false;
 	/**
@@ -63,6 +66,37 @@ public class MENU extends JFrame {
 		fondo.setBounds(47, 10, 1920, 1080);
 		imagen=new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_AREA_AVERAGING));
 		
+		JButton exit = new JButton("Exit");
+        exit.setBackground(Color.BLACK);
+        exit.setForeground(Color.WHITE);
+        exit.setBounds(42, 796, 63, 21);
+        exit.setFocusable(false);
+        exit.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ConnectionBDD.updatePlaneta(planeta);
+            }
+        });
+        
+        JLabel newtrath = new JLabel(MENU.threat);
+        newtrath.setForeground(Color.WHITE);
+        newtrath.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        newtrath.setBounds(42, 514, 306, 239);
+        newtrath.setHorizontalAlignment(SwingConstants.LEFT);
+        newtrath.setVerticalAlignment(SwingConstants.TOP);
+        contentPane.add(newtrath);
+        
+        JLabel stats = new JLabel(planeta.printStats());
+        stats.setHorizontalAlignment(SwingConstants.LEFT);
+        stats.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        stats.setForeground(Color.WHITE);
+        stats.setBounds(42, 99, 306, 417);
+        stats.setVerticalAlignment(SwingConstants.TOP);
+        contentPane.add(stats);
+        contentPane.add(exit);
+		
 		JLabel Ataque = new JLabel("");
 		Ataque.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		Ataque.setForeground(Color.WHITE);
@@ -82,11 +116,8 @@ public class MENU extends JFrame {
 		fondo.setIcon(imagen);
 		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(fondo);
-		JLabel stats = new JLabel("Hello");
-		stats.setFont(new Font("Arial", Font.PLAIN, 17));
-		stats.setForeground(Color.WHITE);
-		stats.setBounds(37, 93, 296, 263);
-		contentPane.add(stats);
+		
+		
 
 		JButton botonbuild = new JButton("");
 		botonbuild.setIcon(new ImageIcon("fotos proyecto/BUILD.jpeg"));
@@ -158,6 +189,12 @@ public class MENU extends JFrame {
 //	public void setFlagUpgradeButton(boolean flagUpgradeButton) {
 //		this.flagUpgradeButton = flagUpgradeButton;
 //	}
+	public static String getThreat() {
+		return threat;
+	}
+	public static void setThreat(String threat) {
+		MENU.threat = threat;
+	}
 	
 	
 	

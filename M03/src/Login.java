@@ -16,6 +16,7 @@ import java.util.TimerTask;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.BoxLayout;
@@ -82,7 +83,8 @@ public class Login extends JFrame {
 				String idPlanetas = idUsuarioPlanetas[1];
 				if (idUsuario < 1) {
 					// POPUP DE ERROR
-					System.out.println("Usuario incorrecta");
+					JOptionPane.showMessageDialog(new JFrame(), "Login incorrecto", "Error login",
+					        JOptionPane.ERROR_MESSAGE);
 				} else {
 					ConnectionBDD.setIdUsuario(idUsuario);
 					Planet planeta;
@@ -99,7 +101,7 @@ public class Login extends JFrame {
 						dispose();
 						System.out.println("ID planeta: "+ConnectionBDD.idPlaneta);
 						Timer time= new Timer();
-						TimerTask viewThreat= new TimerTask() {
+						TimerTask autoIncrease= new TimerTask() {
 							
 							public void run() {		
 							planeta.setDeuterium(planeta.getDeuterium()+Variables.PLANET_DEUTERIUM_GENERATED);
@@ -107,7 +109,16 @@ public class Login extends JFrame {
 							ConnectionBDD.updatePlaneta(planeta);
 							}
 						};
-						time.schedule(viewThreat, 0,60000);
+						Main.createEnemyArmy();
+						TimerTask createEnemyArmy = new TimerTask() {
+							
+							@Override
+							public void run() {
+								MENU.setThreat(Main.ViewThreat());							
+							}
+						};
+						time.schedule(createEnemyArmy, 120000,120000);
+						time.schedule(autoIncrease, 0,60000);
 						MENU menu = new MENU(planeta, time);
 					} else {
 //						Main.setFlagTienePlanetas(true);

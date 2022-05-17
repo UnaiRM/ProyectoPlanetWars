@@ -369,7 +369,7 @@ public class Planet {
 		}
 	}
 	
-	public void printStats() {
+	public String printStats() {
 		// USAR INTERFAZ PARA MOSTRAR ESTADISTICAS
 		int attackTechnology = technologyAttack;
 		int defenseTechnology = technologyDefense;
@@ -409,17 +409,27 @@ public class Planet {
 				break;
 			}
 		}
-		System.out.println("Planet Stats:");
-		System.out.println("\nTECHNOLOGY");
-		System.out.println("\nAttack Technology " +attackTechnology);
-		System.out.println("Defense Technology "+defenseTechnology);
-		// FALTA ATAQUE
-		System.out.println("\nDEFENSE");
-		System.out.println("\nMissile Launcher "+MissileLauncher);
-		System.out.println("Ion Cannon "+ IonCannon);
-		System.out.println("\nRESOURCES:");
-		System.out.println("\nMetal "+metal);
-		System.out.println("Deuterium "+deuterium);
+		
+		String texto = "";
+		texto += "<html><body>TECHNOLOGY<br>";
+		texto += "Attack Technology: "+attackTechnology+"<br>";
+		texto += "Defense Technology "+defenseTechnology+"<br>";
+		texto += "<br>";
+		texto += "ATTACK<br>";
+		texto += "Light Hunter: "+LightHunter+"<br>";
+		texto += "Heavy Hunter: "+HeavyHunter+"<br>";
+		texto += "Battle Ship: "+BattleShip+"<br>";
+		texto += "Armored Ship: "+ArmoredShip+"<br>";
+		texto += "<br>";
+		texto += "DEFENSE<br>";
+		texto += "Missile Launcher: "+MissileLauncher+"<br>";
+		texto += "Ion Cannon: "+IonCannon+"<br>";
+		texto += "Plasma Cannon: "+PlasmaCannon+"<br>";
+		texto += "<br>";
+		texto += "RESOURCES<br>";
+		texto += "Metal: "+metal+"<br>";
+		texto += "Deuterium: "+deuterium+"<br><body><html>";
+		return texto;
 	}
 	
 	public static void main(String[] args) {

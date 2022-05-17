@@ -8,8 +8,8 @@ public class Main {
 	
 	// Recursos para crear la flota enemiga
 	
-	private int enemyMetal = Variables.METAL_BASE_ENEMY_ARMY;
-	private int enemyDeuterium = Variables.DEUTERIUM_BASE_ENEMY_ARMY;
+	private static int enemyMetal = Variables.METAL_BASE_ENEMY_ARMY;
+	private static int enemyDeuterium = Variables.DEUTERIUM_BASE_ENEMY_ARMY;
 	
 //	// CAMBIAR FLAGS DEL LOGIN A NO ESTATICAS
 //	private boolean flagOn = true;
@@ -461,7 +461,7 @@ public class Main {
 
 
 
-	public void createEnemyArmy(){
+	public static void createEnemyArmy(){
 		
 		int enemyMetalTemp = enemyMetal;
 		int enemyDeuteriumTemp = enemyDeuterium;
@@ -541,7 +541,7 @@ public class Main {
 				break;
 			}
 		}	
-		String threat = "\nNEW THREAD COMING"+"\nLight Hunter "+LightHunter+"\nHeavy Hunter " + HeavyHunter + "\nBattle Ship " + BattleShip + "\nArmored Ship " + ArmoredShip;
+		String threat = "<html><body>NEW THREAT COMING"+"<br>Light Hunter "+LightHunter+"<br>Heavy Hunter " + HeavyHunter + "<br>Battle Ship " + BattleShip + "<br>Armored Ship " + ArmoredShip+"<body><html>";
 		return threat;
 	}
 	
