@@ -1,13 +1,16 @@
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class Planet {
 
 	private int technologyDefense = 0;
 	private int technologyAttack = 0;
 	
 	// MIRAR CON CUANTO SE EMPIEZA
-	private int metal = Variables.METAL_BASE_ENEMY_ARMY;
-	private int deuterium = Variables.DEUTERIUM_BASE_ENEMY_ARMY;
+	private int metal = Variables.METAL_BASE_PLANET_ARMY;
+	private int deuterium = Variables.DEUTERIUM_BASE_PLANET_ARMY;
 	
 	private int upgradeDefenseTechnologyDeuteriumCost = Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_DEUTERIUM_COST;
 	private int upgradeAttackTechnologyDeuteriumCost = Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_DEUTERIUM_COST;
@@ -146,7 +149,8 @@ public class Planet {
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" Light Hunters"); 
+			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Light Hunters", "No hay suficientes recursos",
+			        JOptionPane.ERROR_MESSAGE);
 			
 			throw new ResourceException();
 		} else {
@@ -180,8 +184,8 @@ public class Planet {
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" Heavy Hunters"); 
-			
+			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Heavy Hunters", "No hay suficientes recursos",
+			        JOptionPane.ERROR_MESSAGE);
 			throw new ResourceException();
 		} else {
 			// Gastos
@@ -214,8 +218,8 @@ public class Planet {
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" BattleShip"); 
-			
+			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Battle Ship", "No hay suficientes recursos",
+			        JOptionPane.ERROR_MESSAGE);
 			throw new ResourceException();
 		} else {
 			// Gastos
@@ -248,8 +252,8 @@ public class Planet {
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" ArmoredShip"); 
-			
+			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Armored Ship", "No hay suficientes recursos",
+			        JOptionPane.ERROR_MESSAGE);
 			throw new ResourceException();
 		} else {
 			// Gastos
@@ -282,7 +286,8 @@ public class Planet {
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" MissileLauncher"); 
+			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Missile Launcher", "No hay suficientes recursos",
+			        JOptionPane.ERROR_MESSAGE);
 			
 			throw new ResourceException();
 		} else {
@@ -316,7 +321,8 @@ public class Planet {
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" IonCannon"); 
+			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Ion Cannon", "No hay suficientes recursos",
+			        JOptionPane.ERROR_MESSAGE);
 			
 			throw new ResourceException();
 		} else {
@@ -352,7 +358,8 @@ public class Planet {
 				cantidad++;
 			}
 			// MIRAR DE INTEGRAR EN INTERFAZ
-			System.out.println("Se han generado "+cantidad+" PlasmaCannon"); 
+			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Plasma Cannon", "No hay suficientes recursos",
+			        JOptionPane.ERROR_MESSAGE);
 			
 			throw new ResourceException();
 		} else {

@@ -107,22 +107,23 @@ public class ChoosePlanet extends JFrame {
 					
 					@Override
 					public void run() {
-						MENU.setThreat(Main.ViewThreat());	
+						MENU.setThreat(Main.ViewThreat());							
 					}
 				};
 				TimerTask autoBattle = new TimerTask() {
 					
 					@Override
 					public void run() {
-						Battle battle = new Battle(Main.getEnemyArmy(),planeta.getArmy());
+//						Battle battle = new Battle(planeta.getArmy(),Main.getPlanetaEnemigo().getArmy());
+						Battle battle = new Battle(planeta.getArmy(),Main.getEnemyArmy());
 						battle.startBattle();
 						BattleDevelopment developmentAuto = new BattleDevelopment(Main.getBattleDevelopment());
 						Main.createEnemyArmy();
 						MENU.setThreat("");
 					}
 				};
-				time.schedule(autoBattle, 20000,180000);
-				time.schedule(createEnemyArmy, 10000,120000);
+				time.schedule(autoBattle, 180000,180000);
+				time.schedule(createEnemyArmy, 120000,180000);
 				time.schedule(autoIncrease, 60000,60000);
 				MENU menu = new MENU(planeta, time);
 			}

@@ -165,8 +165,8 @@ public class Battle {
 	}
 	
 	public int[] calcularActualUnitsEnemy() {
-		int[] cant = {0,0,0,0};
-		for (int i = 0; i < 4; i++) {
+		int[] cant = {0,0,0,0,0,0,0};
+		for (int i = 0; i < armies[1].length; i++) {
 			ArrayList<MilitaryUnit> flota = armies[1][i];
 			cant[i] = flota.size();
 		}
@@ -175,43 +175,43 @@ public class Battle {
 	}
 	
 	public int getGroupDefender(ArrayList<MilitaryUnit>[] army) {
-		int tipoArmy = army.length;
 		int sumaTotal = 0;
 		int categoria = 0 ;
 		Random generador = new Random();
-		if (tipoArmy == 7) {
-			// En caso de que sea aliado
-			int[] cantPlanetArmy = calcularActualUnitsPlanet();
-			for (int i = 0; i < cantPlanetArmy.length; i++) {
-				sumaTotal += cantPlanetArmy[i];
-			}
-			int numAleatorio = generador.nextInt(0,sumaTotal);
-			int total = 0;
-			for (int i = 0; i < cantPlanetArmy.length; i++) {
-				total += cantPlanetArmy[i];
-				if (total >= numAleatorio) {
-					categoria = i;
-					break;
-				}
-			}
-			return categoria;
-		} else {
-			// Army enemigo
-			int[] cantEnemyArmy = calcularActualUnitsEnemy();
-			for (int i = 0; i < cantEnemyArmy.length; i++) {
-				sumaTotal += cantEnemyArmy[i];
-			}
-			int numAleatorio = generador.nextInt(0,sumaTotal);
-			int total = 0;
-			for (int i = 0; i < cantEnemyArmy.length; i++) {
-				total += cantEnemyArmy[i];
-				if (total >= numAleatorio) {
-					categoria = i;
-					break;
-				}
-			}
-			return categoria;
+		
+		// En caso de que sea aliado
+//		int[] cantPlanetArmy = calcularActualUnitsPlanet();
+		int[] cantPlanetArmy = {0,0,0,0,0,0,0};
+		for (int i = 0; i < army.length; i++) {
+			ArrayList<MilitaryUnit> flota = army[i];
+			
+			System.out.println("Cant grupo "+i+": "+flota.size());
+
+			cantPlanetArmy[i] = flota.size();
 		}
+		
+		for (int i = 0; i < cantPlanetArmy.length; i++) {
+			sumaTotal += cantPlanetArmy[i];
+		}
+		System.out.println("SumaTotal: "+sumaTotal);
+		int numAleatorio = generador.nextInt(0,sumaTotal+1);
+		System.out.println("Num aleatorio: "+numAleatorio);
+		while (numAleatorio == 0) {
+			System.out.println("Num aleatorio: "+numAleatorio);
+			numAleatorio = generador.nextInt(0,sumaTotal+1);
+			break;
+		}
+		
+		int total = 0;
+		for (int i = 0; i < cantPlanetArmy.length; i++) {
+			System.out.println("Total: "+total);
+			total += cantPlanetArmy[i];
+			if (total >= numAleatorio) {
+				categoria = i;
+				break;
+			}
+		}
+		return categoria;
 	}
 
 	public int getPlanetGroupAttacker() {
@@ -375,7 +375,7 @@ public class Battle {
 		int ataque = 0, armor = 0;
 		
 		for (int i = 0; i < armies.length; i++) {
-			System.out.println("Flota "+i);
+			System.out.println("-------------Flota "+i+"--------------");
 			for (int j = 0; j < armies[i].length; j++) {
 				System.out.println("Grupo "+j);
 				for (Object nave : armies[i][j]) {
@@ -443,8 +443,25 @@ public class Battle {
 					grupoAtacante = getEnemyGroupAttacker();
 				}
 				System.out.println("Grupo Atacante: "+grupoAtacante);
+				
+				
+				
+				for (int i = 0; i < armies.length; i++) {
+					System.out.println("-------------Flota "+i+"--------------");
+					for (int j = 0; j < armies[i].length; j++) {
+						System.out.println("Grupo "+j);
+						for (Object nave : armies[i][j]) {
+							if (nave instanceof Ship) {
+								System.out.println(((Ship) nave).getActualArmor());
+							}
+						}
+					}
+				}
+				
+				
+				
 				while (atacante[grupoAtacante].size() < 1) {
-					if (atacante.length > 4) {
+					if (jugador == 0) {
 						grupoAtacante = getPlanetGroupAttacker();
 					} else {
 						grupoAtacante = getEnemyGroupAttacker();
@@ -452,14 +469,30 @@ public class Battle {
 					
 				}
 				
+				System.out.println("Grupo Atacante: "+grupoAtacante);
+				
+				// Se queda pillado aqui
+				
 				naveRandom = generador.nextInt(0,atacante[grupoAtacante].size());
 				
+				System.out.println("Nave atacante: "+naveRandom);
+				
 				grupoDefensa = getGroupDefender(defensa);
+				
+				System.out.println("Grupo defensa: "+grupoDefensa);
+				System.out.println("Tamaño grupo defensa: "+defensa[grupoDefensa].size());
 				while (defensa[grupoDefensa].size() < 1) {
+					System.out.println("Bucle");
+					
 					grupoDefensa = getGroupDefender(defensa);
+					System.out.println("Grupo defensa: "+grupoDefensa);
+					System.out.println("Tamaño grupo defensa: "+defensa[grupoDefensa].size());
 				}
+				System.out.println("Grupo defensa: "+grupoDefensa);
+				
 				naveRandom2 = generador.nextInt(0,defensa[grupoDefensa].size());
 				
+				System.out.println("Nave defensora: "+naveRandom2);
 				
 				
 				if (atacante[grupoAtacante].get(naveRandom) instanceof LightHunter) {
@@ -543,19 +576,21 @@ public class Battle {
 					attackAgain = true;
 					battleDevolpment += "\nAttacks again";
 				}
-				this.actualNumberUnitsEnemy = calcularActualUnitsEnemy();
-				this.actualNumberUnitsPlanet = calcularActualUnitsPlanet();
-				actualNumEnemy = 0;
-				for (int i = 0; i < actualNumberUnitsEnemy.length; i++) {
-					actualNumEnemy += actualNumberUnitsEnemy[i];
-				}
-				actualNumPlanet = 0;
-				for (int i = 0; i < actualNumberUnitsPlanet.length; i++) {
-					actualNumPlanet += actualNumberUnitsPlanet[i];
-				}
+				
 			}
 			
 			// REVISAR PORQUE SE SALTA ESTO EN EL ULTIMO TURNO
+			
+			this.actualNumberUnitsEnemy = calcularActualUnitsEnemy();
+			this.actualNumberUnitsPlanet = calcularActualUnitsPlanet();
+			actualNumEnemy = 0;
+			for (int i = 0; i < actualNumberUnitsEnemy.length; i++) {
+				actualNumEnemy += actualNumberUnitsEnemy[i];
+			}
+			actualNumPlanet = 0;
+			for (int i = 0; i < actualNumberUnitsPlanet.length; i++) {
+				actualNumPlanet += actualNumberUnitsPlanet[i];
+			}
 			
 			System.out.println("Cantidad actual Planeta: "+actualNumPlanet);
 			System.out.println("Cantidad actual Enemy: "+actualNumEnemy);
@@ -570,6 +605,14 @@ public class Battle {
 				battleDevolpment += "\n\n**************CHANGE ATTACKER**************";
 
 			}
+			System.out.println("---------------------------------------");
+		}
+		if (actualNumPlanet > minimoUnidadesPlanet) {
+			battleDevolpment += "\n\nPLANET WINS";
+			System.out.println("PLANET WINS");
+		} else {
+			battleDevolpment += "\n\nENEMY WINS";
+			System.out.println("ENEMY WINS");
 		}
 		Main.setBattleDevelopment(battleDevolpment);
 	}
