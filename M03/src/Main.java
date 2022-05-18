@@ -31,6 +31,8 @@ public class Main {
 	
 	private static ArrayList<MilitaryUnit>[] enemyArmy = new ArrayList[7];
 	
+//	private static Planet planetaEnemigo;
+	
 	private static String battleDevelopment = "";
 
 	public static void main(String[] args) {
@@ -38,9 +40,9 @@ public class Main {
 		Main main = new Main();
 		
 		// Inicia la flota enemiga vacia para evitar errores
-		for (int i = 0; i < 7; i++) {
-			enemyArmy[i] = new ArrayList<MilitaryUnit>();
-		}
+//		for (int i = 0; i < 7; i++) {
+//			enemyArmy[i] = new ArrayList<MilitaryUnit>();
+//		}
 		
 		ConnectionBDD con = new ConnectionBDD();
 		
@@ -456,6 +458,30 @@ public class Main {
 
 
 
+//	public static Planet getPlanetaEnemigo() {
+//		return planetaEnemigo;
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//	public static void setPlanetaEnemigo(Planet planetaEnemigo) {
+//		Main.planetaEnemigo = planetaEnemigo;
+//	}
+
+
+
+
+
+
+
+
+
 	public void setTimeGeneration(int timeGeneration) {
 		this.timeGeneration = timeGeneration;
 	}
@@ -489,6 +515,12 @@ public class Main {
 			enemyArmyTemp[i] = new ArrayList<MilitaryUnit>();
 		}
 		
+//		Planet planetaEnemy = new Planet();
+//		planetaEnemy.setMetal(enemyMetal);
+//		planetaEnemy.setDeuterium(enemyDeuterium);
+//		planetaEnemy.setTechnologyAttack(0);
+//		planetaEnemy.setTechnologyDefense(0);
+		
 		Random generador = new Random();
 		
 		// Generador de tropas por probabilidad
@@ -500,23 +532,48 @@ public class Main {
 				LightHunter nave = new LightHunter();
 				nave.setArmorAndDamage(0, 0);
 				enemyArmyTemp[0].add(nave);
+//				try {
+//					planetaEnemy.newLigthHunter(1);
+//				} catch (ResourceException e) {
+//					// TODO Auto-generated catch block
+//					
+//				}
 			} else if (numRandom >= 35 && numRandom < 60) {
 				enemyMetal -= costeMetalHeavyHunter;
 				enemyDeuterium -= costeDeuteriumHeavyHunter;
 				HeavyHunter nave = new HeavyHunter();
 				nave.setArmorAndDamage(0, 0);
 				enemyArmyTemp[1].add(nave);
+//				try {
+//					planetaEnemy.newHeavyHunter(1);
+//				} catch (ResourceException e) {
+//					// TODO Auto-generated catch block
+//					
+//				}
 			} else if (numRandom >= 60 && numRandom < 80) {
 				enemyMetal -= costeMetalBattleShip;
 				enemyDeuterium -= costeDeuteriumBattleShip;
 				BattleShip nave = new BattleShip();
 				nave.setArmorAndDamage(0, 0);
 				enemyArmyTemp[2].add(nave);
+//				try {
+//					planetaEnemy.newBattleShip(1);
+//				} catch (ResourceException e) {
+//					// TODO Auto-generated catch block
+//					
+//				}
 			} else if (numRandom >= 80 && numRandom < 100) {
 				enemyMetal -= costeMetalArmoredShip;
 				enemyDeuterium -= costeDeuteriumArmoredShip;
 				ArmoredShip nave = new ArmoredShip();
+				nave.setArmorAndDamage(0, 0);
 				enemyArmyTemp[3].add(nave);
+//				try {
+//					planetaEnemy.newArmoredShip(1);
+//				} catch (ResourceException e) {
+//					// TODO Auto-generated catch block
+//					
+//				}
 			}
 		}
 		// Aumento de recursos
@@ -525,12 +582,14 @@ public class Main {
 		enemyDeuterium = (enemyDeuteriumTemp * (100 + Variables.ENEMY_FLEET_INCREASE)) / 100;
 		
 		enemyArmy = enemyArmyTemp;
+//		Main.planetaEnemigo = planetaEnemy;
 	}
 	
 	public static String ViewThreat() {
 		int cantidad = 0;
 		int LightHunter = 0, HeavyHunter = 0, BattleShip = 0, ArmoredShip = 0;
 		for (int i = 0; i < 4; i++) {
+//			ArrayList<MilitaryUnit> flota = planetaEnemigo.getArmy()[i];
 			ArrayList<MilitaryUnit> flota = enemyArmy[i];
 			cantidad = flota.size();
 			switch (i) {

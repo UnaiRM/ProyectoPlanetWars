@@ -16,10 +16,10 @@ public class ConnectionBDD {
 
 	// PREGUNTAR SI PUEDE SER ESTATICA
 	private static Connection con;
-	private String ip = "@192.168.56.101"; //"@192.168.40.2" instituto "@192.168.56.101" casa
+	private String ip = "@192.168.40.2"; //"@192.168.40.2" instituto "@192.168.56.101" casa
 	private String usuario = "alumnoAMS8";
 	private String contrasena = "alumnoAMS8";
-	private String tipo = "xe"; // "orcl" instituto "xe" casa
+	private String tipo = "orcl"; // "orcl" instituto "xe" casa
 	
 	// CONSTANTES PARA EL PROGRAMA
 	static int idUsuario = 0;
@@ -557,35 +557,39 @@ public class ConnectionBDD {
 			e.printStackTrace();
 		}
 		
-		String[] navesAtaque = res.split(";");
-		
-		for (int i = 0; i < navesAtaque.length; i++) {
-			for (int j = 0; j < Character.getNumericValue(navesAtaque[i].charAt(2)); j++) {
-				if (Character.getNumericValue(navesAtaque[i].charAt(0)) == 1) {
-					LightHunter nave = new LightHunter();
-					nave.setArmorAndDamage(Character.getNumericValue(navesAtaque[i].charAt(6)), Character.getNumericValue(navesAtaque[i].charAt(4)));
-					army[0].add(nave);
-				} else if (Character.getNumericValue(navesAtaque[i].charAt(0)) == 2) {
-					HeavyHunter nave = new HeavyHunter();
-					nave.setArmorAndDamage(Character.getNumericValue(navesAtaque[i].charAt(6)), Character.getNumericValue(navesAtaque[i].charAt(4)));
-					army[1].add(nave);
-				} else if (Character.getNumericValue(navesAtaque[i].charAt(0)) == 3) {
-					BattleShip nave = new BattleShip();
-					nave.setArmorAndDamage(Character.getNumericValue(navesAtaque[i].charAt(6)), Character.getNumericValue(navesAtaque[i].charAt(4)));
-					army[2].add(nave);
-				} else if (Character.getNumericValue(navesAtaque[i].charAt(0)) == 4) {
-					ArmoredShip nave = new ArmoredShip();
-					nave.setArmorAndDamage(Character.getNumericValue(navesAtaque[i].charAt(6)), Character.getNumericValue(navesAtaque[i].charAt(4)));
-					army[3].add(nave);
+		if (res != null) {
+			String[] navesAtaque = res.split(";");
+			
+			for (int i = 0; i < navesAtaque.length; i++) {
+				for (int j = 0; j < Character.getNumericValue(navesAtaque[i].charAt(2)); j++) {
+					if (Character.getNumericValue(navesAtaque[i].charAt(0)) == 1) {
+						LightHunter nave = new LightHunter();
+						nave.setArmorAndDamage(Character.getNumericValue(navesAtaque[i].charAt(6)), Character.getNumericValue(navesAtaque[i].charAt(4)));
+						army[0].add(nave);
+					} else if (Character.getNumericValue(navesAtaque[i].charAt(0)) == 2) {
+						HeavyHunter nave = new HeavyHunter();
+						nave.setArmorAndDamage(Character.getNumericValue(navesAtaque[i].charAt(6)), Character.getNumericValue(navesAtaque[i].charAt(4)));
+						army[1].add(nave);
+					} else if (Character.getNumericValue(navesAtaque[i].charAt(0)) == 3) {
+						BattleShip nave = new BattleShip();
+						nave.setArmorAndDamage(Character.getNumericValue(navesAtaque[i].charAt(6)), Character.getNumericValue(navesAtaque[i].charAt(4)));
+						army[2].add(nave);
+					} else if (Character.getNumericValue(navesAtaque[i].charAt(0)) == 4) {
+						ArmoredShip nave = new ArmoredShip();
+						nave.setArmorAndDamage(Character.getNumericValue(navesAtaque[i].charAt(6)), Character.getNumericValue(navesAtaque[i].charAt(4)));
+						army[3].add(nave);
+					}
 				}
 			}
 		}
+		
+		
 		
 		CallableStatement cst2;
 		String res2 = "";
 		
 		try {
-			cst2 = con.prepareCall("{call PLANET_WARS.RETURN_PLANET_SHIP(?,?)}");
+			cst2 = con.prepareCall("{call PLANET_WARS.RETURN_PLANET_DEFENSE(?,?)}");
 			cst2.setInt(1, idPlaneta);
 			cst2.registerOutParameter(2, java.sql.Types.VARCHAR);
 			cst2.execute();
@@ -598,22 +602,24 @@ public class ConnectionBDD {
 			e.printStackTrace();
 		}
 		
-		String[] navesDefensa = res2.split(";");
-		
-		for (int i = 0; i < navesDefensa.length; i++) {
-			for (int j = 0; j < Character.getNumericValue(navesDefensa[i].charAt(2)); j++) {
-				if (Character.getNumericValue(navesDefensa[i].charAt(0)) == 1) {
-					MissileLauncher nave = new MissileLauncher();
-					nave.setArmorAndDamage(Character.getNumericValue(navesDefensa[i].charAt(6)), Character.getNumericValue(navesDefensa[i].charAt(4)));
-					army[4].add(nave);
-				} else if (Character.getNumericValue(navesDefensa[i].charAt(0)) == 2) {
-					IonCannon nave = new IonCannon();
-					nave.setArmorAndDamage(Character.getNumericValue(navesDefensa[i].charAt(6)), Character.getNumericValue(navesDefensa[i].charAt(4)));
-					army[5].add(nave);
-				} else if (Character.getNumericValue(navesDefensa[i].charAt(0)) == 3) {
-					PlasmaCannon nave = new PlasmaCannon();
-					nave.setArmorAndDamage(Character.getNumericValue(navesDefensa[i].charAt(6)), Character.getNumericValue(navesDefensa[i].charAt(4)));
-					army[6].add(nave);
+		if (res2 != null) {
+			String[] navesDefensa = res2.split(";");
+			
+			for (int i = 0; i < navesDefensa.length; i++) {
+				for (int j = 0; j < Character.getNumericValue(navesDefensa[i].charAt(2)); j++) {
+					if (Character.getNumericValue(navesDefensa[i].charAt(0)) == 1) {
+						MissileLauncher nave = new MissileLauncher();
+						nave.setArmorAndDamage(Character.getNumericValue(navesDefensa[i].charAt(6)), Character.getNumericValue(navesDefensa[i].charAt(4)));
+						army[4].add(nave);
+					} else if (Character.getNumericValue(navesDefensa[i].charAt(0)) == 2) {
+						IonCannon nave = new IonCannon();
+						nave.setArmorAndDamage(Character.getNumericValue(navesDefensa[i].charAt(6)), Character.getNumericValue(navesDefensa[i].charAt(4)));
+						army[5].add(nave);
+					} else if (Character.getNumericValue(navesDefensa[i].charAt(0)) == 3) {
+						PlasmaCannon nave = new PlasmaCannon();
+						nave.setArmorAndDamage(Character.getNumericValue(navesDefensa[i].charAt(6)), Character.getNumericValue(navesDefensa[i].charAt(4)));
+						army[6].add(nave);
+					}
 				}
 			}
 		}

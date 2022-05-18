@@ -76,7 +76,9 @@ public class MENU extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                ConnectionBDD.updateArmy(planeta);
                 ConnectionBDD.updatePlaneta(planeta);
+                System.exit(1);
             }
         });
         
