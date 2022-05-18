@@ -429,7 +429,6 @@ public class Battle {
 				grupoDefensa = getGroupDefender(defensa);
 				
 				while (defensa[grupoDefensa].size() < 1) {
-					System.out.println("Bucle");
 					grupoDefensa = getGroupDefender(defensa);
 				}
 

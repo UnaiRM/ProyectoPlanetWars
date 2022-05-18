@@ -145,8 +145,7 @@ public class MENU extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				ReportChoose batalla = new ReportChoose(planeta,time);
+				BattleDevelopment development = new BattleDevelopment(Main.getBattleDevelopment());
 			}
 		});
 		contentPane.add(batalla);
