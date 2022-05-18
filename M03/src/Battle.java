@@ -176,31 +176,23 @@ public class Battle {
 		Random generador = new Random();
 		
 		// En caso de que sea aliado
-//		int[] cantPlanetArmy = calcularActualUnitsPlanet();
 		int[] cantPlanetArmy = {0,0,0,0,0,0,0};
 		for (int i = 0; i < army.length; i++) {
 			ArrayList<MilitaryUnit> flota = army[i];
-			
-			System.out.println("Cant grupo "+i+": "+flota.size());
-
 			cantPlanetArmy[i] = flota.size();
 		}
 		
 		for (int i = 0; i < cantPlanetArmy.length; i++) {
 			sumaTotal += cantPlanetArmy[i];
 		}
-		System.out.println("SumaTotal: "+sumaTotal);
 		int numAleatorio = generador.nextInt(0,sumaTotal+1);
-		System.out.println("Num aleatorio: "+numAleatorio);
 		while (numAleatorio == 0) {
-			System.out.println("Num aleatorio: "+numAleatorio);
 			numAleatorio = generador.nextInt(0,sumaTotal+1);
 			break;
 		}
 		
 		int total = 0;
 		for (int i = 0; i < cantPlanetArmy.length; i++) {
-			System.out.println("Total: "+total);
 			total += cantPlanetArmy[i];
 			if (total >= numAleatorio) {
 				categoria = i;
