@@ -38,11 +38,7 @@ public class Login extends JFrame {
 	private JTextField name;
 	private JPasswordField passwordField;
 	
-//	private static boolean flagButton = false;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		ConnectionBDD con = new ConnectionBDD();
 		EventQueue.invokeLater(new Runnable() {
@@ -58,9 +54,7 @@ public class Login extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public Login() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		getContentPane().setLayout(null);
@@ -119,7 +113,6 @@ public class Login extends JFrame {
 				int idUsuario = Integer.valueOf(idUsuarioPlanetas[0]);
 				String idPlanetas = idUsuarioPlanetas[1];
 				if (idUsuario < 1) {
-					// POPUP DE ERROR
 					JOptionPane.showMessageDialog(new JFrame(), "Login incorrecto", "Error login",
 					        JOptionPane.ERROR_MESSAGE);
 				} else {
@@ -127,7 +120,6 @@ public class Login extends JFrame {
 					Planet planeta;
 					
 					if (idPlanetas.charAt(0) == '0') {
-//						Main.setFlagNoTienePlanetas(true);
 						// Se crea un nuevo planeta
 						planeta = new Planet();
 												
@@ -158,7 +150,6 @@ public class Login extends JFrame {
 							
 							@Override
 							public void run() {
-//								Battle battle = new Battle(planeta.getArmy(),Main.getPlanetaEnemigo().getArmy());
 								Battle battle = new Battle(planeta.getArmy(),Main.getEnemyArmy());
 								battle.startBattle();
 								BattleDevelopment developmentAuto = new BattleDevelopment(Main.getBattleDevelopment());
@@ -171,18 +162,10 @@ public class Login extends JFrame {
 						time.schedule(autoIncrease, 60000,60000);
 						MENU menu = new MENU(planeta, time);
 					} else {
-//						Main.setFlagTienePlanetas(true);
-						// CAMBIAR A LA INTERFAZ PARA ELEGIR
 						dispose();
 						ChoosePlanet choose = new ChoosePlanet(ConnectionBDD.infoPlanets(idPlanetas));
-						
 					}
-					
-//					flagButton = true;
-					
-					
-				}
-						
+				}			
 			}
 		});
 		passwordField = new JPasswordField();

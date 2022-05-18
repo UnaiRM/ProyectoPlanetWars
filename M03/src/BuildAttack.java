@@ -25,10 +25,7 @@ public class BuildAttack extends JFrame {
 	private JPanel contentPane;
 	public  int dimAncho=1536;
 	public  int dimAlto=864;
-	/**
-	 * Launch the application.
-	 */
-	
+
 	public boolean flagExit = false;
 	
 	public static void main(String[] args) {
@@ -44,9 +41,6 @@ public class BuildAttack extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public BuildAttack(Planet planeta, Timer time) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		

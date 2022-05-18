@@ -7,7 +7,6 @@ public class PlasmaCannon extends Ship {
 		super.setBaseDamage(baseDamage);
 	}
 	
-	// Mirar como sacar el nivel de tecnologia de planeta
 	public PlasmaCannon() {
 		super.setArmor(0);
 		super.setInitialArmor(0);
@@ -24,11 +23,7 @@ public class PlasmaCannon extends Ship {
 		super.setLevel_Attack(attackLevel);
 		super.setLevel_Defense(defenseLevel);
 	}
-	
-	// IMPLEMENTAR MILITARYUNIT
-	// MIRAR COMO VAN LAS PELEAS
-	
-	
+
 	@Override
 	public int attack() {
 		// TODO Auto-generated method stub

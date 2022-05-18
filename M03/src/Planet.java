@@ -8,14 +8,12 @@ public class Planet {
 	private int technologyDefense = 0;
 	private int technologyAttack = 0;
 	
-	// MIRAR CON CUANTO SE EMPIEZA
 	private int metal = Variables.METAL_BASE_PLANET_ARMY;
 	private int deuterium = Variables.DEUTERIUM_BASE_PLANET_ARMY;
 	
 	private int upgradeDefenseTechnologyDeuteriumCost = Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_DEUTERIUM_COST;
 	private int upgradeAttackTechnologyDeuteriumCost = Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_DEUTERIUM_COST;
 	
-	// Mirar si se debe indicar que el ArrayList es de Militaryunits
 	private ArrayList<MilitaryUnit>[] army = new ArrayList[7];
 	
 	
@@ -101,7 +99,7 @@ public class Planet {
 
 	// METODOS
 	
-	// Upgrages
+	// Upgrades
 	public void upgradeTechnologyDefense() throws ResourceException {
 		if (this.deuterium < this.upgradeDefenseTechnologyDeuteriumCost) {
 			// Comprobacion de recursos suficientes
@@ -148,7 +146,6 @@ public class Planet {
 				this.army[0].add(nave);
 				cantidad++;
 			}
-			// MIRAR DE INTEGRAR EN INTERFAZ
 			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Light Hunters", "No hay suficientes recursos",
 			        JOptionPane.ERROR_MESSAGE);
 			
@@ -183,7 +180,6 @@ public class Planet {
 				this.army[1].add(nave);
 				cantidad++;
 			}
-			// MIRAR DE INTEGRAR EN INTERFAZ
 			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Heavy Hunters", "No hay suficientes recursos",
 			        JOptionPane.ERROR_MESSAGE);
 			throw new ResourceException();
@@ -217,7 +213,6 @@ public class Planet {
 				this.army[2].add(nave);
 				cantidad++;
 			}
-			// MIRAR DE INTEGRAR EN INTERFAZ
 			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Battle Ship", "No hay suficientes recursos",
 			        JOptionPane.ERROR_MESSAGE);
 			throw new ResourceException();
@@ -251,7 +246,6 @@ public class Planet {
 				this.army[3].add(nave);
 				cantidad++;
 			}
-			// MIRAR DE INTEGRAR EN INTERFAZ
 			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Armored Ship", "No hay suficientes recursos",
 			        JOptionPane.ERROR_MESSAGE);
 			throw new ResourceException();
@@ -285,7 +279,6 @@ public class Planet {
 				this.army[4].add(nave);
 				cantidad++;
 			}
-			// MIRAR DE INTEGRAR EN INTERFAZ
 			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Missile Launcher", "No hay suficientes recursos",
 			        JOptionPane.ERROR_MESSAGE);
 			
@@ -320,7 +313,6 @@ public class Planet {
 				this.army[5].add(nave);
 				cantidad++;
 			}
-			// MIRAR DE INTEGRAR EN INTERFAZ
 			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Ion Cannon", "No hay suficientes recursos",
 			        JOptionPane.ERROR_MESSAGE);
 			
@@ -339,8 +331,6 @@ public class Planet {
 		}
 	}
 	
-	// PREGUNTAR SI SE PUEDE DEVOLVER UN INT PARA LA CANTIDAD NUEVA DE NAVES
-	
 	public void newPlasmaCannon(int n) throws ResourceException {
 		int costeUnidadDeuterium = ConnectionBDD.getDefenseDeuteriumCost(3);
 		int costeUnidadMetal = ConnectionBDD.getDefenseMetalCost(3);
@@ -357,7 +347,6 @@ public class Planet {
 				this.army[6].add(nave);
 				cantidad++;
 			}
-			// MIRAR DE INTEGRAR EN INTERFAZ
 			JOptionPane.showMessageDialog(new JFrame(), "Se han generado "+cantidad+" Plasma Cannon", "No hay suficientes recursos",
 			        JOptionPane.ERROR_MESSAGE);
 			
@@ -377,7 +366,6 @@ public class Planet {
 	}
 	
 	public String printStats() {
-		// USAR INTERFAZ PARA MOSTRAR ESTADISTICAS
 		int attackTechnology = technologyAttack;
 		int defenseTechnology = technologyDefense;
 		
@@ -439,54 +427,4 @@ public class Planet {
 		return texto;
 	}
 	
-	public static void main(String[] args) {
-		ConnectionBDD con = new ConnectionBDD();
-		Planet planeta = new Planet();
-		
-		planeta.setMetal(200000);
-		planeta.setDeuterium(200000);
-		
-		HeavyHunter naveHH1 = new HeavyHunter();
-		HeavyHunter naveHH2 = new HeavyHunter();
-		
-		 //CREAR UNA FLOTA PARA CADA TIPO DE UNIDAD
-	
-		try {
-//			planeta.newLigthHunter(2);
-//			planeta.newArmoredShip(1);
-//			planeta.newHeavyHunter(2);
-			planeta.newMissileLauncher(3);
-			planeta.newIonCannon(4);
-		} catch (ResourceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	 //AÑADIR INDIVIDUALMENTE LAS NAVES A CADA FLOTA
-		
-		
-//		flotaHH.add(naveHH1);
-//		flotaHH.add(naveHH2);
-		
-		ArrayList<MilitaryUnit>[] army = planeta.getArmy();
-		
-	 //PONER CADA FLOTA EN SU POSICION
-		
-		
-	 //ITERACION EN CADA UNA DE LAS UNIDADES
-		for (ArrayList<MilitaryUnit> flota : army) { // ITERA EN CADA FLOTA
-			for (MilitaryUnit nave : flota) { // ITERA EN CADA UNIDAD DE CADA FLOTA
-				System.out.println(nave.getClass());
-			}
-		}
-		try {
-			planeta.upgradeTechnologyAttack();
-			planeta.upgradeTechnologyDefense();
-		} catch (ResourceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		planeta.printStats();
-	}
 }

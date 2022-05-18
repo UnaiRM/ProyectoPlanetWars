@@ -25,9 +25,7 @@ public class BuildDefense extends JFrame {
 	private JPanel contentPane;
 	public  int dimAncho=1536;
 	public  int dimAlto=864;
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -41,11 +39,6 @@ public class BuildDefense extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	
-	
 	public BuildDefense(Planet planeta, Timer time) {
 		
 		
@@ -54,7 +47,6 @@ public class BuildDefense extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-//		System.out.println((int) dim.getWidth() + " "+(int) dim.getHeight());
 		
 		this.setBounds(100, 100, dimAncho, dimAlto);
 		
@@ -175,7 +167,7 @@ public class BuildDefense extends JFrame {
 		});
 
 		contentPane.add(sumar_1);
-		JLabel contador = new JLabel("0");//revisar cambiar a mano
+		JLabel contador = new JLabel("0");
 		contador.setBackground(Color.BLACK);
 		contador.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		contador.setForeground(Color.WHITE);

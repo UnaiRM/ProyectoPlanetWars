@@ -22,12 +22,7 @@ public class Upgrade extends JFrame {
 	private JPanel contentPane;
 	public  int dimAncho=1536;
 	public  int dimAlto=864;
-	/**
-	 * Launch the application.
-	 */
-	
-//	private boolean flagExit = false;
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -41,9 +36,6 @@ public class Upgrade extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Upgrade(Planet planeta, Timer time) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
@@ -107,9 +99,6 @@ public class Upgrade extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					planeta.upgradeTechnologyDefense();
-//					int numEntero = Integer.parseInt(defense.getText());
-//					int resta=(numEntero*106)/100;
-//					String numCadena= Integer.toString(resta);
 					defense.setText(String.valueOf(planeta.getUpgradeDefenseTechnologyDeuteriumCost()));
 				} catch (ResourceException e1) {
 					// TODO Auto-generated catch block
@@ -134,9 +123,6 @@ public class Upgrade extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					planeta.upgradeTechnologyAttack();
-//					int numEntero = Integer.parseInt(attack.getText());
-//					int resta=(numEntero*106)/100;
-//					String numCadena= Integer.toString(resta);
 					attack.setText(String.valueOf(planeta.getUpgradeAttackTechnologyDeuteriumCost()));
 				} catch (ResourceException e1) {
 					// TODO Auto-generated catch block
@@ -158,16 +144,13 @@ public class Upgrade extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				flagExit = true;
 				dispose();
 				ConnectionBDD.updatePlaneta(planeta);
 				MENU menu = new MENU(planeta, time);
 			}
 		});
 		contentPane.add(exit);
-		
-		
-		
+
 		fondo.setIcon(imagen);
 		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(fondo);
@@ -175,14 +158,4 @@ public class Upgrade extends JFrame {
 		
 	}
 
-//	public boolean isFlagExit() {
-//		return flagExit;
-//	}
-//
-//	public void setFlagExit(boolean flagExit) {
-//		this.flagExit = flagExit;
-//	}
-	
-	
-	
 }

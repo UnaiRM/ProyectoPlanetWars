@@ -20,12 +20,7 @@ public class DefenseAttack extends JFrame {
 	private JPanel contentPane;
 	public  int dimAncho=1536;
 	public  int dimAlto=864;
-	/**
-	 * Launch the application.
-	 */
-	
-//	private boolean flagAttack = false, flagDefense = false, flagExit = false;
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,9 +34,6 @@ public class DefenseAttack extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public DefenseAttack(Planet planeta, Timer time) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		
@@ -73,7 +65,6 @@ public class DefenseAttack extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				flagDefense = true;
 				dispose();
 				BuildDefense buildDefense = new BuildDefense(planeta,time);
 			}
@@ -91,7 +82,6 @@ public class DefenseAttack extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				flagAttack = true;
 				dispose();
 				BuildAttack buildAttack = new BuildAttack(planeta,time);
 			}
@@ -107,7 +97,6 @@ public class DefenseAttack extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				flagExit = true;
 				dispose();
 				ConnectionBDD.updatePlaneta(planeta);
 				ConnectionBDD.updateArmy(planeta);
@@ -123,30 +112,4 @@ public class DefenseAttack extends JFrame {
 		
 	}
 
-//	public boolean isFlagAttack() {
-//		return flagAttack;
-//	}
-//
-//	public void setFlagAttack(boolean flagAttack) {
-//		this.flagAttack = flagAttack;
-//	}
-//
-//	public boolean isFlagDefense() {
-//		return flagDefense;
-//	}
-//
-//	public void setFlagDefense(boolean flagDefense) {
-//		this.flagDefense = flagDefense;
-//	}
-//
-//	public boolean isFlagExit() {
-//		return flagExit;
-//	}
-//
-//	public void setFlagExit(boolean flagExit) {
-//		this.flagExit = flagExit;
-//	}
-	
-	
-	
 }

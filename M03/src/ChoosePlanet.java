@@ -31,9 +31,7 @@ public class ChoosePlanet extends JFrame {
 	public  int dimAncho=1536;
 	public  int dimAlto=864;
 	private JTextField textField;
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -114,7 +112,6 @@ public class ChoosePlanet extends JFrame {
 					
 					@Override
 					public void run() {
-//						Battle battle = new Battle(planeta.getArmy(),Main.getPlanetaEnemigo().getArmy());
 						Battle battle = new Battle(planeta.getArmy(),Main.getEnemyArmy());
 						battle.startBattle();
 						BattleDevelopment developmentAuto = new BattleDevelopment(Main.getBattleDevelopment());
@@ -142,7 +139,6 @@ public class ChoosePlanet extends JFrame {
 
 		labelchoose.setForeground(Color.WHITE);
 		labelchoose.setBounds(512, 312, 566, 392);
-//		texto = "<html><body>JLabel con <br> varias <br>linea :-) </body></html>";
 		labelchoose.setText(texto);
 		
 		contentPane.add(labelchoose);

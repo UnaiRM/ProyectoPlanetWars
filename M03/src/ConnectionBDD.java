@@ -14,14 +14,12 @@ import java.util.logging.Logger;
 
 public class ConnectionBDD {
 
-	// PREGUNTAR SI PUEDE SER ESTATICA
 	private static Connection con;
-	private String ip = "@192.168.40.2"; //"@192.168.40.2" instituto "@192.168.56.101" casa
+	private String ip = "@192.168.56.101"; //"@192.168.40.2" instituto "@192.168.56.101" casa
 	private String usuario = "alumnoAMS8";
 	private String contrasena = "alumnoAMS8";
-	private String tipo = "orcl"; // "orcl" instituto "xe" casa
+	private String tipo = "xe"; // "orcl" instituto "xe" casa
 	
-	// CONSTANTES PARA EL PROGRAMA
 	static int idUsuario = 0;
 	static int idPlaneta = 0;
 	
@@ -401,21 +399,17 @@ public class ConnectionBDD {
 			}
 			
 			cst.close();
-//			cst = con.prepareCall("{call PLANET_WARS.INSERT_PLANET_SHIP(?,?,?,?,?)}");
 
 			PreparedStatement ps;
 			ps = con.prepareStatement("insert into PLANET_SHIP values (?,?,?,?,?)");
 			for (String string : navesAtaqueCalculadas) {
-				// 1,2,5,0,0
 				ps.setInt(1, idPlaneta);
 				ps.setInt(2, Character.getNumericValue(string.charAt(0)));
 				ps.setInt(3, Character.getNumericValue(string.charAt(6)));
 				ps.setInt(4, Character.getNumericValue(string.charAt(4)));
 				ps.setInt(5, Character.getNumericValue(string.charAt(2)));
 				ps.addBatch();
-//				System.out.println(ps.execute());
 				ps.clearParameters();
-//				ps.clearParameters();
 			}
 			ps.executeBatch();
 			ps.close();
@@ -458,21 +452,17 @@ public class ConnectionBDD {
 				cnt2++;
 			}
 			
-//			cst = con.prepareCall("{call PLANET_WARS.INSERT_PLANET_SHIP(?,?,?,?,?)}");
 
 			PreparedStatement ps2;
 			ps2 = con.prepareStatement("insert into PLANET_DEFENSE values (?,?,?,?,?)");
 			for (String string : navesDefensaCalculadas) {
-				// 1,2,5,0,0
 				ps2.setInt(1, idPlaneta);
 				ps2.setInt(2, Character.getNumericValue(string.charAt(0)));
 				ps2.setInt(3, Character.getNumericValue(string.charAt(6)));
 				ps2.setInt(4, Character.getNumericValue(string.charAt(4)));
 				ps2.setInt(5, Character.getNumericValue(string.charAt(2)));
 				ps2.addBatch();
-//				System.out.println(ps.execute());
 				ps2.clearParameters();
-//				ps.clearParameters();
 			}
 			ps2.executeBatch();
 			ps2.close();
@@ -516,13 +506,9 @@ public class ConnectionBDD {
 			cst.registerOutParameter(9, java.sql.Types.INTEGER);
 			cst.registerOutParameter(10, java.sql.Types.INTEGER);
 			cst.execute();
-			
-			
-			// SACAR LA FLOTA 
+
 			ArrayList<MilitaryUnit>[] army = loadArmy();
-			
-			
-			
+
 			Planet planeta = new Planet(cst.getInt(5), cst.getInt(4), cst.getInt(9), cst.getInt(10), cst.getInt(6), cst.getInt(7), army);
 			cst.close();
 			return planeta;
@@ -559,7 +545,6 @@ public class ConnectionBDD {
 		
 		if (res != null) {
 			String[] navesAtaque = res.split(";");
-			
 			for (int i = 0; i < navesAtaque.length; i++) {
 				for (int j = 0; j < Character.getNumericValue(navesAtaque[i].charAt(2)); j++) {
 					if (Character.getNumericValue(navesAtaque[i].charAt(0)) == 1) {
@@ -604,7 +589,6 @@ public class ConnectionBDD {
 		
 		if (res2 != null) {
 			String[] navesDefensa = res2.split(";");
-			
 			for (int i = 0; i < navesDefensa.length; i++) {
 				for (int j = 0; j < Character.getNumericValue(navesDefensa[i].charAt(2)); j++) {
 					if (Character.getNumericValue(navesDefensa[i].charAt(0)) == 1) {

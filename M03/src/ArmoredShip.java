@@ -7,7 +7,6 @@ public class ArmoredShip extends Ship {
 		super.setBaseDamage(baseDamage);
 	}
 	
-	// Mirar como sacar el nivel de tecnologia de planeta
 	public ArmoredShip() {
 		super.setArmor(0);
 		super.setInitialArmor(0);
@@ -25,8 +24,6 @@ public class ArmoredShip extends Ship {
 		super.setLevel_Defense(defenseLevel);
 	}
 	
-	// IMPLEMENTAR MILITARYUNIT
-	// MIRAR COMO VAN LAS PELEAS
 	
 	
 	@Override
@@ -58,7 +55,6 @@ public class ArmoredShip extends Ship {
 	}
 
 	
-	// PREGUNTAR SI DEVUELVE LA PROBABILIDAD O LA CANTIDAD DE WASTE
 	@Override
 	public int getChanceGeneratingWaste() {
 		// TODO Auto-generated method stub

@@ -29,10 +29,6 @@ public class MENU extends JFrame {
 	
 	private static String threat = "";
 	
-	//private boolean flagBuildButton = false, flagBattleButton = false, flagUpgradeButton = false;
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,9 +41,7 @@ public class MENU extends JFrame {
 			}
 		});
 	}
-	/**
-	 * Create the frame.
-	 */
+
 	public MENU(Planet planeta, Timer time) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("fotos proyecto/BATALLA ESPACIAL.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,20 +99,11 @@ public class MENU extends JFrame {
 		Ataque.setBounds(42, 502, 256, 315);
 				
 		
-//		Timer time= new Timer();
-//		TimerTask viewThreat= new TimerTask() {
-//			
-//			public void run() {		
-//			System.out.println(Main.ViewThreat());	
-//			}
-//		};
-//		time.schedule(viewThreat, 0,100);
 		contentPane.add(Ataque);
 		
 		fondo.setIcon(imagen);
 		fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		contentPane.add(fondo);
-		
 		
 
 		JButton botonbuild = new JButton("");
@@ -129,9 +114,7 @@ public class MENU extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				flagBuildButton = true;
 				dispose();
-//				setVisible(false);
 				DefenseAttack build = new DefenseAttack(planeta, time);
 			}
 		});
@@ -147,8 +130,6 @@ public class MENU extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				System.out.println("botonUpgrade");
-//				flagUpgradeButton = true;
 				dispose();
 				Upgrade upgrade = new Upgrade(planeta,time);
 			}
@@ -164,8 +145,6 @@ public class MENU extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-//				flagBattleButton = true;
 				dispose();
 				ReportChoose batalla = new ReportChoose(planeta,time);
 			}
@@ -173,31 +152,12 @@ public class MENU extends JFrame {
 		contentPane.add(batalla);
 		setVisible(true);
 	}
-//	public boolean isFlagBuildButton() {
-//		return flagBuildButton;
-//	}
-//	public void setFlagBuildButton(boolean flagBuildButton) {
-//		this.flagBuildButton = flagBuildButton;
-//	}
-//	public boolean isFlagBattleButton() {
-//		return flagBattleButton;
-//	}
-//	public void setFlagBattleButton(boolean flagBattleButton) {
-//		this.flagBattleButton = flagBattleButton;
-//	}
-//	public boolean isFlagUpgradeButton() {
-//		return flagUpgradeButton;
-//	}
-//	public void setFlagUpgradeButton(boolean flagUpgradeButton) {
-//		this.flagUpgradeButton = flagUpgradeButton;
-//	}
+
 	public static String getThreat() {
 		return threat;
 	}
 	public static void setThreat(String threat) {
 		MENU.threat = threat;
 	}
-	
-	
 	
 }
